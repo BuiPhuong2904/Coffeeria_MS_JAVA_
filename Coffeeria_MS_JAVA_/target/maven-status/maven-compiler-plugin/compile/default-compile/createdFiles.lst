@@ -158,6 +158,7 @@ dao\MonAnDAO.class
 View\E_voucher_insert$8.class
 View\C_Signup$5.class
 View\E_customer_update$8.class
+controller\KhachHangController.class
 View\E_menu_insert.class
 View\M_home_T$5.class
 View\E_inventoryPanel$5.class

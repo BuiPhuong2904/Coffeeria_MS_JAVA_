@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import java.text.SimpleDateFormat;
+import model.KhachHang;
 
 /**
  *
@@ -10,11 +10,33 @@ package View;
  */
 public class E_customer_detail extends javax.swing.JFrame {
 
+    private KhachHang kh;
+    
     /**
      * Creates new form E_customer_detail
      */
-    public E_customer_detail() {
+    public E_customer_detail(KhachHang kh) {
         initComponents();
+        
+        this.kh = kh;
+        
+        idTextField.setText(kh.getMakh());
+        nameTextField.setText(kh.getHoten());
+        birthTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(kh.getNgaysinh()));
+        emailTextField.setText(kh.getEmail());
+        phoneTextField.setText(kh.getSdt());
+        pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
+        // Giả sử bạn có textField hoặc label cho loại thành viên
+        pointTextField1.setText(kh.getLoaitv());
+
+        // Không cho phép chỉnh sửa các trường
+        idTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        birthTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        phoneTextField.setEditable(false);
+        pointTextField.setEditable(false);
+        pointTextField1.setEditable(false);
     }
 
     /**

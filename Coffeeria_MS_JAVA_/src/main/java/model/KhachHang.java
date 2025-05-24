@@ -25,7 +25,7 @@ public class KhachHang {
         this.ngaysinh = ngaysinh;
         this.email = email;
         this.sdt = sdt;
-        this.diemtichluy = 0;
+        this.diemtichluy = diemtichluy;
         this.loaitv = loaitv;
     }
     
@@ -35,7 +35,7 @@ public class KhachHang {
         this.email = email;
         this.ngaysinh = ngaysinh;
         this.sdt = sdt;
-        this.diemtichluy = 0;
+        this.diemtichluy = diemtichluy;
         this.loaitv = loaitv;
     }
 

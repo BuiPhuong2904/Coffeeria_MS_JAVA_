@@ -1,17 +1,85 @@
 
 package View;
 
+import controller.KhachHangController;
+import dao.KhachHangDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.KhachHang;
+
 /**
  *
  * @author nttma
  */
 public class E_customerPanel extends javax.swing.JPanel {
 
+    private final KhachHangDAO khachHangDAO = new KhachHangDAO();
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
+    public void loadAll() {
+        List<KhachHang> list = khachHangDAO.findAll(); 
+
+        DefaultTableModel model = (DefaultTableModel) ctTable.getModel();
+        model.setRowCount(0);
+
+        for (KhachHang kh : list) {
+            Object[] row = new Object[] {
+                kh.getMakh(),
+                kh.getHoten(),
+                sdf.format(kh.getNgaysinh()),
+                kh.getEmail(),
+                kh.getSdt(),
+                kh.getDiemtichluy(),
+                kh.getLoaitv()
+            };
+            model.addRow(row);
+        }
+    }
+    
+    public KhachHang getSelectedKhachHang() {
+        int selectedRow = ctTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) ctTable.getModel();
+
+        String makh = (String) model.getValueAt(selectedRow, 0);
+        String hoten = (String) model.getValueAt(selectedRow, 1);
+
+        Date ngaysinh = null;
+        try {
+            String ngaysinhStr = (String) model.getValueAt(selectedRow, 2);
+            if (ngaysinhStr != null && !ngaysinhStr.trim().isEmpty()) {
+                ngaysinh = new SimpleDateFormat("dd/MM/yyyy").parse(ngaysinhStr);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String email = (String) model.getValueAt(selectedRow, 3);
+        String sdt = (String) model.getValueAt(selectedRow, 4);
+
+        double diemtichluy = 0;
+        Object dtlObj = model.getValueAt(selectedRow, 5);
+        if (dtlObj != null) {
+            diemtichluy = Double.parseDouble(dtlObj.toString());
+        }
+
+        String loaitv = (String) model.getValueAt(selectedRow, 6);
+
+        return new KhachHang(makh, hoten, ngaysinh, email, sdt, diemtichluy, loaitv);
+    }
+
     /**
      * Creates new form E_customerPanel
      */
     public E_customerPanel() {
         initComponents();
+        
+        loadAll();
         
         insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
@@ -29,6 +97,7 @@ public class E_customerPanel extends javax.swing.JPanel {
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -268,7 +337,7 @@ public class E_customerPanel extends javax.swing.JPanel {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-        E_customer_insert customerFrame = new E_customer_insert();
+        E_customer_insert customerFrame = new E_customer_insert(this);
         customerFrame.setVisible(true);
         customerFrame.pack();
         customerFrame.setLocationRelativeTo(null);
@@ -277,22 +346,58 @@ public class E_customerPanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        E_customer_update customerFrame = new E_customer_update();
-        customerFrame.setVisible(true);
-        customerFrame.pack();
-        customerFrame.setLocationRelativeTo(null);
+//        E_customer_update customerFrame = new E_customer_update();
+//        customerFrame.setVisible(true);
+//        customerFrame.pack();
+//        customerFrame.setLocationRelativeTo(null);
+        KhachHang selected = getSelectedKhachHang();
+        if (selected != null) {
+            E_customer_update customerFrame = new E_customer_update(selected, this); 
+            customerFrame.setVisible(true);
+            customerFrame.pack();
+            customerFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        E_customer_detail customerFrame = new E_customer_detail();
-        customerFrame.setVisible(true);
-        customerFrame.pack();
-        customerFrame.setLocationRelativeTo(null);
+//        E_customer_detail customerFrame = new E_customer_detail();
+//        customerFrame.setVisible(true);
+//        customerFrame.pack();
+//        customerFrame.setLocationRelativeTo(null);
+        int row = ctTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xem chi tiết.");
+            return;
+        }
+
+        String makh = ctTable.getValueAt(row, 0).toString();
+        KhachHang kh = new KhachHangDAO().findById(makh);
+
+        if (kh != null) {
+            E_customer_detail detailFrame = new E_customer_detail(kh); 
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = ctTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String makh = ctTable.getValueAt(selectedRow, 0).toString(); 
+
+        KhachHangController controller = new KhachHangController(this, this);
+        controller.handleDelete(makh, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 
@@ -315,4 +420,5 @@ public class E_customerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tempPanel;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -1,8 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.KhachHangController;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.KhachHang;
 
 /**
  *
@@ -10,11 +14,23 @@ package View;
  */
 public class E_customer_insert extends javax.swing.JFrame {
 
+    private final E_customerPanel customerPanel;
     /**
      * Creates new form E_customer_insert
      */
-    public E_customer_insert() {
+    public E_customer_insert(E_customerPanel customerPanel) {
         initComponents();
+        
+        this.customerPanel = customerPanel;
+        
+        idTextField.setEditable(false);
+        idTextField.setEnabled(false); 
+        
+        pointTextField.setEditable(false);
+        pointTextField.setEnabled(false); 
+        
+        pointTextField1.setEditable(false);
+        pointTextField1.setEnabled(false); 
     }
 
     /**
@@ -267,11 +283,23 @@ public class E_customer_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        try {
+            String hoten = nameTextField.getText();
+            String ngaysinhStr = birthTextField.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date ngaysinh = sdf.parse(ngaysinhStr);
+
+            String email = emailTextField.getText();
+            String sdt = phoneTextField.getText();
+            double diemtichluy = 0.0; 
+            String loaitv = "Bronze"; 
+
+            KhachHangController controller = new KhachHangController(this, customerPanel);
+            controller.insertKhachHang(hoten, ngaysinhStr, email, sdt, String.valueOf(diemtichluy), loaitv);
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng dd/MM/yyyy", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void pointTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextFieldActionPerformed

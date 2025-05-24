@@ -68,7 +68,7 @@
                       <Component id="nameTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="idTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="birthTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="pointTextField1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="levelTextField" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -112,7 +112,7 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="levelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="pointTextField1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="levelTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="temp1Panel" min="-2" max="-2" attributes="0"/>
@@ -333,7 +333,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="pointTextField1">
+        <Component class="javax.swing.JTextField" name="levelTextField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -343,7 +343,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pointTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="levelTextFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

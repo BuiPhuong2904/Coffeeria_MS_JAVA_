@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.KhachHangController;
+import java.text.SimpleDateFormat;
+import model.KhachHang;
 
 /**
  *
@@ -10,11 +11,39 @@ package View;
  */
 public class E_customer_update extends javax.swing.JFrame {
 
+    private final KhachHang kh;
+    private final E_customerPanel customerPanel;
     /**
      * Creates new form E_customer_update
      */
-    public E_customer_update() {
+    public E_customer_update(KhachHang kh, E_customerPanel customerPanel) {
         initComponents();
+        
+        this.kh = kh;
+        this.customerPanel = customerPanel;
+        
+        loadDataToForm();
+    }
+    
+    private void loadDataToForm() {
+        idTextField.setText(kh.getMakh());
+        idTextField.setEditable(false);
+
+        nameTextField.setText(kh.getHoten());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (kh.getNgaysinh() != null) {
+            birthTextField.setText(sdf.format(kh.getNgaysinh()));
+        } else {
+            birthTextField.setText("");
+        }
+
+        emailTextField.setText(kh.getEmail() != null ? kh.getEmail() : "");
+        phoneTextField.setText(kh.getSdt());
+
+        pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
+
+        levelTextField.setText(kh.getLoaitv() != null ? kh.getLoaitv() : "");
     }
 
     /**
@@ -44,7 +73,7 @@ public class E_customer_update extends javax.swing.JFrame {
         temp1Panel = new javax.swing.JPanel();
         insertButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        pointTextField1 = new javax.swing.JTextField();
+        levelTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -167,11 +196,11 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pointTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pointTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        pointTextField1.addActionListener(new java.awt.event.ActionListener() {
+        levelTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        levelTextField.setForeground(new java.awt.Color(102, 102, 102));
+        levelTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pointTextField1ActionPerformed(evt);
+                levelTextFieldActionPerformed(evt);
             }
         });
 
@@ -199,7 +228,7 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(nameTextField)
                     .addComponent(idTextField)
                     .addComponent(birthTextField)
-                    .addComponent(pointTextField1))
+                    .addComponent(levelTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tempPanelLayout.setVerticalGroup(
@@ -234,7 +263,7 @@ public class E_customer_update extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(levelLabel)
-                    .addComponent(pointTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(temp1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -279,11 +308,16 @@ public class E_customer_update extends javax.swing.JFrame {
     }//GEN-LAST:event_pointTextFieldActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String makh = idTextField.getText();
+        String hoten = nameTextField.getText();
+        String ngaysinhStr = birthTextField.getText();
+        String email = emailTextField.getText(); 
+        String sdt = phoneTextField.getText();
+        String diemtichluy = pointTextField.getText(); 
+        String loaitv = levelTextField.getText();      
+
+        KhachHangController controller = new KhachHangController(this, customerPanel);
+        controller.handleUpdate(makh, hoten, ngaysinhStr, email, sdt, diemtichluy, loaitv, customerPanel::loadAll);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -294,9 +328,9 @@ public class E_customer_update extends javax.swing.JFrame {
         this.dispose(); // đóng form hiện tại
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void pointTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextField1ActionPerformed
+    private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pointTextField1ActionPerformed
+    }//GEN-LAST:event_levelTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,13 +377,13 @@ public class E_customer_update extends javax.swing.JFrame {
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton insertButton;
     private javax.swing.JLabel levelLabel;
+    private javax.swing.JTextField levelTextField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JLabel pointLabel;
     private javax.swing.JTextField pointTextField;
-    private javax.swing.JTextField pointTextField1;
     private javax.swing.JPanel temp1Panel;
     private javax.swing.JPanel tempPanel;
     private javax.swing.JLabel updateLabel;
