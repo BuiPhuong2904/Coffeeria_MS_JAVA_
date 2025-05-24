@@ -326,8 +326,7 @@ public class E_menu_update extends javax.swing.JFrame {
         String moTa = desTextField.getText();
         
         MenuController controller = new MenuController(this, menuPanel);
-        controller.handleUpdate(monAn.getMaMon(), tenMon, danhMuc, giaStr, null, moTa, menuPanel::loadAll // truyền callback loadAll sau khi cập nhật
-        );
+        controller.handleUpdate(monAn.getMaMon(), tenMon, danhMuc, giaStr, null, moTa, menuPanel::loadAll);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

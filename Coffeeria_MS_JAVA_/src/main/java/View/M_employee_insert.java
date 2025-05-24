@@ -1,8 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.NhanVienController;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.NhanVien;
 
 /**
  *
@@ -10,11 +14,20 @@ package View;
  */
 public class M_employee_insert extends javax.swing.JFrame {
 
+    private final M_employeePanel employeePanel;
     /**
      * Creates new form M_employee_insert
      */
-    public M_employee_insert() {
+    public M_employee_insert(M_employeePanel employeePanel) {
         initComponents();
+        this.employeePanel = employeePanel;
+        
+        idTextField.setEditable(false);
+        idTextField.setEnabled(false); 
+        
+        acc_idTextField.setEditable(false);
+        acc_idTextField.setEnabled(false); 
+
     }
 
     /**
@@ -324,6 +337,31 @@ public class M_employee_insert extends javax.swing.JFrame {
         //        homeFrame.pack();
         //        homeFrame.setLocationRelativeTo(null);
         //        this.dispose();
+        try {
+            String hoten = nameTextField.getText();
+            
+            String birthStr = birthTextField.getText(); // từ JTextField
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date ngaysinh = sdf.parse(birthStr);
+            
+            String sdt = phoneTextField.getText();
+            Date ngayvl = startDateChooser.getDate();
+            String chucvu = positionTextField.getText();
+            double luong = Double.parseDouble(salaryTextField.getText());
+            String maql = m_idTextField.getText();
+
+            String email = emailTextField.getText();  
+            String password = "123456";
+
+            NhanVien nv = new NhanVien(hoten, ngaysinh, sdt, ngayvl, chucvu, luong, maql, null);
+            NhanVienController controller = new NhanVienController(this, employeePanel);
+            controller.insertNhanVienWithAccount(nv, email, password);
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng dd/MM/yyyy", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Lương phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -337,37 +375,37 @@ public class M_employee_insert extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new M_employee_insert().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(M_employee_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new M_employee_insert().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_idLabel;

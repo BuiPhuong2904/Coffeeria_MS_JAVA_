@@ -67,7 +67,22 @@ public class TaiKhoanDAO {
         return matk;
     }
 
-
+    public String getEmailByMatk(String matk) {
+        String email = "";
+        String sql = "SELECT EMAIL FROM TAIKHOAN WHERE MATK = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, matk);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                email = rs.getString("EMAIL");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return email;
+    }
+    
     // Hàm chuyển ResultSet thành đối tượng TaiKhoan
     private TaiKhoan mapResultSetToTaiKhoan(ResultSet rs) throws SQLException {
         return new TaiKhoan(

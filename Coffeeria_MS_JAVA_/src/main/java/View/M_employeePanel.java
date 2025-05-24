@@ -1,14 +1,96 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
+
+import controller.NhanVienController;
+import dao.NhanVienDAO;
+import dao.TaiKhoanDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.NhanVien;
 
 /**
  *
  * @author nttma
  */
 public class M_employeePanel extends javax.swing.JPanel {
+
+    public void loadAll() {
+        DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+        model.setRowCount(0); 
+
+        NhanVienDAO nvDAO = new NhanVienDAO();
+        TaiKhoanDAO tkDAO = new TaiKhoanDAO();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        List<NhanVien> list = nvDAO.findAll();         
+        for (NhanVien nv : list) {
+            String email = tkDAO.getEmailByMatk(nv.getMatk());
+
+            String ngaysinhStr = nv.getNgaysinh() != null ? sdf.format(nv.getNgaysinh()) : null;
+            String ngayvlStr = nv.getNgayvl() != null ? sdf.format(nv.getNgayvl()) : null;
+
+
+            model.addRow(new Object[] {
+                nv.getManv(),
+                nv.getHoten(),
+                ngaysinhStr,
+                nv.getSdt(),
+                email,
+                ngayvlStr,
+                nv.getChucvu(),
+                nv.getLuong(),
+                nv.getMaql(),
+                nv.getMatk()
+            });
+        }
+    }
+    
+    public NhanVien getSelectedNhanVien() {
+        int selectedRow = employeeTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+
+        String manv = (String) model.getValueAt(selectedRow, 0);
+        String hoten = (String) model.getValueAt(selectedRow, 1);
+
+        Date ngaysinh = null;
+        Date ngayvl = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            String ngaysinhStr = (String) model.getValueAt(selectedRow, 2);
+            if (ngaysinhStr != null && !ngaysinhStr.trim().isEmpty()) {
+                ngaysinh = sdf.parse(ngaysinhStr);
+            }
+
+            String ngayvlStr = (String) model.getValueAt(selectedRow, 5);
+            if (ngayvlStr != null && !ngayvlStr.trim().isEmpty()) {
+                ngayvl = sdf.parse(ngayvlStr);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String sdt = (String) model.getValueAt(selectedRow, 3);
+        String email = (String) model.getValueAt(selectedRow, 4); 
+        String chucvu = (String) model.getValueAt(selectedRow, 6);
+
+        double luong = 0;
+        Object luongObj = model.getValueAt(selectedRow, 7);
+        if (luongObj != null) {
+            luong = Double.parseDouble(luongObj.toString());
+        }
+
+        String maql = (String) model.getValueAt(selectedRow, 8);
+        String matk = (String) model.getValueAt(selectedRow, 9);
+
+        return new NhanVien(manv, hoten, ngaysinh, sdt, ngayvl, chucvu, luong, maql, matk);
+    }
 
     /**
      * Creates new form M_employeePanel
@@ -31,6 +113,8 @@ public class M_employeePanel extends javax.swing.JPanel {
         detailButton.setContentAreaFilled(false);
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
+        
+        loadAll();
     }
 
     /**
@@ -44,7 +128,7 @@ public class M_employeePanel extends javax.swing.JPanel {
 
         tempPanel = new javax.swing.JPanel();
         voucherScrollPane = new javax.swing.JScrollPane();
-        voucherTable = new javax.swing.JTable();
+        employeeTable = new javax.swing.JTable();
         search1Panel = new javax.swing.JPanel();
         searchLabel = new javax.swing.JLabel();
         search2Panel = new javax.swing.JPanel();
@@ -64,8 +148,8 @@ public class M_employeePanel extends javax.swing.JPanel {
         tempPanel.setPreferredSize(new java.awt.Dimension(800, 750));
         tempPanel.setLayout(null);
 
-        voucherTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        voucherTable.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null}
             },
@@ -73,7 +157,7 @@ public class M_employeePanel extends javax.swing.JPanel {
                 "ID", "Name", "Birth", "Phone number", "Email", "Start Date", "Position", "Salary", "Manager ID", "Account ID"
             }
         ));
-        voucherScrollPane.setViewportView(voucherTable);
+        voucherScrollPane.setViewportView(employeeTable);
 
         tempPanel.add(voucherScrollPane);
         voucherScrollPane.setBounds(10, 142, 780, 600);
@@ -268,7 +352,7 @@ public class M_employeePanel extends javax.swing.JPanel {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-        M_employee_insert employeeFrame = new M_employee_insert();
+        M_employee_insert employeeFrame = new M_employee_insert(this);
         employeeFrame.setVisible(true);
         employeeFrame.pack();
         employeeFrame.setLocationRelativeTo(null);
@@ -277,22 +361,50 @@ public class M_employeePanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        M_employee_update voucherFrame = new M_employee_update();
-        voucherFrame.setVisible(true);
-        voucherFrame.pack();
-        voucherFrame.setLocationRelativeTo(null);
+        NhanVien selected = getSelectedNhanVien();
+        if (selected != null) {
+            M_employee_update updateFrame = new M_employee_update(selected, this); 
+            updateFrame.setVisible(true);
+            updateFrame.pack();
+            updateFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân viên để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        M_employee_detail employeeFrame = new M_employee_detail();
-        employeeFrame.setVisible(true);
-        employeeFrame.pack();
-        employeeFrame.setLocationRelativeTo(null);
+        int row = employeeTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân viên để xem chi tiết.");
+            return;
+        }
+
+        String manv = employeeTable.getValueAt(row, 0).toString();
+        NhanVien nv = new NhanVienDAO().findById(manv);
+
+        if (nv != null) {
+            M_employee_detail detailFrame = new M_employee_detail(nv); 
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = employeeTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân viên để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String manv = employeeTable.getValueAt(selectedRow, 0).toString(); 
+
+        NhanVienController controller = new NhanVienController(this, this);
+        controller.handleDelete(manv, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 
@@ -303,6 +415,7 @@ public class M_employeePanel extends javax.swing.JPanel {
     private javax.swing.JTextField allTextField;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton detailButton;
+    private javax.swing.JTable employeeTable;
     private javax.swing.JButton insertButton;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel search1Panel;
@@ -313,6 +426,5 @@ public class M_employeePanel extends javax.swing.JPanel {
     private javax.swing.JButton updateButton;
     private javax.swing.JLabel voucherLabel;
     private javax.swing.JScrollPane voucherScrollPane;
-    private javax.swing.JTable voucherTable;
     // End of variables declaration//GEN-END:variables
 }

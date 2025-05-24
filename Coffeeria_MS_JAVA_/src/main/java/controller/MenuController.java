@@ -13,7 +13,7 @@ import model.MonAn;
  * @author Bich Phuong
  */
 public class MenuController {
-    private final Component view; // View gốc, dùng để show dialog
+    private final Component view;
     private final E_menuPanel menuPanel; 
 
     public MenuController(Component view, E_menuPanel menuPanel) {

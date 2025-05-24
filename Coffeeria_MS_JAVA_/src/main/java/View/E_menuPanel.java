@@ -1,6 +1,7 @@
 
 package View;
 
+import controller.MenuController;
 import dao.MonAnDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,7 +17,7 @@ public class E_menuPanel extends javax.swing.JPanel {
 
     public void loadAll() {
         DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
-        model.setRowCount(0); // Xóa dữ liệu cũ
+        model.setRowCount(0);
 
         List<MonAn> list = new MonAnDAO().findAll(); 
         for (MonAn m : list) {
@@ -420,6 +421,16 @@ public class E_menuPanel extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = menuTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một món để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String maMon = menuTable.getValueAt(selectedRow, 0).toString(); 
+
+        MenuController controller = new MenuController(this, this);
+        controller.handleDelete(maMon, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 

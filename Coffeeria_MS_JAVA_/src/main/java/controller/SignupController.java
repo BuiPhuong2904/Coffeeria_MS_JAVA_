@@ -1,7 +1,6 @@
 package controller;
 
 import dao.TaiKhoanDAO;
-import dao.KhachHangDAO;
 import model.TaiKhoan;
 import View.C_Signup;
 import View.C_Signin;
@@ -41,7 +40,7 @@ public class SignupController {
             return;
         }
         
-        NhanVien nv = new NhanVien(hoten, null, null, sdt, null, null, null, 0, null, matk);
+        NhanVien nv = new NhanVien(hoten, null, sdt, null, null, 0, null, matk);
         boolean nv1 = NhanVienDAO.insertNhanVien(nv);
 
         if (nv1) {

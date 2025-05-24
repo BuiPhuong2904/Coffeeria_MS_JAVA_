@@ -12,7 +12,7 @@ public class E_menu_detail extends javax.swing.JFrame {
     /**
      * Creates new form E_menu_detail
      */
-public E_menu_detail(MonAn monAn) {
+    public E_menu_detail(MonAn monAn) {
         initComponents();
         setLocationRelativeTo(null); // căn giữa
 

@@ -11,9 +11,7 @@ public class NhanVien {
     private String manv;
     private String hoten;
     private Date ngaysinh;
-    private String gioitinh;
     private String sdt;
-    private String diachi;
     private Date ngayvl;
     private String chucvu;
     private double luong;
@@ -22,14 +20,12 @@ public class NhanVien {
 
     public NhanVien() {}
 
-    public NhanVien(String manv, String hoten, Date ngaysinh, String gioitinh, String sdt,
-                    String diachi, Date ngayvl, String chucvu, double luong, String maql, String matk) {
+    public NhanVien(String manv, String hoten, Date ngaysinh, String sdt,
+                    Date ngayvl, String chucvu, double luong, String maql, String matk) {
         this.manv = manv;
         this.hoten = hoten;
         this.ngaysinh = ngaysinh;
-        this.gioitinh = gioitinh;
         this.sdt = sdt;
-        this.diachi = diachi;
         this.ngayvl = ngayvl;
         this.chucvu = chucvu;
         this.luong = luong;
@@ -37,13 +33,11 @@ public class NhanVien {
         this.matk = matk;
     }
     
-        public NhanVien(String hoten, Date ngaysinh, String gioitinh, String sdt,
-                    String diachi, Date ngayvl, String chucvu, double luong, String maql, String matk) {
+        public NhanVien(String hoten, Date ngaysinh, String sdt,
+                        Date ngayvl, String chucvu, double luong, String maql, String matk) {
         this.hoten = hoten;
         this.ngaysinh = ngaysinh;
-        this.gioitinh = gioitinh;
         this.sdt = sdt;
-        this.diachi = diachi;
         this.ngayvl = ngayvl;
         this.chucvu = chucvu;
         this.luong = luong;
@@ -61,14 +55,8 @@ public class NhanVien {
     public Date getNgaysinh() { return ngaysinh; }
     public void setNgaysinh(Date ngaysinh) { this.ngaysinh = ngaysinh; }
 
-    public String getGioitinh() { return gioitinh; }
-    public void setGioitinh(String gioitinh) { this.gioitinh = gioitinh;}
-
     public String getSdt() { return sdt; }
     public void setSdt(String sdt) { this.sdt = sdt; }
-
-    public String getDiachi() { return diachi; }
-    public void setDiachi(String diachi) { this.diachi = diachi; }
 
     public Date getNgayvl() { return ngayvl; }
     public void setNgayvl(Date ngayvl) { this.ngayvl = ngayvl; }
