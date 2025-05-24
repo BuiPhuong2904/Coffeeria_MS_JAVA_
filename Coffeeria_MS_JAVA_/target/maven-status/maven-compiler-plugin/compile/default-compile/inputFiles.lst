@@ -1,3 +1,60 @@
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\com\mycompany\java_coffeeria_ms\Java_Coffeeria_MS.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\ChuyenManHinhController.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\DanhMucBean.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\MenuController.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\SigninController.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\SignupController.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\dao\KhachHangDAO.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\dao\MonAnDAO.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\dao\NhanVienDAO.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\dao\TaiKhoanDAO.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\model\KhachHang.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\model\MonAn.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\model\NhanVien.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\model\TaiKhoan.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\utils\DBConnection.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\C_Signin.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\C_Signup.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\DrinkItem.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_billPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_customer_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_customer_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_customer_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_customerPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_home_A.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_home_O.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_home_R.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_Homepage.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_homePanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_inventory_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_inventory_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_inventory_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_inventoryPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_menu_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_menu_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_menu_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_menuPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_voucher_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_voucher_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_voucher_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_voucherPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\itemPanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_employee_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_employee_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_employee_update.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_employeePanel.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_detail.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_insert.java
+D:\Do_An\Java\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_update.java
+=======
+>>>>>>> Stashed changes
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\com\mycompany\java_coffeeria_ms\Java_Coffeeria_MS.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\ChuyenManHinhController.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\DanhMucBean.java
@@ -50,3 +107,7 @@ D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\j
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_detail.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_insert.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\M_home_T_update.java
+<<<<<<< Updated upstream
+=======
+>>>>>>> 68b951f294604e6faa731cf0fa4be6d6cbcffd4c
+>>>>>>> Stashed changes

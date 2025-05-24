@@ -25,11 +25,14 @@ public class E_home_O extends javax.swing.JFrame {
     public E_home_O() {
         initComponents();
         
+        returnButton.setContentAreaFilled(false);
+        returnButton.setBorderPainted(false);
+        returnButton.setFocusPainted(false);
+        
         JScrollPane scrollPane = new JScrollPane(menuPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
 //        orderFrame.refreshMenu(updatedDrinkList);
-
     }
     
 
@@ -60,7 +63,7 @@ public class E_home_O extends javax.swing.JFrame {
         orderScrollPane = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
         conPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
         totalPanel = new javax.swing.JPanel();
         subLabel = new javax.swing.JLabel();
         sub_textLabel = new javax.swing.JLabel();
@@ -218,11 +221,11 @@ public class E_home_O extends javax.swing.JFrame {
 
         conPanel.setPreferredSize(new java.awt.Dimension(473, 44));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Confirm Payment");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        confirmButton.setText("Confirm Payment");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
@@ -232,12 +235,12 @@ public class E_home_O extends javax.swing.JFrame {
             conPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, conPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
         conPanelLayout.setVerticalGroup(
             conPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+            .addComponent(confirmButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
         );
 
         totalPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -433,9 +436,9 @@ public class E_home_O extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
@@ -484,10 +487,10 @@ public class E_home_O extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JButton checkButton;
     private javax.swing.JPanel conPanel;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JLabel disLabel;
     private javax.swing.JLabel dis_textLabel;
     private javax.swing.JPanel itemLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;

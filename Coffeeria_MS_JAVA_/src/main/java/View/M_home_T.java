@@ -67,6 +67,7 @@ public class M_home_T extends javax.swing.JFrame {
         returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         tempPanel.setBackground(new java.awt.Color(252, 252, 246));
         tempPanel.setPreferredSize(new java.awt.Dimension(800, 750));
