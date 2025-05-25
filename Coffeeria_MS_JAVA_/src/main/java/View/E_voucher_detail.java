@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import model.KhuyenMai;
 
 /**
  *
@@ -13,8 +12,36 @@ public class E_voucher_detail extends javax.swing.JFrame {
     /**
      * Creates new form E_voucher_detail
      */
-    public E_voucher_detail() {
+    public E_voucher_detail(KhuyenMai khuyenMai) {
         initComponents();
+        
+        setLocationRelativeTo(null);
+
+        // Gán dữ liệu vào các trường
+        idTextField.setText(khuyenMai.getMaKM());
+        nameTextField.setText(khuyenMai.getTenKM());
+        typeTextField.setText(khuyenMai.getLoaiKM());
+
+        if ("Giảm theo %".equals(khuyenMai.getLoaiKM())) {
+            disTextField.setText(String.valueOf(khuyenMai.getGiaTriGiam()) + "%");
+        } else {
+            disTextField.setText(String.valueOf(khuyenMai.getGiaTriGiam()));
+        }
+        
+        conditionTextField.setText(khuyenMai.getDieuKien());
+        startDateChooser.setDate(khuyenMai.getNgayBD());
+        endDateChooser.setDate(khuyenMai.getNgayKT());
+        statusTextField.setText(khuyenMai.getTrangThai());
+
+        // Không cho sửa
+        idTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        typeTextField.setEditable(false);
+        disTextField.setEditable(false);
+        conditionTextField.setEditable(false);
+        startDateChooser.setEnabled(false);
+        endDateChooser.setEnabled(false);
+        statusTextField.setEnabled(false);
     }
 
     /**
@@ -281,37 +308,37 @@ public class E_voucher_detail extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new E_voucher_detail().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new E_voucher_detail().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

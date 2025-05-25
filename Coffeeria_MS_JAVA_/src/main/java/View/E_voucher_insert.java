@@ -4,17 +4,22 @@
  */
 package View;
 
+import controller.KhuyenMaiController;
+import java.util.Date;
+
 /**
  *
  * @author nttma
  */
 public class E_voucher_insert extends javax.swing.JFrame {
-
+    
+    private E_voucherPanel voucherPanel;
     /**
      * Creates new form E_voucher_update
      */
-    public E_voucher_insert() {
+    public E_voucher_insert(E_voucherPanel voucherPanel) {
         initComponents();
+        this.voucherPanel = voucherPanel;
     }
 
     /**
@@ -286,11 +291,17 @@ public class E_voucher_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_conditionTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String maKM = idTextField.getText().trim();
+        String tenKM = nameTextField.getText().trim();
+        String loaiKM = typeTextField.getText().trim();
+        String giaTri = disTextField.getText().trim();
+        String dieuKien = conditionTextField.getText().trim();
+        Date ngayBD = startDateChooser.getDate();
+        Date ngayKT = endDateChooser.getDate();
+        String trangThai = statusTextField.getText().trim();
+
+        KhuyenMaiController controller = new KhuyenMaiController(this, voucherPanel);
+        controller.handleInsert(maKM, tenKM, loaiKM, giaTri, dieuKien, ngayBD, ngayKT, trangThai);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -304,38 +315,38 @@ public class E_voucher_insert extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new E_voucher_insert().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(E_voucher_insert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new E_voucher_insert().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addLabel;

@@ -1,8 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
+
+import controller.KhuyenMaiController;
+import dao.KhuyenMaiDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.KhuyenMai;
 
 /**
  *
@@ -10,11 +14,68 @@ package View;
  */
 public class E_voucherPanel extends javax.swing.JPanel {
 
+    public void loadAll() {
+        DefaultTableModel model = (DefaultTableModel) voucherTable.getModel();
+        model.setRowCount(0);
+
+        List<KhuyenMai> list = new KhuyenMaiDAO().findAll();
+        for (KhuyenMai km : list) {
+            
+            String giaTriDisplay;
+            if ("Giảm theo %".equals(km.getLoaiKM())) {
+                giaTriDisplay = km.getGiaTriGiam() + "%";
+            } else {
+                giaTriDisplay = String.format("%,.0f đ", km.getGiaTriGiam()); 
+            }
+
+            model.addRow(new Object[] {
+                km.getMaKM(),
+                km.getTenKM(),
+                km.getLoaiKM(),
+                giaTriDisplay,
+                km.getDieuKien(),
+                km.getNgayBD(),
+                km.getNgayKT(),
+                km.getTrangThai()
+            });
+        }
+    }
+    
+    public KhuyenMai getSelectedKhuyenMai() {
+        int selectedRow = voucherTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) voucherTable.getModel();
+        String maKM = (String) model.getValueAt(selectedRow, 0);
+        String tenKM = (String) model.getValueAt(selectedRow, 1);
+        String loaiKM = (String) model.getValueAt(selectedRow, 2);
+
+        String giaTriStr = model.getValueAt(selectedRow, 3).toString().trim();
+
+        double giaTriGiam;
+        if (giaTriStr.endsWith("%")) {
+            giaTriStr = giaTriStr.replace("%", "");
+            giaTriGiam = Double.parseDouble(giaTriStr);
+        } else {
+            giaTriStr = giaTriStr.replace("đ", "").replace(",", "").trim();
+            giaTriGiam = Double.parseDouble(giaTriStr);
+        }
+
+        String dieuKien = (String) model.getValueAt(selectedRow, 4);
+        java.util.Date ngayBD = (java.util.Date) model.getValueAt(selectedRow, 5);
+        java.util.Date ngayKT = (java.util.Date) model.getValueAt(selectedRow, 6);
+        String trangThai = (String) model.getValueAt(selectedRow, 7);
+
+        return new KhuyenMai(maKM, tenKM, loaiKM, giaTriGiam, dieuKien, ngayBD, ngayKT, trangThai);
+    }
+    
     /**
      * Creates new form E_discountPanel
      */
     public E_voucherPanel() {
         initComponents();
+        
+        loadAll();
         
         insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
@@ -268,7 +329,7 @@ public class E_voucherPanel extends javax.swing.JPanel {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-        E_voucher_insert voucherFrame = new E_voucher_insert();
+        E_voucher_insert voucherFrame = new E_voucher_insert(this);
         voucherFrame.setVisible(true);
         voucherFrame.pack();
         voucherFrame.setLocationRelativeTo(null);
@@ -277,22 +338,50 @@ public class E_voucherPanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        E_voucher_update voucherFrame = new E_voucher_update();
-        voucherFrame.setVisible(true);
-        voucherFrame.pack();
-        voucherFrame.setLocationRelativeTo(null);
+        KhuyenMai selected = getSelectedKhuyenMai(); // bạn đã có hàm này trong panel
+        if (selected != null) {
+            E_voucher_update voucherFrame = new E_voucher_update(selected, this);
+            voucherFrame.setVisible(true);
+            voucherFrame.pack();
+            voucherFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khuyến mãi để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        E_voucher_detail voucherFrame = new E_voucher_detail();
-        voucherFrame.setVisible(true);
-        voucherFrame.pack();
-        voucherFrame.setLocationRelativeTo(null);
+        int row = voucherTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khuyến mãi để xem chi tiết.");
+            return;
+        }
+
+        String maKM = voucherTable.getValueAt(row, 0).toString();
+        KhuyenMai km = new KhuyenMaiDAO().findById(maKM);
+
+        if (km != null) {
+            E_voucher_detail voucherFrame = new E_voucher_detail(km);
+            voucherFrame.setVisible(true);
+            voucherFrame.pack();
+            voucherFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy khuyến mãi.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = voucherTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khuyến mãi để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String maKM = voucherTable.getValueAt(selectedRow, 0).toString();
+
+        KhuyenMaiController controller = new KhuyenMaiController(this, this);
+        controller.handleDelete(maKM, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 

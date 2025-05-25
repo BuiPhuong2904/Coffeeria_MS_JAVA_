@@ -312,9 +312,8 @@ public class E_menu_insert extends javax.swing.JFrame {
         String danhMuc = categoryTextField.getText().trim();
         String giaBanStr = priceTextField.getText().trim();
         String moTa = desTextField.getText().trim();
-        String hinhAnh = ""; // Nếu có chọn file ảnh thì xử lý sau
+        String hinhAnh = ""; 
 
-        // Gọi controller xử lý
         MenuController controller = new MenuController(this, menuPanel);
         controller.handleInsert(maMon, tenMon, danhMuc, giaBanStr, hinhAnh, moTa);
 

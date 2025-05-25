@@ -64,7 +64,7 @@ public class MonAnDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, maMon);
             ResultSet rs = ps.executeQuery();
-            return rs.next(); // Nếu có bản ghi -> đã tồn tại
+            return rs.next(); 
         } catch (SQLException e) {
             e.printStackTrace();
         }

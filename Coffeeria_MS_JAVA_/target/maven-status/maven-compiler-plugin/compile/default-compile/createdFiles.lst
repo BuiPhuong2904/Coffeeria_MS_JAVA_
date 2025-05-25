@@ -123,7 +123,6 @@ View\E_menu_insert$5.class
 View\E_bill_detail$4.class
 View\M_employee_insert$5.class
 View\C_Signin$4.class
-View\E_voucher_update$8.class
 View\E_bill_detail$5.class
 View\E_customer_insert$7.class
 View\E_inventory_insert$6.class
@@ -155,7 +154,6 @@ View\E_customer_insert$5.class
 View\M_employeePanel$3.class
 View\M_home_T_insert$6.class
 dao\MonAnDAO.class
-View\E_voucher_insert$8.class
 View\C_Signup$5.class
 View\E_customer_update$8.class
 controller\KhachHangController.class
@@ -167,7 +165,6 @@ View\E_inventory_insert$4.class
 View\M_employee_insert.class
 model\KhachHang.class
 View\E_menu_insert$2.class
-View\E_voucher_detail$7.class
 View\E_voucherPanel$6.class
 View\E_customer_update$2.class
 View\itemPanel.class
@@ -177,6 +174,7 @@ View\E_inventory_update$1.class
 View\E_billPanel.class
 View\E_menu_detail$2.class
 View\M_home_T_detail$5.class
+model\KhuyenMai.class
 View\E_bill_insert.class
 View\E_inventory_update$2.class
 View\M_home_T_update$2.class
@@ -203,6 +201,7 @@ View\E_menu_insert$1.class
 View\M_home_T$6.class
 View\E_customer_detail$4.class
 View\E_voucher_update$5.class
+dao\KhuyenMaiDAO.class
 View\E_billPanel$3.class
 View\M_employee_update$7.class
 View\E_inventory_insert$3.class
@@ -258,6 +257,7 @@ View\E_inventory_update$5.class
 View\M_employee_detail$3.class
 View\E_menuPanel$5.class
 View\M_employee_detail$4.class
+controller\KhuyenMaiController.class
 View\E_voucher_update$1.class
 View\M_home_T_update$6.class
 View\E_voucherPanel$2.class
