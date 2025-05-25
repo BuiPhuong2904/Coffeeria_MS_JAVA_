@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import model.KhachHang;
 
 /**
  *
@@ -283,23 +282,15 @@ public class E_customer_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        try {
-            String hoten = nameTextField.getText();
-            String ngaysinhStr = birthTextField.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date ngaysinh = sdf.parse(ngaysinhStr);
-
-            String email = emailTextField.getText();
-            String sdt = phoneTextField.getText();
-            double diemtichluy = 0.0; 
-            String loaitv = "Bronze"; 
-
-            KhachHangController controller = new KhachHangController(this, customerPanel);
-            controller.insertKhachHang(hoten, ngaysinhStr, email, sdt, String.valueOf(diemtichluy), loaitv);
-
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng dd/MM/yyyy", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        String hoten = nameTextField.getText();
+        String ngaysinhStr = birthTextField.getText();
+        String email = emailTextField.getText();
+        String sdt = phoneTextField.getText();
+        double diemtichluy = 0.0;
+        String loaitv = "Bronze";
+        
+        KhachHangController controller = new KhachHangController(this, customerPanel);
+        controller.insertKhachHang(hoten, ngaysinhStr, email, sdt, String.valueOf(diemtichluy), loaitv);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void pointTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextFieldActionPerformed

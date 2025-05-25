@@ -1,6 +1,12 @@
 
 package View;
 
+import controller.ChamCongController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.ChamCong;
+
 /**
  *
  * @author nttma
@@ -8,14 +14,30 @@ package View;
 public class M_home_T_update extends javax.swing.JFrame {
 
     private M_home_T parent;
+    private ChamCong chamCong;
     
-    public M_home_T_update(M_home_T parent) {
+    public M_home_T_update(ChamCong chamCong, M_home_T parent) {
         initComponents();
         this.parent = parent;
+        
+        this.chamCong = chamCong;
+        
+        loadDataToForm();
     }
     
     public M_home_T_update() {
         initComponents();
+    }
+    
+    private void loadDataToForm() {
+        tk_idTextField.setText(chamCong.getMaChamCong());
+        tk_idTextField.setEditable(false);
+        
+        e_idTextField.setText(chamCong.getMaNV());
+        hoursTextField.setText(String.valueOf(chamCong.getSoGioLam()));
+
+        Date workDate = chamCong.getNgayLV();
+        workdateDateChooser.setDate(workDate);
     }
 
     /**
@@ -234,11 +256,17 @@ public class M_home_T_update extends javax.swing.JFrame {
     }//GEN-LAST:event_hoursTextFieldActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String maChamCong = tk_idTextField.getText().trim();   
+        String maNV = e_idTextField.getText().trim();  
+        String soGioLamStr = hoursTextField.getText().trim(); 
+        Date ngayLV = workdateDateChooser.getDate();        
+
+        ChamCongController controller = new ChamCongController(this, parent);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String ngayLVStr = sdf.format(ngayLV);
+
+        controller.updateChamCong(maChamCong, ngayLVStr, soGioLamStr, maNV);
+
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

@@ -4,6 +4,10 @@
  */
 package View;
 
+import controller.ChamCongController;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nttma
@@ -18,6 +22,9 @@ public class M_home_T_insert extends javax.swing.JFrame {
     public M_home_T_insert(M_home_T parent) {
         initComponents();
         this.parent = parent;
+        
+        tk_idTextField.setEditable(false);
+        tk_idTextField.setEnabled(false); 
     }
     
     public M_home_T_insert() {
@@ -241,11 +248,12 @@ public class M_home_T_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_hoursTextFieldActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        Date workDate = workdateDateChooser.getDate(); 
+        String soGioLam = hoursTextField.getText().trim(); 
+        String maNV = e_idTextField.getText().trim();
+
+        ChamCongController controller = new ChamCongController(this, parent);
+        controller.insertChamCong(workDate, soGioLam, maNV);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

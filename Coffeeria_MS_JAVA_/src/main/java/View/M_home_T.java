@@ -1,14 +1,71 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.ChamCongController;
+import dao.ChamCongDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ChamCong;
 
 /**
  *
  * @author nttma
  */
 public class M_home_T extends javax.swing.JFrame {
+
+    private final ChamCongDAO chamCongDAO = new ChamCongDAO();
+    
+    public void loadAll() {
+        List<ChamCong> list = chamCongDAO.findAll(); 
+
+        DefaultTableModel model = (DefaultTableModel) timeTable.getModel();
+        model.setRowCount(0); 
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (ChamCong cc : list) {
+            Object[] row = new Object[] {
+                cc.getMaChamCong(),
+                sdf.format(cc.getNgayLV()),
+                cc.getSoGioLam(),
+                cc.getMaNV()
+            };
+            model.addRow(row);
+        }
+    }
+    
+    public ChamCong getSelectedChamCong() {
+        int selectedRow = timeTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) timeTable.getModel();
+
+        String maChamCong = (String) model.getValueAt(selectedRow, 0);
+
+        Date ngayLV = null;
+        try {
+            String ngayLVStr = (String) model.getValueAt(selectedRow, 1);
+            if (ngayLVStr != null && !ngayLVStr.trim().isEmpty()) {
+                ngayLV = new SimpleDateFormat("dd/MM/yyyy").parse(ngayLVStr);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        double soGioLam = 0;
+        Object gioObj = model.getValueAt(selectedRow, 2);
+        if (gioObj != null) {
+            soGioLam = Double.parseDouble(gioObj.toString());
+        }
+
+        String maNV = (String) model.getValueAt(selectedRow, 3);
+
+        return new ChamCong(maChamCong, ngayLV, soGioLam, maNV);
+    }
 
     /**
      * Creates new form E_home_T
@@ -295,22 +352,40 @@ public class M_home_T extends javax.swing.JFrame {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        M_home_T_detail timekeepingFrame = new M_home_T_detail(this);
-        timekeepingFrame.setVisible(true);
-        timekeepingFrame.pack();
-        timekeepingFrame.setLocationRelativeTo(null);
+        ChamCong selected = getSelectedChamCong();
+        if (selected != null) {
+            M_home_T_detail detailFrame = new M_home_T_detail(selected);
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xem chi tiết.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        ChamCong selected = getSelectedChamCong();
+        if (selected == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        ChamCongController controller = new ChamCongController(this, this);
+        controller.deleteChamCong(selected.getMaChamCong(), this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        M_home_T_update timekeepingFrame = new M_home_T_update(this);
-        timekeepingFrame.setVisible(true);
-        timekeepingFrame.pack();
-        timekeepingFrame.setLocationRelativeTo(null);
+        ChamCong selected = getSelectedChamCong();
+        if (selected != null) {
+            M_home_T_update timekeepingFrame = new M_home_T_update(selected, this);
+            timekeepingFrame.setVisible(true);
+            timekeepingFrame.pack();
+            timekeepingFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed

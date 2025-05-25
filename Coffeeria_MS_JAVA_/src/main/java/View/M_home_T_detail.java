@@ -4,6 +4,8 @@
  */
 package View;
 
+import model.ChamCong;
+
 /**
  *
  * @author nttma
@@ -11,14 +13,26 @@ package View;
 public class M_home_T_detail extends javax.swing.JFrame {
 
     private M_home_T parent;
+    private ChamCong chamCong;
     
     public M_home_T_detail(M_home_T parent) {
         initComponents();
         this.parent = parent;
     }
         
-    public M_home_T_detail() {
+    public M_home_T_detail(ChamCong chamCong) {
         initComponents();
+        this.chamCong = chamCong;
+        
+        tk_idTextField.setText(chamCong.getMaChamCong()); 
+        e_idTextField.setText(chamCong.getMaNV());        
+        hoursTextField.setText(String.valueOf(chamCong.getSoGioLam())); 
+        workdateDateChooser.setDate(chamCong.getNgayLV()); 
+
+        tk_idTextField.setEditable(false);  
+        e_idTextField.setEditable(false);   
+        hoursTextField.setEditable(false);  
+        workdateDateChooser.setEnabled(false);  
     }
 
     /**
