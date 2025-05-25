@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.SanPhamController;
+import java.util.Date;
+import model.SanPham;
 
 /**
  *
@@ -10,13 +11,34 @@ package View;
  */
 public class E_inventory_update extends javax.swing.JFrame {
 
+    private final SanPham sanPham;
+    private final E_inventoryPanel inventoryPanel;
     /**
      * Creates new form E_inventory_update
      */
-    public E_inventory_update() {
+    public E_inventory_update(SanPham sanPham, E_inventoryPanel inventoryPanel) {
         initComponents();
+        
+        this.sanPham = sanPham;
+        this.inventoryPanel = inventoryPanel;
+        
+        loadDataToForm();
     }
 
+    private void loadDataToForm() {
+        idTextField.setText(sanPham.getMaSP());
+        nameTextField.setText(sanPham.getTenSP());
+        categoryTextField.setText(sanPham.getLoaiSP());
+        quantityTextField.setText(String.valueOf(sanPham.getTongSL()));
+        unitTextField.setText(sanPham.getDonViTinh());
+        statusTextField.setText(sanPham.getTrangThai());
+        priceTextField.setText(String.format("%,.0f", sanPham.getGiaNhap()));
+        mfdDateChooser.setDate(sanPham.getNgaySX());
+        expDateChooser.setDate(sanPham.getHanSD());
+
+        idTextField.setEditable(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -310,11 +332,18 @@ public class E_inventory_update extends javax.swing.JFrame {
     }//GEN-LAST:event_priceTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String tenSP = nameTextField.getText().trim();
+        String loaiSP = categoryTextField.getText().trim();
+        String tongSL = quantityTextField.getText().trim();
+        String donViTinh = unitTextField.getText().trim();
+        String trangThai = statusTextField.getText().trim();
+        String giaNhap = priceTextField.getText().trim();
+        Date ngaySX = mfdDateChooser.getDate();
+        Date hanSD = expDateChooser.getDate();
+
+        SanPhamController controller = new SanPhamController(this, inventoryPanel);
+        controller.handleUpdate(sanPham.getMaSP(), tenSP, loaiSP, tongSL, donViTinh, trangThai, giaNhap, ngaySX, hanSD,
+                                inventoryPanel::loadAll);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

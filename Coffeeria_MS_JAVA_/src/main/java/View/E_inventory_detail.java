@@ -4,6 +4,8 @@
  */
 package View;
 
+import model.SanPham;
+
 /**
  *
  * @author nttma
@@ -13,8 +15,32 @@ public class E_inventory_detail extends javax.swing.JFrame {
     /**
      * Creates new form E_inventory_detail
      */
-    public E_inventory_detail() {
+    public E_inventory_detail(SanPham sanPham) {
         initComponents();
+        
+        setLocationRelativeTo(null);
+
+        // Gán dữ liệu vào các trường
+        idTextField.setText(sanPham.getMaSP());
+        nameTextField.setText(sanPham.getTenSP());
+        categoryTextField.setText(sanPham.getLoaiSP());
+        quantityTextField.setText(String.valueOf(sanPham.getTongSL()));
+        unitTextField.setText(sanPham.getDonViTinh());
+        statusTextField.setText(sanPham.getTrangThai());
+        priceTextField.setText(String.format("%,.0f", sanPham.getGiaNhap()));
+        mfdDateChooser.setDate(sanPham.getNgaySX());
+        expDateChooser.setDate(sanPham.getHanSD());
+
+        // Không cho chỉnh sửa
+        idTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        categoryTextField.setEditable(false);
+        quantityTextField.setEditable(false);
+        unitTextField.setEditable(false);
+        statusTextField.setEditable(false);
+        priceTextField.setEditable(false);
+        mfdDateChooser.setEnabled(false);
+        expDateChooser.setEnabled(false);
     }
 
     /**

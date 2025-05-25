@@ -134,7 +134,7 @@ public class E_homePanel extends javax.swing.JPanel {
         takeorderFrame.setVisible(true);
         takeorderFrame.pack();
         takeorderFrame.setLocationRelativeTo(null);
-        this.dispose();
+//        this.dispose();
     }//GEN-LAST:event_takeoButtonActionPerformed
 
     private void accButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accButtonActionPerformed
@@ -143,7 +143,7 @@ public class E_homePanel extends javax.swing.JPanel {
         accFrame.setVisible(true);
         accFrame.pack();
         accFrame.setLocationRelativeTo(null);
-        this.dispose();
+//        this.dispose();
     }//GEN-LAST:event_accButtonActionPerformed
 
     private void revenueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueButtonActionPerformed
@@ -161,7 +161,7 @@ public class E_homePanel extends javax.swing.JPanel {
         timekeepingFrame.setVisible(true);
         timekeepingFrame.pack();
         timekeepingFrame.setLocationRelativeTo(null);
-        this.dispose();
+//        this.dispose();
     }//GEN-LAST:event_timeButtonActionPerformed
 
 

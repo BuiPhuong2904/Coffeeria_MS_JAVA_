@@ -101,6 +101,7 @@ View\C_Signin$2.class
 View\C_Signup$6.class
 View\E_inventory_insert$8.class
 View\E_home_O$4.class
+controller\SanPhamController.class
 View\M_home_T$1.class
 View\E_bill_detail$3.class
 View\E_customer_insert$6.class
@@ -123,6 +124,7 @@ View\E_menu_insert$5.class
 View\E_bill_detail$4.class
 View\M_employee_insert$5.class
 View\C_Signin$4.class
+dao\SanPhamDAO.class
 View\E_bill_detail$5.class
 View\E_customer_insert$7.class
 View\E_inventory_insert$6.class
@@ -251,6 +253,7 @@ View\M_home_T_insert$1.class
 controller\NhanVienController.class
 View\M_employee_detail.class
 View\E_bill_insert$6.class
+model\SanPham.class
 View\E_voucher_detail$1.class
 View\M_employee_update$3.class
 View\E_inventory_update$5.class

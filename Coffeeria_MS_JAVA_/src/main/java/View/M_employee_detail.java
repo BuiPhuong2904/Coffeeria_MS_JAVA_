@@ -25,7 +25,7 @@ public class M_employee_detail extends javax.swing.JFrame {
         phoneTextField.setText(nv.getSdt());
         startDateChooser.setDate(nv.getNgayvl());
         positionTextField.setText(nv.getChucvu());
-        salaryTextField.setText(String.valueOf(nv.getLuong()));
+        salaryTextField.setText(String.format("%,.0f", nv.getLuong()));
         m_idTextField.setText(nv.getMaql());
         acc_idTextField.setText(nv.getMatk());
 

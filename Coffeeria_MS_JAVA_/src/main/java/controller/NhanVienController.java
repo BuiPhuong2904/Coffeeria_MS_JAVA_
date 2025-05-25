@@ -66,6 +66,9 @@ public class NhanVienController {
         try {
             Date ngaysinh = new SimpleDateFormat("dd/MM/yyyy").parse(ngaysinhStr);
             Date ngayvl = new SimpleDateFormat("dd/MM/yyyy").parse(ngayvlStr);
+
+            // Chuyển đổi lương
+            luongStr = luongStr.replace(".", "").replace(",", ".");
             double luong = Double.parseDouble(luongStr);
 
             NhanVien nv = new NhanVien(manv, hoten, ngaysinh, sdt, ngayvl, chucvu, luong, maql, matk);

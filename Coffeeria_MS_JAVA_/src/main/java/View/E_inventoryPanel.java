@@ -4,7 +4,12 @@ package View;
 //import View.TableButton.ButtonEditor;
 //import View.TableButton.ButtonRenderer;
 //import javax.swing.JCheckBox;
+import controller.SanPhamController;
+import dao.SanPhamDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.SanPham;
 
 /**
  *
@@ -12,9 +17,75 @@ import javax.swing.table.DefaultTableModel;
  */
 public class E_inventoryPanel extends javax.swing.JPanel {
 
+    public void loadAll() {
+        DefaultTableModel model = (DefaultTableModel) inventoryTable.getModel();
+        model.setRowCount(0);
+
+        List<SanPham> list = new SanPhamDAO().findAll();
+        for (SanPham sp : list) {
+            model.addRow(new Object[] {
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getLoaiSP(),
+                sp.getTongSL(),
+                sp.getDonViTinh(),
+                String.format("%,.0f", sp.getGiaNhap()),
+                sp.getNgaySX(),
+                sp.getHanSD(),
+                sp.getTrangThai()
+            });
+        }
+    }
+    
+    
+    public SanPham getSelectedSanPham() {
+        int selectedRow = inventoryTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) inventoryTable.getModel();
+
+        String maSP = (String) model.getValueAt(selectedRow, 0);
+        String tenSP = (String) model.getValueAt(selectedRow, 1);
+        String loaiSP = (String) model.getValueAt(selectedRow, 2);
+
+        int tongSL = 0;
+        Object tongSLObj = model.getValueAt(selectedRow, 3);
+        switch (tongSLObj) {
+            case Integer integer -> tongSL = integer;
+            case Number number -> tongSL = number.intValue();
+            case String string -> {
+                try {
+                    tongSL = Integer.parseInt(string);
+                } catch (NumberFormatException e) {
+                    tongSL = 0;
+                }
+            }
+            default -> {
+            }
+        }
+
+        String donViTinh = (String) model.getValueAt(selectedRow, 4);
+
+        String giaNhapStr = model.getValueAt(selectedRow, 5).toString().trim();
+        giaNhapStr = giaNhapStr.replace("đ", "").replace(",", "").replace(".", "").trim();
+        double giaNhap = 0;
+        try {
+            giaNhap = Double.parseDouble(giaNhapStr);
+        } catch (NumberFormatException e) {
+            giaNhap = 0;
+        }
+
+        java.util.Date ngaySX = (java.util.Date) model.getValueAt(selectedRow, 6);
+        java.util.Date hanSD = (java.util.Date) model.getValueAt(selectedRow, 7);
+        String trangThai = (String) model.getValueAt(selectedRow, 8);
+
+        return new SanPham(maSP, tenSP, loaiSP, tongSL, donViTinh, giaNhap, ngaySX, hanSD, trangThai);
+    }
+    
     public E_inventoryPanel() {
         initComponents();
-        initTableModel();
+
+        loadAll();
         
         insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
@@ -33,20 +104,7 @@ public class E_inventoryPanel extends javax.swing.JPanel {
         detailButton.setFocusPainted(false);
         
     }
-    
-    private void initTableModel() {
-        inventoryTable.setModel(new DefaultTableModel(
-            new Object[][] {
-                // để trống hoặc load dữ liệu thật sau
-                {"001", "Bánh mì", "Thực phẩm", 10, "Cái", 5000, "2024-01-01", "2025-01-01"},
-                {"002", "Nước suối", "Đồ uống", 20, "Chai", 7000, "2024-01-01", "2025-01-01"}
-            },
-            new String[] {
-                "ID", "Name", "Category", "Quantity", "Unit", "Import Price", "MFD", "EXP", "Status"
-            }
-        ));
-    }
-    
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -360,7 +418,7 @@ public class E_inventoryPanel extends javax.swing.JPanel {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-        E_inventory_insert inventoryFrame = new E_inventory_insert();
+        E_inventory_insert inventoryFrame = new E_inventory_insert(this);
         inventoryFrame.setVisible(true);
         inventoryFrame.pack();
         inventoryFrame.setLocationRelativeTo(null);
@@ -369,22 +427,51 @@ public class E_inventoryPanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        E_inventory_update inventoryFrame = new E_inventory_update();
-        inventoryFrame.setVisible(true);
-        inventoryFrame.pack();
-        inventoryFrame.setLocationRelativeTo(null);
+        SanPham selected = getSelectedSanPham(); // hàm bạn đã có tương tự getSelectedKhuyenMai
+        if (selected != null) {
+            // Mở form cập nhật sản phẩm, truyền sản phẩm và panel hiện tại để gọi lại loadAll() sau khi cập nhật
+            E_inventory_update updateFrame = new E_inventory_update(selected, this);
+            updateFrame.setVisible(true);
+            updateFrame.pack();
+            updateFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        E_inventory_detail inventoryFrame = new E_inventory_detail();
-        inventoryFrame.setVisible(true);
-        inventoryFrame.pack();
-        inventoryFrame.setLocationRelativeTo(null);
+        int row = inventoryTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để xem chi tiết.");
+            return;
+        }
+
+        String maSP = inventoryTable.getValueAt(row, 0).toString();
+        SanPham sp = new SanPhamDAO().findById(maSP);
+
+        if (sp != null) {
+            E_inventory_detail detailFrame = new E_inventory_detail(sp);
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = inventoryTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String maSP = inventoryTable.getValueAt(selectedRow, 0).toString();
+
+        SanPhamController controller = new SanPhamController(this, this);
+        controller.handleDelete(maSP, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     

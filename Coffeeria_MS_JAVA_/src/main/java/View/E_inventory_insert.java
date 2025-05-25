@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.SanPhamController;
+import java.util.Date;
 
 /**
  *
@@ -10,11 +10,13 @@ package View;
  */
 public class E_inventory_insert extends javax.swing.JFrame {
 
+    private E_inventoryPanel inventoryPanel;
     /**
      * Creates new form E_inventory_insert
      */
-    public E_inventory_insert() {
+    public E_inventory_insert(E_inventoryPanel inventoryPanel) {
         initComponents();
+        this.inventoryPanel = inventoryPanel;
     }
 
     /**
@@ -310,11 +312,18 @@ public class E_inventory_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_priceTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String maSP = idTextField.getText().trim();
+        String tenSP = nameTextField.getText().trim();
+        String loaiSP = categoryTextField.getText().trim();
+        String soLuongStr = quantityTextField.getText().trim();
+        String donViTinh = unitTextField.getText().trim();
+        String trangThai = statusTextField.getText().trim();
+        String giaNhapStr = priceTextField.getText().trim();
+        Date ngaySX = mfdDateChooser.getDate();
+        Date hanSD = expDateChooser.getDate();
+
+        SanPhamController controller = new SanPhamController(this, inventoryPanel);
+        controller.handleInsert(maSP, tenSP, loaiSP, soLuongStr, donViTinh, giaNhapStr, ngaySX, hanSD, trangThai);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

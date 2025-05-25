@@ -42,7 +42,7 @@ public class M_employeePanel extends javax.swing.JPanel {
                 email,
                 ngayvlStr,
                 nv.getChucvu(),
-                nv.getLuong(),
+                String.format("%,.0f", nv.getLuong()),
                 nv.getMaql(),
                 nv.getMatk()
             });
@@ -83,7 +83,12 @@ public class M_employeePanel extends javax.swing.JPanel {
         double luong = 0;
         Object luongObj = model.getValueAt(selectedRow, 7);
         if (luongObj != null) {
-            luong = Double.parseDouble(luongObj.toString());
+            String luongStr = luongObj.toString().replace(".", "").replace(",", ".");
+            try {
+                luong = Double.parseDouble(luongStr);
+            } catch (NumberFormatException e) {
+                luong = 0;
+            }
         }
 
         String maql = (String) model.getValueAt(selectedRow, 8);

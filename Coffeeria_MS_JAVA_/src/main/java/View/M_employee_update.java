@@ -48,7 +48,7 @@ public class M_employee_update extends javax.swing.JFrame {
         }
 
         positionTextField.setText(nv.getChucvu());
-        salaryTextField.setText(String.valueOf(nv.getLuong()));
+        salaryTextField.setText(String.format("%,.0f", nv.getLuong()));
         m_idTextField.setText(nv.getMaql());
         acc_idTextField.setText(nv.getMatk());
         
