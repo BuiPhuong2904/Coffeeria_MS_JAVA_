@@ -14,26 +14,26 @@ INSERT INTO MONAN VALUES ('MN010', 'Latte', 'Cà Phê Espresso', 65000, NULL, 'C
 INSERT INTO MONAN VALUES ('MN011', 'Mocha', 'Cà Phê Espresso', 69000, NULL, 'Cà phê espresso kết hợp sô-cô-la');
 INSERT INTO MONAN VALUES ('MN012', 'Caramel Macchiato', 'Cà Phê Espresso', 69000, NULL, 'Cà phê espresso với caramel và sữa');
 
-INSERT INTO MONAN VALUES ('MN013', 'Bánh Mì Thịt Nướng', 'Bánh Mì', 19000, NULL, 'Bánh mì nhân thịt nướng đậm đà');
-INSERT INTO MONAN VALUES ('MN014', 'Bánh Mì Xíu Mại', 'Bánh Mì', 19000, NULL, 'Bánh mì nhân xíu mại thơm ngon');
-INSERT INTO MONAN VALUES ('MN015', 'Bánh Mì Gà Xé', 'Bánh Mì', 19000, NULL, 'Bánh mì nhân gà xé mềm mại');
-INSERT INTO MONAN VALUES ('MN016', 'Bánh Mì Cá Ngừ', 'Bánh Mì', 19000, NULL, 'Bánh mì nhân cá ngừ beo béo');
+INSERT INTO MONAN VALUES ('MN013', 'Croissant Bơ', 'Bánh Ngọt', 35000, NULL, 'Bánh croissant thơm bơ, giòn rụm lớp vỏ ngoài');
+INSERT INTO MONAN VALUES ('MN014', 'Brownie Hạt Óc Chó', 'Bánh Ngọt', 45000, NULL, 'Bánh brownie đậm vị chocolate, thêm hạt óc chó bùi thơm');
+INSERT INTO MONAN VALUES ('MN015', 'Mille Crepe Trà Xanh', 'Bánh Ngọt', 45000, NULL, 'Bánh nghìn lớp vị trà xanh, béo nhẹ, thơm mát và tinh tế');
+INSERT INTO MONAN VALUES ('MN016', 'Mochi Kem Dâu', 'Bánh Ngọt', 42000, NULL, 'Mochi vỏ nếp dẻo, nhân kem dâu mát lạnh, ngọt dịu');
 
 INSERT INTO MONAN VALUES ('MN017', 'Trà Sen Vàng', 'Trà', 49000, NULL, 'Trà sen vàng thanh mát, thêm sen bùi');
 INSERT INTO MONAN VALUES ('MN018', 'Trà Thạch Đào', 'Trà', 49000, NULL, 'Trà đào kết hợp thạch giòn ngon');
-INSERT INTO MONAN VALUES ('MN019', 'Trà Thanh Đào', 'Trà', 49000, NULL, 'Trà thanh long kết hợp đào tươi');
+INSERT INTO MONAN VALUES ('MN019', 'Trà Dâu Tây Kem Cheese', 'Trà', 55000, NULL, 'Trà dâu tươi mát, phủ lớp kem cheese mặn ngọt hấp dẫn');
 INSERT INTO MONAN VALUES ('MN020', 'Trà Thạch Vải', 'Trà', 49000, NULL, 'Trà kết hợp thạch và vải ngọt');
-INSERT INTO MONAN VALUES ('MN021', 'Trà Xanh Đậu Đỏ', 'Trà', 49000, NULL, 'Trà xanh phối với đậu đỏ thanh mát');
+INSERT INTO MONAN VALUES ('MN021', 'Matcha Đậu Đỏ', 'Trà', 49000, NULL, 'Trà xanh phối với đậu đỏ thanh mát');
 
 INSERT INTO MONAN VALUES ('MN022', 'Freeze Trà Xanh', 'Freeze', 59000, NULL, 'Đá xay vị trà xanh truyền thống');
 INSERT INTO MONAN VALUES ('MN023', 'Freeze Sô-cô-la', 'Freeze', 59000, NULL, 'Đá xay vị sô-cô-la thơm béo');
-INSERT INTO MONAN VALUES ('MN024', 'Cookies và Cream', 'Freeze', 59000, NULL, 'Đá xay bánh quy và kem');
+INSERT INTO MONAN VALUES ('MN024', 'Cookies và Cream Freeze', 'Freeze', 59000, NULL, 'Đá xay bánh quy và kem');
 INSERT INTO MONAN VALUES ('MN025', 'Caramel Phin Freeze', 'Freeze', 65000, NULL, 'Freeze cà phê phin caramel');
 INSERT INTO MONAN VALUES ('MN026', 'Classic Phin Freeze', 'Freeze', 65000, NULL, 'Freeze cà phê phin cổ điển');
 
-INSERT INTO MONAN VALUES ('MN027', 'Tiramisu', 'Bánh', 29000, NULL, 'Bánh tiramisu mềm mịn vị Ý');
-INSERT INTO MONAN VALUES ('MN028', 'Mousse Dâu', 'Bánh', 29000, NULL, 'Bánh mousse dâu tươi mát lạnh');
+INSERT INTO MONAN VALUES ('MN027', 'Tiramisu', 'Bánh ngọt', 39000, NULL, 'Bánh tiramisu mềm mịn');
+INSERT INTO MONAN VALUES ('MN028', 'Mousse Dâu', 'Bánh ngọt', 39000, NULL, 'Bánh mousse dâu tươi mát lạnh');
 
-INSERT INTO MONAN VALUES ('MN029', 'Chanh Dây Đá Viên', 'Thức Uống Khác', 49000, NULL, 'Nước chanh dây mát lạnh');
-INSERT INTO MONAN VALUES ('MN030', 'Chanh Dây Đá Xay', 'Thức Uống Khác', 55000, NULL, 'Chanh dây xay tươi mát');
+INSERT INTO MONAN VALUES ('MN042', 'Soda Xoài Nhiệt Đới', 'Thức Uống Khác', 55000, NULL, 'Soda xoài kết hợp syrup nhiệt đới, màu đẹp, vị chua ngọt mát lạnh');
+INSERT INTO MONAN VALUES ('MN030', 'Soda Việt Quất', 'Thức Uống Khác', 55000, NULL, 'Soda chua ngọt kết hợp vị việt quất độc đáo và tươi mới');
 commit;
