@@ -36,3 +36,4 @@ INSERT INTO MONAN VALUES ('MN028', 'Mousse Dâu', 'Bánh', 29000, NULL, 'Bánh m
 
 INSERT INTO MONAN VALUES ('MN029', 'Chanh Dây Đá Viên', 'Thức Uống Khác', 49000, NULL, 'Nước chanh dây mát lạnh');
 INSERT INTO MONAN VALUES ('MN030', 'Chanh Dây Đá Xay', 'Thức Uống Khác', 55000, NULL, 'Chanh dây xay tươi mát');
+commit;
