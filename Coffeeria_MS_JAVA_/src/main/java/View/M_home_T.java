@@ -73,6 +73,8 @@ public class M_home_T extends javax.swing.JFrame {
     public M_home_T() {
         initComponents();
         
+        loadAll();
+        
         insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
         insertButton.setFocusPainted(false);
