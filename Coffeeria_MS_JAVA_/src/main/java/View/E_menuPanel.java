@@ -114,6 +114,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         tempPanel.setPreferredSize(new java.awt.Dimension(800, 750));
         tempPanel.setLayout(null);
 
+        menuTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -125,7 +126,20 @@ public class E_menuPanel extends javax.swing.JPanel {
                 "ID", "Name", "Category", "Price", "Image", "Description"
             }
         ));
+        menuTable.setRowHeight(30);
+        menuTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         menuScrollPane.setViewportView(menuTable);
+        if (menuTable.getColumnModel().getColumnCount() > 0) {
+            menuTable.getColumnModel().getColumn(0).setMinWidth(60);
+            menuTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+            menuTable.getColumnModel().getColumn(0).setMaxWidth(60);
+            menuTable.getColumnModel().getColumn(3).setMinWidth(100);
+            menuTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            menuTable.getColumnModel().getColumn(3).setMaxWidth(100);
+            menuTable.getColumnModel().getColumn(5).setMinWidth(200);
+            menuTable.getColumnModel().getColumn(5).setPreferredWidth(200);
+            menuTable.getColumnModel().getColumn(5).setMaxWidth(200);
+        }
 
         tempPanel.add(menuScrollPane);
         menuScrollPane.setBounds(10, 222, 780, 520);

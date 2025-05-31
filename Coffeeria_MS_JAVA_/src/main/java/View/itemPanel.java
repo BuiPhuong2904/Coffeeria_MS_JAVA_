@@ -1,11 +1,17 @@
 
 package View;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 public class itemPanel extends javax.swing.JPanel {
 
     public itemPanel() {
         initComponents();
+        
+        this.setPreferredSize(new Dimension(150, 250));
     }
     
     public void setData(DrinkItem item) {
@@ -13,6 +19,29 @@ public class itemPanel extends javax.swing.JPanel {
         priceLabel.setText(String.format("%.0f VNĐ", item.getPrice()));
         picLabel.setIcon(item.getImage());
     }
+    
+    public void setNameLabel(String name) {
+        String htmlText = "<html><div style='width:100px; text-align: center;'>" + name + "</div></html>";
+        nameLabel.setText(htmlText);
+    }
+
+
+    public void setPriceLabel(double price) {
+        priceLabel.setText(String.format("%.0f VNĐ", price));
+    }
+
+    public void setImage(String imagePath) {
+        try {
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            picLabel.setIcon(new ImageIcon(img));
+            picLabel.setText(""); // xóa text placeholder "hinh"
+        } catch (Exception e) {
+            System.err.println("Không thể tải ảnh: " + imagePath);
+            picLabel.setText("No Image");
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -25,65 +54,77 @@ public class itemPanel extends javax.swing.JPanel {
 
         itemLabel = new javax.swing.JPanel();
         picLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
         priceLabel = new javax.swing.JLabel();
         quantitySpinner = new javax.swing.JSpinner();
         addButton = new javax.swing.JButton();
+        namePanel = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
 
         itemLabel.setBackground(new java.awt.Color(255, 255, 255));
 
         picLabel.setText("hinh");
         picLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLabel.setText("Name");
+        picLabel.setPreferredSize(new java.awt.Dimension(120, 120));
 
         priceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         priceLabel.setText("Price");
 
         addButton.setText("Add");
+
+        namePanel.setBackground(new java.awt.Color(255, 255, 255));
+        namePanel.setLayout(null);
+
+        nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setText("Name");
+        namePanel.add(nameLabel);
+        nameLabel.setBounds(10, 0, 130, 50);
 
         javax.swing.GroupLayout itemLabelLayout = new javax.swing.GroupLayout(itemLabel);
         itemLabel.setLayout(itemLabelLayout);
         itemLabelLayout.setHorizontalGroup(
             itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemLabelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLabelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(itemLabelLayout.createSequentialGroup()
                         .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(priceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(namePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         itemLabelLayout.setVerticalGroup(
             itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemLabelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameLabel)
-                .addGap(18, 18, 18)
+                .addComponent(namePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(priceLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(itemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(itemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(itemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(itemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,6 +133,7 @@ public class itemPanel extends javax.swing.JPanel {
     private javax.swing.JButton addButton;
     private javax.swing.JPanel itemLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JPanel namePanel;
     private javax.swing.JLabel picLabel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JSpinner quantitySpinner;

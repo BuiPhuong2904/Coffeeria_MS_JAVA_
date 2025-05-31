@@ -1,8 +1,13 @@
 
 package View;
 
+import dao.MonAnDAO;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.util.List;
 import javax.swing.JScrollPane;
+import model.MonAn;
+import model.WrapLayout;
 
 public class E_home_O extends javax.swing.JFrame {
     public E_home_O() {
@@ -12,12 +17,37 @@ public class E_home_O extends javax.swing.JFrame {
         returnButton.setBorderPainted(false);
         returnButton.setFocusPainted(false);
         
-        JScrollPane scrollPane = new JScrollPane(menuPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        loadMonAnToMenu();
         
 //        orderFrame.refreshMenu(updatedDrinkList);
     }
     
+    public void loadMonAnToMenu() {
+        MonAnDAO monAnDAO = new MonAnDAO(); // tạo DAO
+        List<MonAn> danhSachMonAn = monAnDAO.findAll(); // lấy danh sách món
+
+        menuPanel.removeAll(); // Xóa tất cả các item cũ
+        menuPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 10, 10));
+
+
+        for (MonAn mon : danhSachMonAn) {
+            itemPanel item = new itemPanel(); // tạo từng itemPanel
+
+            // Đặt dữ liệu
+            item.setNameLabel(mon.getTenMon());
+            item.setPriceLabel(mon.getGiaBan());
+            item.setImage(mon.getHinhAnh()); // bạn cần thêm setImage(String path) trong itemPanel
+
+            menuPanel.add(item);
+        }
+
+        menuPanel.revalidate();
+        menuPanel.repaint();
+    }
+
+    
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,13 +61,6 @@ public class E_home_O extends javax.swing.JFrame {
         tempPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         returnButton = new javax.swing.JButton();
-        menuPanel = new javax.swing.JPanel();
-        itemLabel = new javax.swing.JPanel();
-        picLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        priceLabel = new javax.swing.JLabel();
-        quantitySpinner = new javax.swing.JSpinner();
-        addButton = new javax.swing.JButton();
         orderPanel = new javax.swing.JPanel();
         orderLabel = new javax.swing.JLabel();
         phoneTextField = new javax.swing.JTextField();
@@ -55,6 +78,8 @@ public class E_home_O extends javax.swing.JFrame {
         totalLabel = new javax.swing.JLabel();
         total_textLabel = new javax.swing.JLabel();
         orderLabel1 = new javax.swing.JLabel();
+        menuScrollPane = new javax.swing.JScrollPane();
+        menuPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -89,53 +114,6 @@ public class E_home_O extends javax.swing.JFrame {
                 .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        itemLabel.setBackground(new java.awt.Color(255, 255, 255));
-
-        picLabel.setText("hinh");
-        picLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLabel.setText("Name");
-
-        priceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        priceLabel.setText("Price");
-
-        addButton.setText("Add");
-
-        javax.swing.GroupLayout itemLabelLayout = new javax.swing.GroupLayout(itemLabel);
-        itemLabel.setLayout(itemLabelLayout);
-        itemLabelLayout.setHorizontalGroup(
-            itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLabelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(itemLabelLayout.createSequentialGroup()
-                        .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(priceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        itemLabelLayout.setVerticalGroup(
-            itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLabelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameLabel)
-                .addGap(18, 18, 18)
-                .addComponent(priceLabel)
-                .addGap(18, 18, 18)
-                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        menuPanel.add(itemLabel);
 
         orderPanel.setPreferredSize(new java.awt.Dimension(473, 696));
 
@@ -334,6 +312,8 @@ public class E_home_O extends javax.swing.JFrame {
         orderLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         orderLabel1.setText("MENU");
 
+        menuScrollPane.setViewportView(menuPanel);
+
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
         tempPanel.setLayout(tempPanelLayout);
         tempPanelLayout.setHorizontalGroup(
@@ -341,10 +321,10 @@ public class E_home_O extends javax.swing.JFrame {
             .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(tempPanelLayout.createSequentialGroup()
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(orderLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(orderLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
+                    .addComponent(menuScrollPane))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(orderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -357,8 +337,8 @@ public class E_home_O extends javax.swing.JFrame {
                     .addComponent(orderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addComponent(orderLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(menuScrollPane))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -467,15 +447,13 @@ public class E_home_O extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JButton checkButton;
     private javax.swing.JPanel conPanel;
     private javax.swing.JButton confirmButton;
     private javax.swing.JLabel disLabel;
     private javax.swing.JLabel dis_textLabel;
-    private javax.swing.JPanel itemLabel;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JLabel nameLabel;
+    private javax.swing.JScrollPane menuScrollPane;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel orderLabel;
     private javax.swing.JLabel orderLabel1;
@@ -483,9 +461,6 @@ public class E_home_O extends javax.swing.JFrame {
     private javax.swing.JScrollPane orderScrollPane;
     private javax.swing.JTable orderTable;
     private javax.swing.JTextField phoneTextField;
-    private javax.swing.JLabel picLabel;
-    private javax.swing.JLabel priceLabel;
-    private javax.swing.JSpinner quantitySpinner;
     private javax.swing.JButton returnButton;
     private javax.swing.JLabel subLabel;
     private javax.swing.JLabel sub_textLabel;

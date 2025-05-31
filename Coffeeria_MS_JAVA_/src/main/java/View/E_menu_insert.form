@@ -83,8 +83,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="100" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="imageLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="addButton" alignment="0" pref="120" max="32767" attributes="0"/>
+                          <Component id="addButton" pref="120" max="32767" attributes="0"/>
+                          <Component id="imageLabel" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
@@ -106,7 +106,7 @@
             <Component class="javax.swing.JLabel" name="imageLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
+                <Property name="text" type="java.lang.String" value="[Image]"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder/>
@@ -121,6 +121,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add Image"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -2,6 +2,12 @@
 package View;
 
 import controller.MenuController;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -68,11 +74,16 @@ public class E_menu_insert extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(252, 252, 246));
 
         imageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imageLabel.setText("jLabel1");
+        imageLabel.setText("[Image]");
         imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         addButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         addButton.setText("Add Image");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
@@ -81,8 +92,8 @@ public class E_menu_insert extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(100, 100, 100))
         );
         rightPanelLayout.setVerticalGroup(
@@ -326,6 +337,36 @@ public class E_menu_insert extends javax.swing.JFrame {
         //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
         this.dispose(); // đóng form hiện tại
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            File drinkDir = new File("src/main/resources/drink");
+
+            JFileChooser fileChooser = new JFileChooser(drinkDir);
+            fileChooser.setDialogTitle("Chọn ảnh từ thư mục drink");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Hình ảnh", "jpg", "png", "jpeg", "gif");
+            fileChooser.setFileFilter(filter);
+
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+
+                // Load ảnh và resize
+                ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+                Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+
+                imageLabel.setText("");
+
+                imageLabel.setIcon(resizedIcon);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Không thể chọn ảnh.");
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments

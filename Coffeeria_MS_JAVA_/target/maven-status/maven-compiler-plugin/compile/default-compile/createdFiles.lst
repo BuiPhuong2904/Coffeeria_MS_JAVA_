@@ -16,6 +16,7 @@ View\E_inventory_update$4.class
 View\C_Signup.class
 View\M_home_T_update$5.class
 View\E_inventory_update$9.class
+View\E_menu_update$8.class
 View\E_voucher_detail$4.class
 View\E_customer_insert$3.class
 View\M_employee_insert$2.class
@@ -228,6 +229,7 @@ View\M_home_T.class
 View\M_home_T_insert$5.class
 View\E_bill_detail$1.class
 View\M_employee_detail$6.class
+View\E_menu_insert$8.class
 model\ChamCong.class
 View\E_home_O$6.class
 View\E_menu_detail$1.class

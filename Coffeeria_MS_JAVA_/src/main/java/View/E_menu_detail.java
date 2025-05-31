@@ -78,7 +78,7 @@ public class E_menu_detail extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(252, 252, 246));
 
         imageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imageLabel.setText("jLabel1");
+        imageLabel.setText("[Image]");
         imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         nameLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
