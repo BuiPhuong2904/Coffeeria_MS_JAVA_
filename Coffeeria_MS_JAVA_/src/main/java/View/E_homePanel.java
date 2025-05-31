@@ -31,6 +31,7 @@ public class E_homePanel extends javax.swing.JPanel {
         accButton = new javax.swing.JButton();
         revenueButton = new javax.swing.JButton();
         timeButton = new javax.swing.JButton();
+        im_exButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 750));
 
@@ -81,6 +82,17 @@ public class E_homePanel extends javax.swing.JPanel {
             }
         });
 
+        im_exButton.setBackground(new java.awt.Color(207, 178, 145));
+        im_exButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        im_exButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/inventoryIn_Out50.png"))); // NOI18N
+        im_exButton.setText("Import/Export");
+        im_exButton.setFocusPainted(false);
+        im_exButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                im_exButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
         tempPanel.setLayout(tempPanelLayout);
         tempPanelLayout.setHorizontalGroup(
@@ -88,12 +100,13 @@ public class E_homePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempPanelLayout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(takeoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(takeoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(im_exButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(revenueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
         tempPanelLayout.setVerticalGroup(
@@ -103,11 +116,13 @@ public class E_homePanel extends javax.swing.JPanel {
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(takeoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(revenueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(338, 338, 338))
+                    .addComponent(im_exButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
+                .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -164,9 +179,18 @@ public class E_homePanel extends javax.swing.JPanel {
 //        this.dispose();
     }//GEN-LAST:event_timeButtonActionPerformed
 
+    private void im_exButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_im_exButtonActionPerformed
+        // TODO add your handling code here:
+        E_home_IE ieFrame = new E_home_IE();
+        ieFrame.setVisible(true);
+        ieFrame.pack();
+        ieFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_im_exButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accButton;
+    private javax.swing.JButton im_exButton;
     private javax.swing.JButton revenueButton;
     private javax.swing.JButton takeoButton;
     private javax.swing.JPanel tempPanel;
