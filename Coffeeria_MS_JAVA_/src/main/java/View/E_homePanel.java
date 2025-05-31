@@ -28,10 +28,11 @@ public class E_homePanel extends javax.swing.JPanel {
 
         tempPanel = new javax.swing.JPanel();
         takeoButton = new javax.swing.JButton();
-        accButton = new javax.swing.JButton();
+        profileButton = new javax.swing.JButton();
         revenueButton = new javax.swing.JButton();
         timeButton = new javax.swing.JButton();
         im_exButton = new javax.swing.JButton();
+        userButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 750));
 
@@ -49,14 +50,14 @@ public class E_homePanel extends javax.swing.JPanel {
             }
         });
 
-        accButton.setBackground(new java.awt.Color(207, 178, 145));
-        accButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        accButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/person50.png"))); // NOI18N
-        accButton.setText("Account");
-        accButton.setFocusPainted(false);
-        accButton.addActionListener(new java.awt.event.ActionListener() {
+        profileButton.setBackground(new java.awt.Color(207, 178, 145));
+        profileButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        profileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/person50.png"))); // NOI18N
+        profileButton.setText("Profile");
+        profileButton.setFocusPainted(false);
+        profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accButtonActionPerformed(evt);
+                profileButtonActionPerformed(evt);
             }
         });
 
@@ -93,6 +94,17 @@ public class E_homePanel extends javax.swing.JPanel {
             }
         });
 
+        userButton.setBackground(new java.awt.Color(207, 178, 145));
+        userButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/user50.png"))); // NOI18N
+        userButton.setText("User");
+        userButton.setFocusPainted(false);
+        userButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
         tempPanel.setLayout(tempPanelLayout);
         tempPanelLayout.setHorizontalGroup(
@@ -106,7 +118,8 @@ public class E_homePanel extends javax.swing.JPanel {
                 .addGap(71, 71, 71)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(revenueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
         tempPanelLayout.setVerticalGroup(
@@ -119,9 +132,11 @@ public class E_homePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(im_exButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(accButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
-                .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(110, 110, 110))
         );
 
@@ -152,14 +167,14 @@ public class E_homePanel extends javax.swing.JPanel {
 //        this.dispose();
     }//GEN-LAST:event_takeoButtonActionPerformed
 
-    private void accButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accButtonActionPerformed
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // TODO add your handling code here:
         E_home_A accFrame = new E_home_A();
         accFrame.setVisible(true);
         accFrame.pack();
         accFrame.setLocationRelativeTo(null);
 //        this.dispose();
-    }//GEN-LAST:event_accButtonActionPerformed
+    }//GEN-LAST:event_profileButtonActionPerformed
 
     private void revenueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueButtonActionPerformed
         // TODO add your handling code here:
@@ -187,14 +202,23 @@ public class E_homePanel extends javax.swing.JPanel {
         ieFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_im_exButtonActionPerformed
 
+    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
+        // TODO add your handling code here:
+        E_home_U uFrame = new E_home_U();
+        uFrame.setVisible(true);
+        uFrame.pack();
+        uFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_userButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton accButton;
     private javax.swing.JButton im_exButton;
+    private javax.swing.JButton profileButton;
     private javax.swing.JButton revenueButton;
     private javax.swing.JButton takeoButton;
     private javax.swing.JPanel tempPanel;
     private javax.swing.JButton timeButton;
+    private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 
     private void dispose() {
