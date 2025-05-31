@@ -75,8 +75,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         TableColumn imageColumn = menuTable.getColumnModel().getColumn(4);
         menuTable.getColumnModel().removeColumn(imageColumn);
 
-        // hiện lại:
-        // menuTable.getColumnModel().addColumn(idColumn);
+        TableSearchUtil.enableSearch(menuTable, searchTextField);
     }
 
     /**

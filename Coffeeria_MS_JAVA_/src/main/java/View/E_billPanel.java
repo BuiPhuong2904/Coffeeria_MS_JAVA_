@@ -25,6 +25,8 @@ public class E_billPanel extends javax.swing.JPanel {
         detailButton.setContentAreaFilled(false);
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
+        
+        TableSearchUtil.enableSearch(billTable, searchTextField);
     }
 
     /**

@@ -103,6 +103,7 @@ public class E_inventoryPanel extends javax.swing.JPanel {
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
         
+        TableSearchUtil.enableSearch(inventoryTable, searchTextField);
     }
       
 

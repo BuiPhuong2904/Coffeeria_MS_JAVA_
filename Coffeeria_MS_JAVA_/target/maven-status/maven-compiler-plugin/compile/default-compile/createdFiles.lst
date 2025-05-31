@@ -83,6 +83,7 @@ View\E_voucher_insert$2.class
 View\E_home_A$1.class
 View\E_home_O$2.class
 View\E_homePanel$4.class
+View\TableSearchUtil.class
 View\E_home_U_detail$1.class
 View\M_home_T_insert.class
 View\E_inventory_detail$4.class
@@ -165,6 +166,7 @@ View\E_home_R.class
 View\E_customer_detail$8.class
 View\E_customer_insert$2.class
 View\E_home_IE_update.class
+View\TableSearchUtil$1.class
 View\C_Signin$6.class
 View\E_billPanel$1.class
 View\M_employee_insert$3.class

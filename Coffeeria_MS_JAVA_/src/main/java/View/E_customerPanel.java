@@ -96,6 +96,8 @@ public class E_customerPanel extends javax.swing.JPanel {
         detailButton.setContentAreaFilled(false);
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
+        
+        TableSearchUtil.enableSearch(ctTable, searchTextField);
     }
     
 

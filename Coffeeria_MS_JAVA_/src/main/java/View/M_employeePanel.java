@@ -120,6 +120,8 @@ public class M_employeePanel extends javax.swing.JPanel {
         detailButton.setFocusPainted(false);
         
         loadAll();
+        
+        TableSearchUtil.enableSearch(employeeTable, searchTextField);
     }
 
     /**

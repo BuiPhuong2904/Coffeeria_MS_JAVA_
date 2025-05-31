@@ -35,6 +35,8 @@ public class E_home_IE extends javax.swing.JFrame {
         returnButton.setContentAreaFilled(false);
         returnButton.setBorderPainted(false);
         returnButton.setFocusPainted(false);
+        
+        TableSearchUtil.enableSearch(im_exTable, searchTextField);
     }
 
     /**

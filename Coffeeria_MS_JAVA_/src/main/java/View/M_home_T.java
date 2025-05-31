@@ -94,6 +94,8 @@ public class M_home_T extends javax.swing.JFrame {
         returnButton.setContentAreaFilled(false);
         returnButton.setBorderPainted(false);
         returnButton.setFocusPainted(false);
+        
+        TableSearchUtil.enableSearch(timeTable, searchTextField);
     }
 
     /**

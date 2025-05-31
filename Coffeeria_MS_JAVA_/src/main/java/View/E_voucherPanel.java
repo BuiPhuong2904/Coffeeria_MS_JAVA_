@@ -92,6 +92,8 @@ public class E_voucherPanel extends javax.swing.JPanel {
         detailButton.setContentAreaFilled(false);
         detailButton.setBorderPainted(false);
         detailButton.setFocusPainted(false);
+        
+        TableSearchUtil.enableSearch(voucherTable, searchTextField);
     }
 
     /**
