@@ -134,6 +134,7 @@ public class E_voucherPanel extends javax.swing.JPanel {
                 "ID", "Name", "Type", "Discount Value", "Condition", "Start Date", "End Date", "Status"
             }
         ));
+        voucherTable.setRowHeight(30);
         voucherScrollPane.setViewportView(voucherTable);
 
         tempPanel.add(voucherScrollPane);

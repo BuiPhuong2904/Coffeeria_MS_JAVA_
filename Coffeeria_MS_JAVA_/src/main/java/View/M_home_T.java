@@ -141,6 +141,7 @@ public class M_home_T extends javax.swing.JFrame {
                 "Timekeeping ID", "Employee ID", "Name", "Work Date", "Working Hours"
             }
         ));
+        timeTable.setRowHeight(30);
         timeScrollPane.setViewportView(timeTable);
 
         tempPanel.add(timeScrollPane);

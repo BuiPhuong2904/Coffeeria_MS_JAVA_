@@ -144,6 +144,7 @@ public class E_inventoryPanel extends javax.swing.JPanel {
         tempPanel.setPreferredSize(new java.awt.Dimension(800, 750));
         tempPanel.setLayout(null);
 
+        inventoryTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -155,6 +156,7 @@ public class E_inventoryPanel extends javax.swing.JPanel {
                 "ID", "Name", "Category", "Quantity", "Unit", "Import Price", "MFD", "EXP", "Status"
             }
         ));
+        inventoryTable.setRowHeight(30);
         inventoryScrollPane.setViewportView(inventoryTable);
 
         tempPanel.add(inventoryScrollPane);

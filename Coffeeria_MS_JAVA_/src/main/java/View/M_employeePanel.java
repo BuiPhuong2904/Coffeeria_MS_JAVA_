@@ -162,6 +162,7 @@ public class M_employeePanel extends javax.swing.JPanel {
                 "ID", "Name", "Birth", "Phone number", "Email", "Start Date", "Position", "Salary", "Manager ID", "Account ID"
             }
         ));
+        employeeTable.setRowHeight(30);
         voucherScrollPane.setViewportView(employeeTable);
 
         tempPanel.add(voucherScrollPane);
