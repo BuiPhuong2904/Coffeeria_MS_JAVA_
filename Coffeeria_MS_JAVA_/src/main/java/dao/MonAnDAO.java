@@ -17,15 +17,14 @@ import utils.DBConnection;
 public class MonAnDAO {
 
     public boolean insertMonAn(MonAn mon) {
-        String sql = "INSERT INTO MONAN (MAMON, TENMON, DANHMUC, GIABAN, HINHANH, MOTA) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO MONAN (MAMON, TENMON, DANHMUC, GIABAN, MOTA) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, mon.getMaMon());
             ps.setString(2, mon.getTenMon());
             ps.setString(3, mon.getDanhMuc());
             ps.setDouble(4, mon.getGiaBan());
-            ps.setString(5, mon.getHinhAnh());
-            ps.setString(6, mon.getMoTa());
+            ps.setString(5, mon.getMoTa());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,7 +44,6 @@ public class MonAnDAO {
                     rs.getString("TENMON"),
                     rs.getString("DANHMUC"),
                     rs.getDouble("GIABAN"),
-                    rs.getString("HINHANH"),
                     rs.getString("MOTA")
                 );
                 list.add(m);
@@ -55,8 +53,6 @@ public class MonAnDAO {
         }
         return list;
     }
-
-    // Thêm các hàm update, delete, search nếu cần
 
     public boolean existsByMaMon(String maMon) {
         String sql = "SELECT 1 FROM MONAN WHERE MAMON = ?";
@@ -72,23 +68,21 @@ public class MonAnDAO {
     }
 
     public boolean updateMonAn(MonAn mon) {
-        String sql = "UPDATE MONAN SET TENMON=?, DANHMUC=?, GIABAN=?, HINHANH=?, MOTA=? WHERE MAMON=?";
+        String sql = "UPDATE MONAN SET TENMON=?, DANHMUC=?, GIABAN=?, MOTA=? WHERE MAMON=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, mon.getTenMon());
             ps.setString(2, mon.getDanhMuc());
             ps.setDouble(3, mon.getGiaBan());
-            ps.setString(4, mon.getHinhAnh());
-            ps.setString(5, mon.getMoTa());
-            ps.setString(6, mon.getMaMon());
-
+            ps.setString(4, mon.getMoTa());
+            ps.setString(5, mon.getMaMon());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-    
+
     public boolean deleteByMaMon(String maMon) {
         String sql = "DELETE FROM MONAN WHERE MAMON = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -113,7 +107,6 @@ public class MonAnDAO {
                     rs.getString("TENMON"),
                     rs.getString("DANHMUC"),
                     rs.getDouble("GIABAN"),
-                    rs.getString("HINHANH"),
                     rs.getString("MOTA")
                 );
             }

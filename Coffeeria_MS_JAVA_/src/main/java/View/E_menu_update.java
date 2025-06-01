@@ -4,6 +4,9 @@ package View;
 import controller.MenuController;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -18,6 +21,8 @@ public class E_menu_update extends javax.swing.JFrame {
     
     private final MonAn monAn;
     private final E_menuPanel menuPanel;
+    
+    private File selectedImageFile = null;
 
     /**
      * Creates new form E_menu_update
@@ -36,9 +41,20 @@ public class E_menu_update extends javax.swing.JFrame {
         nameTextField.setText(monAn.getTenMon());
         categoryTextField.setText(monAn.getDanhMuc());
         priceTextField.setText(String.valueOf(monAn.getGiaBan()));
-        // imageTextField.setText(monAn.getHinhAnh());
+        
+        System.out.println("Mô tả: " + monAn.getMoTa());
+
         desTextField.setText(monAn.getMoTa());
         idTextField.setEditable(false); // Không cho sửa mã món
+        
+        ImageIcon icon = monAn.getImageIcon();
+        if (icon != null) {
+            Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(image));
+            imageLabel.setText("");
+        } else {
+            imageLabel.setText("Không có ảnh");
+        }
     }
 
     /**
@@ -325,27 +341,31 @@ public class E_menu_update extends javax.swing.JFrame {
     }//GEN-LAST:event_desTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
         String tenMon = nameTextField.getText();
         String danhMuc = categoryTextField.getText();
         String giaStr = priceTextField.getText();
-        // String hinhAnh = imageTextField.getText();
         String moTa = desTextField.getText();
         
+        if (selectedImageFile != null) {
+        try {
+            String extension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf("."));
+            File destFile = new File("resources/drink/" + monAn.getMaMon() + extension);
+            Files.copy(selectedImageFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi lưu ảnh: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
         MenuController controller = new MenuController(this, menuPanel);
-        controller.handleUpdate(monAn.getMaMon(), tenMon, danhMuc, giaStr, null, moTa, menuPanel::loadAll);
+        controller.handleUpdate(monAn.getMaMon(), tenMon, danhMuc, giaStr, moTa, menuPanel::loadAll);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         E_menuPanel menuPanel = new E_menuPanel();
         menuPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -361,15 +381,15 @@ public class E_menu_update extends javax.swing.JFrame {
 
             int result = fileChooser.showOpenDialog(this);
             if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
+//                File selectedFile = fileChooser.getSelectedFile();
+                selectedImageFile = fileChooser.getSelectedFile();
 
                 // Load ảnh và resize
-                ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+                ImageIcon icon = new ImageIcon(selectedImageFile.getAbsolutePath());
                 Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(image);
 
                 imageLabel.setText("");
-
                 imageLabel.setIcon(resizedIcon);
             }
         } catch (Exception ex) {
@@ -405,13 +425,7 @@ public class E_menu_update extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_menu_update().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

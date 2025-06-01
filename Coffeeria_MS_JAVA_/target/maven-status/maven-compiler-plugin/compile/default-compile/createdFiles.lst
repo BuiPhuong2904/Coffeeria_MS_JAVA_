@@ -20,6 +20,7 @@ View\M_home_T_update$5.class
 View\E_home_IE_update$3.class
 View\E_inventory_update$9.class
 View\E_menu_update$8.class
+View\C_Homepage$1.class
 View\E_voucher_detail$4.class
 View\E_customer_insert$3.class
 View\M_employee_insert$2.class
@@ -108,6 +109,7 @@ View\E_voucher_update$4.class
 View\E_inventory_insert$9.class
 View\E_customer_update$3.class
 View\E_home_U_detail$5.class
+View\C_Homepage.class
 View\C_Signup$4.class
 View\E_inventory_detail$3.class
 View\M_employeePanel$2.class

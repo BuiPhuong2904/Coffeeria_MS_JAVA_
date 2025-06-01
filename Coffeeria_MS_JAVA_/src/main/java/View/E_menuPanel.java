@@ -26,7 +26,7 @@ public class E_menuPanel extends javax.swing.JPanel {
                 m.getTenMon(),
                 m.getDanhMuc(),
                 m.getGiaBan(),
-                m.getHinhAnh(),
+                null,
                 m.getMoTa()
             });
         }
@@ -41,10 +41,9 @@ public class E_menuPanel extends javax.swing.JPanel {
         String tenMon = (String) model.getValueAt(selectedRow, 1);
         String danhMuc = (String) model.getValueAt(selectedRow, 2);
         double giaBan = (Double) model.getValueAt(selectedRow, 3);
-        String hinhAnh = (String) model.getValueAt(selectedRow, 4);
         String moTa = (String) model.getValueAt(selectedRow, 5);
 
-        return new MonAn(maMon, tenMon, danhMuc, giaBan, hinhAnh, moTa);
+        return new MonAn(maMon, tenMon, danhMuc, giaBan, moTa);
     }
 
 
@@ -417,7 +416,6 @@ public class E_menuPanel extends javax.swing.JPanel {
         insertFrame.setVisible(true);
         insertFrame.pack();
         insertFrame.setLocationRelativeTo(null);
-        //        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void priceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTextFieldActionPerformed

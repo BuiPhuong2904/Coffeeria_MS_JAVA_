@@ -4,6 +4,9 @@ package View;
 import controller.MenuController;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -15,12 +18,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class E_menu_insert extends javax.swing.JFrame {
 
+    private File selectedImageFile = null; 
+
     /**
      * Creates new form E_menu_insert
      */
-//    public E_menu_insert() {
-//        initComponents();
-//    }
     
     private E_menuPanel menuPanel;
 
@@ -313,20 +315,26 @@ public class E_menu_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_desTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
         String maMon = idTextField.getText().trim();
         String tenMon = nameTextField.getText().trim();
         String danhMuc = categoryTextField.getText().trim();
         String giaBanStr = priceTextField.getText().trim();
         String moTa = desTextField.getText().trim();
-        String hinhAnh = ""; 
+        
+        if (selectedImageFile != null) {
+            try {
+                String extension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf("."));
+                File dest = new File("resources/drink/" + maMon + extension);
+                Files.copy(selectedImageFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi khi sao chép ảnh!");
+                return;
+            }
+        }
 
         MenuController controller = new MenuController(this, menuPanel);
-        controller.handleInsert(maMon, tenMon, danhMuc, giaBanStr, hinhAnh, moTa);
+        controller.handleInsert(maMon, tenMon, danhMuc, giaBanStr, moTa);
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -334,8 +342,7 @@ public class E_menu_insert extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_menuPanel menuPanel = new E_menuPanel();
         menuPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -395,13 +402,7 @@ public class E_menu_insert extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_menu_insert().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

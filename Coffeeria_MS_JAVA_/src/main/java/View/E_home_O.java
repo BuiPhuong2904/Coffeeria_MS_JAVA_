@@ -26,17 +26,17 @@ public class E_home_O extends javax.swing.JFrame {
         MonAnDAO monAnDAO = new MonAnDAO(); // tạo DAO
         List<MonAn> danhSachMonAn = monAnDAO.findAll(); // lấy danh sách món
 
-        menuPanel.removeAll(); // Xóa tất cả các item cũ
+        menuPanel.removeAll();
         menuPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 10, 10));
 
 
         for (MonAn mon : danhSachMonAn) {
-            itemPanel item = new itemPanel(); // tạo từng itemPanel
+            itemPanel item = new itemPanel();
 
             // Đặt dữ liệu
             item.setNameLabel(mon.getTenMon());
             item.setPriceLabel(mon.getGiaBan());
-            item.setImage(mon.getHinhAnh()); // bạn cần thêm setImage(String path) trong itemPanel
+            item.setImage(mon.getImageIcon());
 
             menuPanel.add(item);
         }
@@ -44,10 +44,6 @@ public class E_home_O extends javax.swing.JFrame {
         menuPanel.revalidate();
         menuPanel.repaint();
     }
-
-    
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.

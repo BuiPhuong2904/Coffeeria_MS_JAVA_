@@ -4,6 +4,7 @@ package View;
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import model.MonAn;
 
 
 public class itemPanel extends javax.swing.JPanel {
@@ -14,10 +15,10 @@ public class itemPanel extends javax.swing.JPanel {
         this.setPreferredSize(new Dimension(150, 250));
     }
     
-    public void setData(DrinkItem item) {
-        nameLabel.setText(item.getName());
-        priceLabel.setText(String.format("%.0f VNĐ", item.getPrice()));
-        picLabel.setIcon(item.getImage());
+    public void setData(MonAn mon) {
+        setNameLabel(mon.getTenMon());
+        setPriceLabel(mon.getGiaBan());
+        setImage(mon.getImageIcon());
     }
     
     public void setNameLabel(String name) {
@@ -30,6 +31,16 @@ public class itemPanel extends javax.swing.JPanel {
         priceLabel.setText(String.format("%.0f VNĐ", price));
     }
 
+    public void setImage(ImageIcon icon) {
+        if (icon != null) {
+            Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            picLabel.setIcon(new ImageIcon(img));
+            picLabel.setText("");
+        } else {
+            picLabel.setText("No Image");
+        }
+    }
+        
     public void setImage(String imagePath) {
         try {
             ImageIcon icon = new ImageIcon(imagePath);

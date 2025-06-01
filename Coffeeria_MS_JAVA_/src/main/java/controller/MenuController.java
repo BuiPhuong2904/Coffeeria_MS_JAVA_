@@ -21,9 +21,9 @@ public class MenuController {
         this.menuPanel = menuPanel;
     }
 
-    public void handleInsert(String maMon, String tenMon, String danhMuc, String giaBanStr, String hinhAnh, String moTa) {
+    public void handleInsert(String maMon, String tenMon, String danhMuc, String giaBanStr, String moTa) {
         if (maMon.isEmpty() || tenMon.isEmpty() || giaBanStr.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Vui lòng nhập đủ các trường bắt buộc.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập đủ các thông tin bắt buộc.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -34,7 +34,7 @@ public class MenuController {
 
         try {
             double giaBan = Double.parseDouble(giaBanStr);
-            MonAn mon = new MonAn(maMon, tenMon, danhMuc, giaBan, hinhAnh, moTa);
+            MonAn mon = new MonAn(maMon, tenMon, danhMuc, giaBan, moTa);
             boolean success = new MonAnDAO().insertMonAn(mon);
             if (success) {
                 JOptionPane.showMessageDialog(view, "Thêm món thành công!");
@@ -50,7 +50,7 @@ public class MenuController {
         }
     }
     
-    public void handleUpdate(String maMon, String tenMon, String danhMuc, String giaStr, String hinhAnh, String moTa, Runnable afterUpdateCallback) {
+    public void handleUpdate(String maMon, String tenMon, String danhMuc, String giaStr, String moTa, Runnable afterUpdateCallback) {
         if (tenMon.isEmpty() || giaStr.isEmpty()) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ tên và giá.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
@@ -58,7 +58,7 @@ public class MenuController {
 
         try {
             double giaBan = Double.parseDouble(giaStr);
-            MonAn updated = new MonAn(maMon, tenMon, danhMuc, giaBan, hinhAnh, moTa);
+            MonAn updated = new MonAn(maMon, tenMon, danhMuc, giaBan, moTa);
             boolean success = new MonAnDAO().updateMonAn(updated);
             if (success) {
                 JOptionPane.showMessageDialog(view, "Cập nhật thành công!");
@@ -86,5 +86,4 @@ public class MenuController {
             }
         }
     }
-
 }
