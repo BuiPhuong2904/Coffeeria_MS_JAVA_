@@ -1,4 +1,5 @@
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\com\mycompany\java_coffeeria_ms\Java_Coffeeria_MS.java
+D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\C_ChuyenManHinhController.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\ChamCongController.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\ChuyenManHinhController.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\controller\DanhMucBean.java
@@ -28,7 +29,6 @@ D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\j
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\C_Homepage.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\C_Signin.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\C_Signup.java
-D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\DrinkItem.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_detail.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_insert.java
 D:\Nam2_HK2\Github\Project_JAVA\Coffeeria_MS_JAVA_\Coffeeria_MS_JAVA_\src\main\java\View\E_bill_update.java
