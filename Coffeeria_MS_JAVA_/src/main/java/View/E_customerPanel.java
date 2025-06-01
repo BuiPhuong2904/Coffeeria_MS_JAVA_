@@ -141,9 +141,10 @@ public class E_customerPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Full name", "Birth", "Email", "Phone number", "Point", "Level"
+                "ID", "Full name", "Birth", "Phone number", "Point", "Level", "Account ID"
             }
         ));
+        ctTable.setRowHeight(30);
         ctScrollPane.setViewportView(ctTable);
 
         tempPanel.add(ctScrollPane);
