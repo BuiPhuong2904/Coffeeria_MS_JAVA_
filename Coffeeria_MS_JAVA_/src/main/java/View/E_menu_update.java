@@ -42,8 +42,6 @@ public class E_menu_update extends javax.swing.JFrame {
         categoryTextField.setText(monAn.getDanhMuc());
         priceTextField.setText(String.valueOf(monAn.getGiaBan()));
         
-        System.out.println("Mô tả: " + monAn.getMoTa());
-
         desTextField.setText(monAn.getMoTa());
         idTextField.setEditable(false); // Không cho sửa mã món
         

@@ -137,6 +137,7 @@ View\E_inventory_detail$6.class
 View\E_inventoryPanel.class
 View\E_menu_update$5.class
 controller\NhanVienController.class
+View\M_home_T_detail$6.class
 View\M_employee_detail.class
 View\M_employee_update$3.class
 View\E_voucher_update$1.class
@@ -295,6 +296,7 @@ View\E_customer_detail$4.class
 dao\KhuyenMaiDAO.class
 View\E_billPanel$3.class
 View\E_inventory_insert$3.class
+View\M_home_T_update$7.class
 View\E_customerPanel.class
 View\E_home_U_insert$2.class
 View\E_home_U$8.class

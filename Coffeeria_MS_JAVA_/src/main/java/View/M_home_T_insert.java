@@ -253,13 +253,8 @@ public class M_home_T_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-//        M_home_T timekeepingFrame = new M_home_T();
-//        timekeepingFrame.setVisible(true);
-//        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-//        this.dispose(); // đóng form hiện tại
-        
-        parent.setVisible(true); // Hiện lại form cha
+        // TODO add your handling code here:    
+        parent.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

@@ -39,7 +39,7 @@ public class MenuController {
             if (success) {
                 JOptionPane.showMessageDialog(view, "Thêm món thành công!");
                 if (menuPanel != null) {
-                    menuPanel.loadAll(); // gọi lại loadAll() để cập nhật bảng
+                    menuPanel.loadAll();
                 }
                 ((Window) view).dispose();
             } else {
@@ -62,8 +62,8 @@ public class MenuController {
             boolean success = new MonAnDAO().updateMonAn(updated);
             if (success) {
                 JOptionPane.showMessageDialog(view, "Cập nhật thành công!");
-                if (afterUpdateCallback != null) afterUpdateCallback.run(); // cập nhật bảng
-                ((Window) view).dispose(); // đóng form
+                if (afterUpdateCallback != null) afterUpdateCallback.run();
+                ((Window) view).dispose(); 
             } else {
                 JOptionPane.showMessageDialog(view, "Cập nhật thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
@@ -79,7 +79,7 @@ public class MenuController {
             if (success) {
                 JOptionPane.showMessageDialog(view, "Xóa món thành công!");
                 if (afterDeleteCallback != null) {
-                    afterDeleteCallback.run(); // gọi load lại bảng
+                    afterDeleteCallback.run();
                 }
             } else {
                 JOptionPane.showMessageDialog(view, "Xóa món thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);

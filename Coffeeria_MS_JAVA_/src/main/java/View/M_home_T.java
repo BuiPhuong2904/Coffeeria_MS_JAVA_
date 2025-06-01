@@ -3,6 +3,7 @@ package View;
 
 import controller.ChamCongController;
 import dao.ChamCongDAO;
+import dao.NhanVienDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,8 @@ import model.ChamCong;
 public class M_home_T extends javax.swing.JFrame {
 
     private final ChamCongDAO chamCongDAO = new ChamCongDAO();
+    private final NhanVienDAO nhanVienDAO = new NhanVienDAO();
+
     
     public void loadAll() {
         List<ChamCong> list = chamCongDAO.findAll(); 
@@ -28,11 +31,13 @@ public class M_home_T extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         for (ChamCong cc : list) {
+            String tenNV = nhanVienDAO.getTenNVByMaNV(cc.getMaNV());
             Object[] row = new Object[] {
                 cc.getMaChamCong(),
+                cc.getMaNV(),
+                tenNV != null ? tenNV : "",           
                 sdf.format(cc.getNgayLV()),
-                cc.getSoGioLam(),
-                cc.getMaNV()
+                cc.getSoGioLam()
             };
             model.addRow(row);
         }
@@ -45,10 +50,11 @@ public class M_home_T extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) timeTable.getModel();
 
         String maChamCong = (String) model.getValueAt(selectedRow, 0);
+        String maNV = (String) model.getValueAt(selectedRow, 1);
 
         Date ngayLV = null;
         try {
-            String ngayLVStr = (String) model.getValueAt(selectedRow, 1);
+            String ngayLVStr = (String) model.getValueAt(selectedRow, 3);
             if (ngayLVStr != null && !ngayLVStr.trim().isEmpty()) {
                 ngayLV = new SimpleDateFormat("dd/MM/yyyy").parse(ngayLVStr);
             }
@@ -57,12 +63,10 @@ public class M_home_T extends javax.swing.JFrame {
         }
 
         double soGioLam = 0;
-        Object gioObj = model.getValueAt(selectedRow, 2);
+        Object gioObj = model.getValueAt(selectedRow, 4);
         if (gioObj != null) {
             soGioLam = Double.parseDouble(gioObj.toString());
         }
-
-        String maNV = (String) model.getValueAt(selectedRow, 3);
 
         return new ChamCong(maChamCong, ngayLV, soGioLam, maNV);
     }

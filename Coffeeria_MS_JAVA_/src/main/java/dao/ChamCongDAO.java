@@ -12,6 +12,7 @@ import utils.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date; 
 
 public class ChamCongDAO {
 
@@ -61,7 +62,11 @@ public class ChamCongDAO {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setDate(1, (Date) chamCong.getNgayLV());
+            java.util.Date utilDate = chamCong.getNgayLV();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            ps.setDate(1, sqlDate);
+
             ps.setDouble(2, chamCong.getSoGioLam());
             ps.setString(3, chamCong.getMaNV());
             ps.setString(4, chamCong.getMaChamCong());

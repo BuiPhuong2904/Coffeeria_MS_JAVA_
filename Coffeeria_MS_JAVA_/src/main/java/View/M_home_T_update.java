@@ -15,6 +15,7 @@ public class M_home_T_update extends javax.swing.JFrame {
 
     private M_home_T parent;
     private ChamCong chamCong;
+    private ChamCongController chamCongController;
     
     public M_home_T_update(ChamCong chamCong, M_home_T parent) {
         initComponents();
@@ -22,7 +23,10 @@ public class M_home_T_update extends javax.swing.JFrame {
         
         this.chamCong = chamCong;
         
+        this.chamCongController = new ChamCongController(this, parent);
+        
         loadDataToForm();
+        addEvents();
     }
     
     public M_home_T_update() {
@@ -38,8 +42,29 @@ public class M_home_T_update extends javax.swing.JFrame {
 
         Date workDate = chamCong.getNgayLV();
         workdateDateChooser.setDate(workDate);
+        
+        String tenNV = chamCongController.getTenNVByMaNV(chamCong.getMaNV());
+        nameTextField.setText(tenNV != null ? tenNV : "");
     }
 
+    private void addEvents() {
+        e_idTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String maNV = e_idTextField.getText().trim();
+                if (!maNV.isEmpty()) {
+                    String tenNV = chamCongController.getTenNVByMaNV(maNV);
+                    if (tenNV != null) {
+                        nameTextField.setText(tenNV);
+                    } else {
+                        nameTextField.setText("");
+                        JOptionPane.showMessageDialog(M_home_T_update.this, "Không tìm thấy nhân viên với mã này.");
+                    }
+                }
+            }
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,7 +296,7 @@ public class M_home_T_update extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        parent.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

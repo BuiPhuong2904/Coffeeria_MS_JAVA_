@@ -8,6 +8,7 @@ package controller;
 
 import View.M_home_T;
 import dao.ChamCongDAO;
+import dao.NhanVienDAO;
 import model.ChamCong;
 
 import javax.swing.*;
@@ -24,6 +25,11 @@ public class ChamCongController {
     public ChamCongController(Component view, M_home_T chamCongView) {
         this.view = view;
         this.chamCongView = chamCongView;
+    }
+
+    public String getTenNVByMaNV(String maNV) {
+        NhanVienDAO nvDAO = new NhanVienDAO();
+        return nvDAO.getTenNVByMaNV(maNV); 
     }
 
     public void insertChamCong(Date ngayLV, String soGioLamStr, String maNV) {
@@ -71,7 +77,7 @@ public class ChamCongController {
             boolean success = chamCongDAO.updateChamCong(cc);
             if (success) {
                 JOptionPane.showMessageDialog(view, "Cập nhật chấm công thành công.");
-                chamCongView.loadAll(); // Cập nhật bảng
+                chamCongView.loadAll(); 
             } else {
                 JOptionPane.showMessageDialog(view, "Cập nhật chấm công thất bại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
@@ -82,7 +88,6 @@ public class ChamCongController {
         }
     }
 
-    // Xóa chấm công
     public void deleteChamCong(String maChamCong, Runnable afterDeleteCallback) {
         int confirm = JOptionPane.showConfirmDialog(view, "Bạn có chắc chắn muốn xóa bản ghi này?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {

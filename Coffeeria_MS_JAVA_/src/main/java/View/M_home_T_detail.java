@@ -1,9 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
+import controller.ChamCongController;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JOptionPane;
 import model.ChamCong;
 
 /**
@@ -14,26 +15,57 @@ public class M_home_T_detail extends javax.swing.JFrame {
 
     private M_home_T parent;
     private ChamCong chamCong;
+    private ChamCongController chamCongController;
+
     
     public M_home_T_detail(M_home_T parent) {
         initComponents();
         this.parent = parent;
+        
+        chamCongController = new ChamCongController(this, parent);
+        
+        addEvents();
     }
         
     public M_home_T_detail(ChamCong chamCong) {
         initComponents();
         this.chamCong = chamCong;
         
+        this.chamCongController = new ChamCongController(this, parent);
+        
         tk_idTextField.setText(chamCong.getMaChamCong()); 
         e_idTextField.setText(chamCong.getMaNV());        
         hoursTextField.setText(String.valueOf(chamCong.getSoGioLam())); 
         workdateDateChooser.setDate(chamCong.getNgayLV()); 
+        
+        String tenNV = chamCongController.getTenNVByMaNV(chamCong.getMaNV());
+        nameTextField.setText(tenNV != null ? tenNV : "");
 
         tk_idTextField.setEditable(false);  
         e_idTextField.setEditable(false);   
         hoursTextField.setEditable(false);  
         workdateDateChooser.setEnabled(false);  
+        nameTextField.setEditable(false); 
     }
+
+    private void addEvents() {
+        e_idTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                String maNV = e_idTextField.getText().trim();
+                if (!maNV.isEmpty()) {
+                    String tenNV = chamCongController.getTenNVByMaNV(maNV);
+                    if (tenNV != null) {
+                        nameTextField.setText(tenNV);
+                    } else {
+                        nameTextField.setText("");
+                        JOptionPane.showMessageDialog(M_home_T_detail.this, "Không tìm thấy nhân viên với mã này.");
+                    }
+                }
+            }
+        });
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,7 +269,9 @@ public class M_home_T_detail extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        if (parent != null) {
+            parent.setVisible(true); 
+        }
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -268,13 +302,7 @@ public class M_home_T_detail extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new M_home_T_detail().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
