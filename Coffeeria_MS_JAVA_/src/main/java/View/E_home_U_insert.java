@@ -1,6 +1,8 @@
 
 package View;
 
+import controller.TaiKhoanController;
+
 /**
  *
  * @author nttma
@@ -13,8 +15,8 @@ public class E_home_U_insert extends javax.swing.JFrame {
         initComponents();
         this.parent = parent;
         
-//        ie_idTextField.setEditable(false);
-//        ie_idTextField.setEnabled(false); 
+        idTextField.setEditable(false);
+        idTextField.setEnabled(false); 
     }
     
     public E_home_U_insert() {
@@ -248,22 +250,18 @@ public class E_home_U_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_statusTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-//        String maKM = idTextField.getText().trim();
-//        String tenKM = emailTextField.getText().trim();
-//        String loaiKM = passTextField.getText().trim();
-//        String giaTri = typeTextField.getText().trim();
-//        String dieuKien = statusTextField.getText().trim();
-//        Date ngayBD = startDateChooser.getDate();
-//        Date ngayKT = endDateChooser.getDate();
-//        String trangThai = statusTextField.getText().trim();
-//
-//        KhuyenMaiController controller = new KhuyenMaiController(this, voucherPanel);
-//        controller.handleInsert(maKM, tenKM, loaiKM, giaTri, dieuKien, ngayBD, ngayKT, trangThai);
+        String email = emailTextField.getText().trim();
+        String matKhau = passTextField.getText().trim();
+        String loaiTK = typeTextField.getText().trim();
+        String trangThai = statusTextField.getText().trim();
+
+        TaiKhoanController controller = new TaiKhoanController(this, parent);
+        controller.insertTaiKhoan(email, matKhau, loaiTK, trangThai);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        parent.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

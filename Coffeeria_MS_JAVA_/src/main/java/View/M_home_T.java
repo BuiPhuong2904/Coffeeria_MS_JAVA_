@@ -403,14 +403,12 @@ public class M_home_T extends javax.swing.JFrame {
         timekeepingFrame.setVisible(true);
         timekeepingFrame.pack();
         timekeepingFrame.setLocationRelativeTo(null);
-//        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 

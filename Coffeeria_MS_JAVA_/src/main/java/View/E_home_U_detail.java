@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.TaiKhoanController;
+import model.TaiKhoan;
 
 /**
  *
@@ -11,28 +11,34 @@ package View;
 public class E_home_U_detail extends javax.swing.JFrame {
     
     private E_home_U parent;
+    
+    private TaiKhoan taiKhoan;
+    private TaiKhoanController taiKhoanController;
 
     public E_home_U_detail(E_home_U parent) {
         initComponents();
         this.parent = parent;
         
-        idTextField.setEditable(false);
-        idTextField.setEnabled(false); 
-        
-        emailTextField.setEditable(false);
-        emailTextField.setEnabled(false); 
-        
-        passTextField.setEditable(false);
-        passTextField.setEnabled(false); 
-        
-        typeTextField.setEditable(false);
-        typeTextField.setEnabled(false); 
-        
-        statusTextField.setEditable(false);
-        statusTextField.setEnabled(false); 
+        this.taiKhoanController = new TaiKhoanController(this, parent); 
     }
-    public E_home_U_detail() {
+    
+    public E_home_U_detail(TaiKhoan taiKhoan) {
         initComponents();
+        
+        this.taiKhoan = taiKhoan;
+        this.taiKhoanController = new TaiKhoanController(this, parent);
+        
+        idTextField.setText(taiKhoan.getMaTK());
+        emailTextField.setText(taiKhoan.getEmail());
+        passTextField.setText(taiKhoan.getMatKhau());
+        typeTextField.setText(taiKhoan.getLoaiTK());
+        statusTextField.setText(taiKhoan.getTrangThai());
+
+        idTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        passTextField.setEditable(false);
+        typeTextField.setEditable(false);
+        statusTextField.setEditable(false); 
     }
 
     /**
@@ -247,7 +253,9 @@ public class E_home_U_detail extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        if (parent != null) {
+            parent.setVisible(true); 
+        }
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
