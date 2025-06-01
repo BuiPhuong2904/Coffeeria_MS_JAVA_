@@ -22,21 +22,22 @@ public class E_customer_detail extends javax.swing.JFrame {
         
         idTextField.setText(kh.getMakh());
         nameTextField.setText(kh.getHoten());
-        birthTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(kh.getNgaysinh()));
-        emailTextField.setText(kh.getEmail());
+        birthTextField.setText(
+            kh.getNgaysinh() != null ? new SimpleDateFormat("dd/MM/yyyy").format(kh.getNgaysinh()) : ""
+        );
         phoneTextField.setText(kh.getSdt());
         pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
-        // Giả sử bạn có textField hoặc label cho loại thành viên
         pointTextField1.setText(kh.getLoaitv());
+//        accountIdTextField.setText(kh.getMatk()); 
 
         // Không cho phép chỉnh sửa các trường
         idTextField.setEditable(false);
         nameTextField.setEditable(false);
         birthTextField.setEditable(false);
-        emailTextField.setEditable(false);
         phoneTextField.setEditable(false);
         pointTextField.setEditable(false);
         pointTextField1.setEditable(false);
+//        accountIdTextField.setEditable(false);
     }
 
     /**

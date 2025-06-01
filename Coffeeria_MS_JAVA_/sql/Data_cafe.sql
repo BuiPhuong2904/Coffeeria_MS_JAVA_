@@ -38,7 +38,7 @@ INSERT INTO MONAN VALUES ('MN029', 'Soda Xoài Nhiệt Đới', 'Thức Uống K
 INSERT INTO MONAN VALUES ('MN030', 'Soda Việt Quất', 'Thức Uống Khác', 55000, NULL, 'Soda chua ngọt kết hợp vị việt quất độc đáo và tươi mới');
 commit;
 
---Bảng Tài khoản 
+--Bảng Tài khoản - Nhân viên 
 INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('nguyenvanan@park.com', 'nguyenvanan123', 'Manager');
 INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('tranthibich@park.com', 'tranthibich123', 'Employee');
 INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('leminhtri@park.com', 'leminhtri123', 'Employee');
@@ -51,6 +51,43 @@ INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('danghieuthanh@park.com', 
 INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('vuquynhanh@park.com', 'vuquynhanh123', 'Employee', 'Inactive');
 
 commit;
+
+-- Bảng Tài khoản - Khách hàng 
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('nguyenthithao@park.com', 'nguyenthithao123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('phamvandat@park.com', 'phamvandat123', 'Customer', 'Inactive');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('tranminhha@park.com', 'tranminhha123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('lethikimanh@park.com', 'lethikimanh123', 'Customer', 'Inactive');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('ngocminhtuan@park.com', 'ngocminhtuan123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('buihoangyen@park.com', 'buihoangyen123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('dinhngocson@park.com', 'dinhngocson123', 'Customer', 'Inactive');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('nguyenquynhchi@park.com', 'nguyenquynhchi123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('doanthanhtam@park.com', 'doanthanhtam123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('phamhoangloc@park.com', 'phamhoangloc123', 'Customer', 'Inactive');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('lethimai@park.com', 'lethimai123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('votranbao@park.com', 'votranbao123', 'Customer', 'Inactive');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('nguyenvannam@park.com', 'nguyenvannam123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK) VALUES ('hoangminhtrang@park.com', 'hoangminhtrang123', 'Customer');
+INSERT INTO TAIKHOAN (EMAIL, MATKHAU, LOAITK, TRANGTHAI) VALUES ('tranthanhdat@park.com', 'tranthanhdat123', 'Customer', 'Inactive');
+
+commit;
+
+-- Bảng KHACHHANG
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Nguyễn Thị Thảo', TO_DATE('1992-04-15','YYYY-MM-DD'), '0901234561', 120, 'Silver', 'TK011');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Phạm Văn Đạt', TO_DATE('2005-08-22','YYYY-MM-DD'), '0901234562', 0, 'Bronze', 'TK012');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Trần Minh Hà', TO_DATE('1998-12-05','YYYY-MM-DD'), '0901234563', 310.0, 'Gold', 'TK013');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Lê Thị Kim Anh', TO_DATE('1991-06-19','YYYY-MM-DD'), '0901234564', 40.0, 'Bronze', 'TK014');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Ngọc Minh Tuấn', TO_DATE('1989-03-11','YYYY-MM-DD'), '0901234565', 180.0, 'Silver', 'TK015');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Bùi Hoàng Yến', TO_DATE('1995-10-30','YYYY-MM-DD'), '0901234566', 90.0, 'Bronze', 'TK016');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Đinh Ngọc Sơn', TO_DATE('2003-01-21','YYYY-MM-DD'), '0901234567', 0.0, 'Bronze', 'TK017');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Nguyễn Quỳnh Chi', TO_DATE('1996-09-14','YYYY-MM-DD'), '0901234568', 200, 'Gold', 'TK018');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Đoàn Thanh Tâm', TO_DATE('1993-07-09','YYYY-MM-DD'), '0901234569', 70.0, 'Bronze', 'TK019');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Phạm Hoàng Lộc', TO_DATE('2007-02-26','YYYY-MM-DD'), '0901234570', 320.0, 'Platinum', 'TK020');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Lê Thị Mai', TO_DATE('1990-11-17','YYYY-MM-DD'), '0901234571', 130.0, 'Silver', 'TK021');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Võ Trần Bảo', TO_DATE('2006-05-03','YYYY-MM-DD'), '0901234572', 0.0, 'Bronze', 'TK022');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Nguyễn Văn Nam', TO_DATE('1994-01-25','YYYY-MM-DD'), '0901234573', 200.0, 'Gold', 'TK023');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Hoàng Minh Trang', TO_DATE('1997-08-08','YYYY-MM-DD'), '0901234574', 60.0, 'Bronze', 'TK024');
+INSERT INTO KHACHHANG (HOTEN, NGAYSINH, SDT, DIEMTICHLUY, LOAITV, MATK) VALUES ('Trần Thành Đạt', TO_DATE('1991-03-15','YYYY-MM-DD'), '0901234575', 400.0, 'Platinum', 'TK025');
+
 
 --Bảng Nhân viên
 -- 1. Quản lý

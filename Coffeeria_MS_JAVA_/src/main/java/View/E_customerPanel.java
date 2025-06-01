@@ -31,10 +31,10 @@ public class E_customerPanel extends javax.swing.JPanel {
                 kh.getMakh(),
                 kh.getHoten(),
                 sdf.format(kh.getNgaysinh()),
-                kh.getEmail(),
                 kh.getSdt(),
                 kh.getDiemtichluy(),
-                kh.getLoaitv()
+                kh.getLoaitv(),
+                kh.getMatk()
             };
             model.addRow(row);
         }
@@ -59,18 +59,18 @@ public class E_customerPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-        String email = (String) model.getValueAt(selectedRow, 3);
-        String sdt = (String) model.getValueAt(selectedRow, 4);
+        String sdt = (String) model.getValueAt(selectedRow, 3);
 
         double diemtichluy = 0;
-        Object dtlObj = model.getValueAt(selectedRow, 5);
+        Object dtlObj = model.getValueAt(selectedRow, 4);
         if (dtlObj != null) {
             diemtichluy = Double.parseDouble(dtlObj.toString());
         }
 
-        String loaitv = (String) model.getValueAt(selectedRow, 6);
+        String loaitv = (String) model.getValueAt(selectedRow, 5);
+        String matk = (String) model.getValueAt(selectedRow, 6);
 
-        return new KhachHang(makh, hoten, ngaysinh, email, sdt, diemtichluy, loaitv);
+        return new KhachHang(makh, hoten, ngaysinh, sdt, diemtichluy, loaitv, matk);
     }
 
     /**
@@ -343,15 +343,10 @@ public class E_customerPanel extends javax.swing.JPanel {
         customerFrame.setVisible(true);
         customerFrame.pack();
         customerFrame.setLocationRelativeTo(null);
-        //        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-//        E_customer_update customerFrame = new E_customer_update();
-//        customerFrame.setVisible(true);
-//        customerFrame.pack();
-//        customerFrame.setLocationRelativeTo(null);
         KhachHang selected = getSelectedKhachHang();
         if (selected != null) {
             E_customer_update customerFrame = new E_customer_update(selected, this); 
@@ -365,10 +360,6 @@ public class E_customerPanel extends javax.swing.JPanel {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-//        E_customer_detail customerFrame = new E_customer_detail();
-//        customerFrame.setVisible(true);
-//        customerFrame.pack();
-//        customerFrame.setLocationRelativeTo(null);
         int row = ctTable.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xem chi tiết.");

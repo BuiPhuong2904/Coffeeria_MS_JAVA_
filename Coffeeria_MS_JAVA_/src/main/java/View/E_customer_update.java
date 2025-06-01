@@ -38,7 +38,6 @@ public class E_customer_update extends javax.swing.JFrame {
             birthTextField.setText("");
         }
 
-        emailTextField.setText(kh.getEmail() != null ? kh.getEmail() : "");
         phoneTextField.setText(kh.getSdt());
 
         pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
