@@ -1,7 +1,6 @@
-
 package controller;
 
-import View.E_customerPanel; 
+import View.E_customerPanel;
 import dao.KhachHangDAO;
 import java.awt.Component;
 import java.awt.Window;
@@ -15,7 +14,6 @@ import model.KhachHang;
  *
  * @author Bich Phuong
  */
-
 public class KhachHangController {
     private final KhachHangDAO khachHangDAO = new KhachHangDAO();
     private final Component view;
@@ -26,10 +24,9 @@ public class KhachHangController {
         this.khachHangPanel = khachHangPanel;
     }
 
-    // Thêm khách hàng mới
-    public void insertKhachHang(String hoten, String ngaysinhStr, String email, String sdt, 
-                                String diemtichluyStr, String loaitv) {
-        if (hoten.isEmpty() || ngaysinhStr.isEmpty() || email.isEmpty() || sdt.isEmpty()) {
+    public void insertKhachHang(String hoten, String ngaysinhStr, String sdt, 
+                                String diemtichluyStr, String loaitv, String matk) {
+        if (hoten.isEmpty() || ngaysinhStr.isEmpty() || sdt.isEmpty() || matk.isEmpty()) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin bắt buộc.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -41,16 +38,16 @@ public class KhachHangController {
             KhachHang kh = new KhachHang();
             kh.setHoten(hoten);
             kh.setNgaysinh(ngaysinh);
-            kh.setEmail(email);
             kh.setSdt(sdt);
             kh.setDiemtichluy(diemtichluy);
             kh.setLoaitv(loaitv);
+            kh.setMatk(matk);
 
             boolean ok = khachHangDAO.insertKhachHang(kh);
             if (ok) {
                 JOptionPane.showMessageDialog(view, "Thêm khách hàng thành công.");
                 if (khachHangPanel != null) {
-                    khachHangPanel.loadAll(); // Cập nhật bảng
+                    khachHangPanel.loadAll();
                 }
                 ((Window) view).dispose();
             } else {
@@ -63,11 +60,10 @@ public class KhachHangController {
         }
     }
 
-    // Cập nhật khách hàng
-    public void handleUpdate(String makh, String hoten, String ngaysinhStr, String email, String sdt, 
-                             String diemtichluyStr, String loaitv, Runnable afterUpdateCallback) {
-        if (makh.isEmpty() || hoten.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ Mã và Họ tên.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+    public void handleUpdate(String makh, String hoten, String ngaysinhStr, String sdt,
+                             String diemtichluyStr, String loaitv, String matk, Runnable afterUpdateCallback) {
+        if (makh.isEmpty() || hoten.isEmpty() || matk.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ Mã, Họ tên và Mã tài khoản.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -79,10 +75,10 @@ public class KhachHangController {
             kh.setMakh(makh);
             kh.setHoten(hoten);
             kh.setNgaysinh(ngaysinh);
-            kh.setEmail(email);
             kh.setSdt(sdt);
             kh.setDiemtichluy(diemtichluy);
             kh.setLoaitv(loaitv);
+            kh.setMatk(matk);
 
             boolean success = khachHangDAO.updateKhachHang(kh);
             if (success) {
@@ -99,7 +95,6 @@ public class KhachHangController {
         }
     }
 
-    // Xóa khách hàng theo mã
     public void handleDelete(String makh, Runnable callback) {
         int confirm = JOptionPane.showConfirmDialog(view,
             "Bạn có chắc chắn muốn xóa khách hàng này?",
