@@ -53,6 +53,27 @@ BEGIN
     SELECT 'HD' || LPAD(seq_hoadon.NEXTVAL, 3, '0') INTO :NEW.MAHD FROM dual;
 END;
 
+
+CREATE OR REPLACE TRIGGER trg_cong_diem_tich_luy
+AFTER INSERT ON HOADON
+FOR EACH ROW
+DECLARE
+    v_diem_cong NUMBER(10, 0);
+BEGIN
+    -- Tính điểm: 1 điểm cho mỗi 1.000 đồng (làm tròn xuống)
+    v_diem_cong := FLOOR(:NEW.TONGTIENSAU / 1000);
+
+    -- Cập nhật điểm tích lũy trong bảng KHACHHANG
+    UPDATE KHACHHANG
+    SET DIEMTICHLUY = NVL(DIEMTICHLUY, 0) + v_diem_cong
+    WHERE MAKH = :NEW.MAKH;
+
+    -- (Tùy chọn) Nếu có bảng lịch sử tích lũy, bạn có thể thêm vào đây
+    -- INSERT INTO LICHSUTICHLUY (MAKH, NGAY, DIEMTHAYDOI, LOAI, GHICHU)
+    -- VALUES (:NEW.MAKH, SYSDATE, v_diem_cong, 'CONG', 'Tự động cộng điểm khi lập hóa đơn');
+END;
+
+
 -- Bảng Sản phẩm 
 CREATE SEQUENCE seq_sanpham START WITH 1 INCREMENT BY 1 NOCACHE ORDER NOCYCLE;
 

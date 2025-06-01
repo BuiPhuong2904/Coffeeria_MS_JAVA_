@@ -1,14 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.TaiKhoanController;
+import dao.TaiKhoanDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.TaiKhoan;
 
 /**
  *
  * @author nttma
  */
 public class E_home_U extends javax.swing.JFrame {
+    
+    private final TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO();
+
+    public void loadAll() {
+        List<TaiKhoan> list = taiKhoanDAO.findAll();
+
+        DefaultTableModel model = (DefaultTableModel) userTable.getModel();
+        model.setRowCount(0);
+
+        for (TaiKhoan tk : list) {
+            Object[] row = new Object[]{
+                tk.getMaTK(),    
+                tk.getEmail(),     
+                tk.getMatKhau(),  
+                tk.getLoaiTK(),  
+                tk.getTrangThai()  
+            };
+            model.addRow(row);
+        }
+    }
+
+    public TaiKhoan getSelectedTaiKhoan() {
+        int selectedRow = userTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) userTable.getModel();
+
+        String matk = (String) model.getValueAt(selectedRow, 0);
+        String email = (String) model.getValueAt(selectedRow, 1);
+        String matkhau = (String) model.getValueAt(selectedRow, 2);
+        String loaitk = (String) model.getValueAt(selectedRow, 3);
+        String trangthai = (String) model.getValueAt(selectedRow, 4);
+
+        return new TaiKhoan(matk, email, matkhau, loaitk, trangthai);
+    }
 
     /**
      * Creates new form E_home_U
@@ -16,7 +55,9 @@ public class E_home_U extends javax.swing.JFrame {
     public E_home_U() {
         initComponents();
         
-                insertButton.setContentAreaFilled(false);
+        loadAll();
+        
+        insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
         insertButton.setFocusPainted(false);
         
@@ -297,96 +338,56 @@ public class E_home_U extends javax.swing.JFrame {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-        E_home_U_insert uFrame = new E_home_U_insert(this);
-        uFrame.setVisible(true);
-        uFrame.pack();
-        uFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        E_home_U_insert insertFrame = new E_home_U_insert(this);
+        insertFrame.setVisible(true);
+        insertFrame.pack();
+        insertFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        //        ChamCong selected = getSelectedChamCong();
-        //        if (selected != null) {
-            //            E_home_IE_update ieFrame = new E_home_IE_update(selected, this);
-            E_home_U_update uFrame = new E_home_U_update(this); // chạy thì nhớ xóa dòng này để dòng trên nha, test nên thêm vô
-            uFrame.setVisible(true);
-            uFrame.pack();
-            uFrame.setLocationRelativeTo(null);
-            //        } else {
-            //            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để cập nhật.");
-            //        }
+        TaiKhoan selected = getSelectedTaiKhoan();
+        if (selected != null) {
+            E_home_U_update updateFrame = new E_home_U_update(selected, this);
+            updateFrame.setVisible(true);
+            updateFrame.pack();
+            updateFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        //        ChamCong selected = getSelectedChamCong();
-        //        if (selected == null) {
-            //            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            //            return;
-            //        }
-        //
-        //        ChamCongController controller = new ChamCongController(this, this);
-        //        controller.deleteChamCong(selected.getMaChamCong(), this::loadAll);
+        TaiKhoan selected = getSelectedTaiKhoan();
+        if (selected == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+        TaiKhoanController controller = new TaiKhoanController(this, this);
+        controller.deleteTaiKhoan(selected.getMaTK(), this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        //        ChamCong selected = getSelectedChamCong();
-        //        if (selected != null) {
-            //            M_home_T_detail detailFrame = new M_home_T_detail(selected);
-            // chạy thì nhớ xóa dòng dưới để dòng trên nha, test nên thêm vô
-            E_home_U_detail uFrame = new E_home_U_detail(this);
-            uFrame.setVisible(true);
-            uFrame.pack();
-            uFrame.setLocationRelativeTo(null);
-            //        } else {
-            //            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xem chi tiết.");
-            //        }
+        TaiKhoan selected = getSelectedTaiKhoan();
+        if (selected != null) {
+            E_home_U_detail detailFrame = new E_home_U_detail(selected);
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tài khoản để xem chi tiết.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(E_home_U.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(E_home_U.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(E_home_U.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(E_home_U.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new E_home_U().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel action1Panel;

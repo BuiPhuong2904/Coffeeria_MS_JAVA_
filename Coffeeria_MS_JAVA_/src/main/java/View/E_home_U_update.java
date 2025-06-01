@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.TaiKhoanController;
+import model.TaiKhoan;
 
 /**
  *
@@ -12,13 +12,29 @@ public class E_home_U_update extends javax.swing.JFrame {
 
     private E_home_U parent;
     
-    public E_home_U_update(E_home_U parent) {
+    private TaiKhoan taiKhoan;
+    private TaiKhoanController taiKhoanController;
+    
+    public E_home_U_update(TaiKhoan taiKhoan, E_home_U parent) {
         initComponents();
         this.parent = parent;
         
-        idTextField.setEditable(false);
-        idTextField.setEnabled(false); 
+        this.taiKhoan = taiKhoan;
+        this.taiKhoanController = new TaiKhoanController(this, parent);
+        
+        loadDataToForm();
     }
+    
+    private void loadDataToForm() {
+        idTextField.setText(taiKhoan.getMaTK());
+        idTextField.setEditable(false); 
+
+        emailTextField.setText(taiKhoan.getEmail());
+        passTextField.setText(taiKhoan.getMatKhau());
+        typeTextField.setText(taiKhoan.getLoaiTK() != null ? taiKhoan.getLoaiTK() : "");
+        statusTextField.setText(taiKhoan.getTrangThai() != null ? taiKhoan.getTrangThai() : "");
+    }
+
     
     public E_home_U_update() {
         initComponents();
@@ -251,22 +267,19 @@ public class E_home_U_update extends javax.swing.JFrame {
     }//GEN-LAST:event_statusTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        String maKM = idTextField.getText().trim();
-        //        String tenKM = emailTextField.getText().trim();
-        //        String loaiKM = passTextField.getText().trim();
-        //        String giaTri = typeTextField.getText().trim();
-        //        String dieuKien = statusTextField.getText().trim();
-        //        Date ngayBD = startDateChooser.getDate();
-        //        Date ngayKT = endDateChooser.getDate();
-        //        String trangThai = statusTextField.getText().trim();
-        //
-        //        KhuyenMaiController controller = new KhuyenMaiController(this, voucherPanel);
-        //        controller.handleInsert(maKM, tenKM, loaiKM, giaTri, dieuKien, ngayBD, ngayKT, trangThai);
+        String maTK = idTextField.getText().trim();
+        String email = emailTextField.getText().trim();
+        String matKhau = passTextField.getText().trim();
+        String loaiTK = typeTextField.getText().trim();
+        String trangThai = statusTextField.getText().trim();
+
+        TaiKhoanController controller = new TaiKhoanController(this, parent);
+        controller.updateTaiKhoan(maTK, email, matKhau, loaiTK, trangThai);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        parent.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
