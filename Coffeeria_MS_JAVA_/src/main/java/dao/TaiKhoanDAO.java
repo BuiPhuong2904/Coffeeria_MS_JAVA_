@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TaiKhoanDAO {
-    // Hàm đăng nhập
+
     public TaiKhoan dangNhap(String email, String matKhau) {
         String sql = "SELECT * FROM TAIKHOAN WHERE EMAIL = ? AND MATKHAU = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -83,7 +83,6 @@ public class TaiKhoanDAO {
         return email;
     }
     
-    // Hàm chuyển ResultSet thành đối tượng TaiKhoan
     private TaiKhoan mapResultSetToTaiKhoan(ResultSet rs) throws SQLException {
         return new TaiKhoan(
             rs.getString("MATK"),
@@ -92,5 +91,65 @@ public class TaiKhoanDAO {
             rs.getString("LOAITK"),
             rs.getString("TRANGTHAI")
         );
+    }
+    
+    public TaiKhoan findById(String matk) {
+        String sql = "SELECT * FROM TAIKHOAN WHERE MATK = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, matk);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToTaiKhoan(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateTaiKhoan(TaiKhoan tk) {
+        String sql = "UPDATE TAIKHOAN SET EMAIL = ?, MATKHAU = ?, LOAITK = ?, TRANGTHAI = ? WHERE MATK = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, tk.getEmail());
+            ps.setString(2, tk.getMatKhau());
+            ps.setString(3, tk.getLoaiTK());
+            ps.setString(4, tk.getTrangThai());
+            ps.setString(5, tk.getMatk());
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteById(String matk) {
+        String sql = "DELETE FROM TAIKHOAN WHERE MATK = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, matk);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<TaiKhoan> findAll() {
+        List<TaiKhoan> list = new ArrayList<>();
+        String sql = "SELECT * FROM TAIKHOAN";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                list.add(mapResultSetToTaiKhoan(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
