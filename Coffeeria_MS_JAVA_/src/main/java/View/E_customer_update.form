@@ -58,7 +58,7 @@
                       <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="phoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="pointLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="levelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="acc_idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -111,7 +111,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="levelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="acc_idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="levelTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -199,7 +199,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Email:"/>
+            <Property name="text" type="java.lang.String" value="Phone number:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="emailTextField">
@@ -220,7 +220,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Phone number:"/>
+            <Property name="text" type="java.lang.String" value="Point:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="phoneTextField">
@@ -241,7 +241,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Point:"/>
+            <Property name="text" type="java.lang.String" value="Level:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pointTextField">
@@ -257,12 +257,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pointTextFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="levelLabel">
+        <Component class="javax.swing.JLabel" name="acc_idLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Level:"/>
+            <Property name="text" type="java.lang.String" value="Account ID:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="temp1Panel">

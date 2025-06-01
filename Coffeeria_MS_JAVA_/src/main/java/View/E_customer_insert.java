@@ -21,11 +21,11 @@ public class E_customer_insert extends javax.swing.JFrame {
         idTextField.setEditable(false);
         idTextField.setEnabled(false); 
         
-        pointTextField.setEditable(false);
-        pointTextField.setEnabled(false); 
+        levelTextField.setEditable(false);
+        levelTextField.setEnabled(false); 
         
-        pointTextField1.setEditable(false);
-        pointTextField1.setEnabled(false); 
+        acc_idTextField.setEditable(false);
+        acc_idTextField.setEnabled(false); 
     }
 
     /**
@@ -45,17 +45,17 @@ public class E_customer_insert extends javax.swing.JFrame {
         nameTextField = new javax.swing.JTextField();
         birthLabel = new javax.swing.JLabel();
         birthTextField = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
         phoneLabel = new javax.swing.JLabel();
-        phoneTextField = new javax.swing.JTextField();
+        phonelTextField = new javax.swing.JTextField();
         pointLabel = new javax.swing.JLabel();
         pointTextField = new javax.swing.JTextField();
         levelLabel = new javax.swing.JLabel();
+        levelTextField = new javax.swing.JTextField();
+        acc_idLabel = new javax.swing.JLabel();
         temp1Panel = new javax.swing.JPanel();
         insertButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        pointTextField1 = new javax.swing.JTextField();
+        acc_idTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -100,25 +100,14 @@ public class E_customer_insert extends javax.swing.JFrame {
             }
         });
 
-        emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        emailLabel.setText("Email:");
-
-        emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        emailTextField.setForeground(new java.awt.Color(102, 102, 102));
-        emailTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTextFieldActionPerformed(evt);
-            }
-        });
-
         phoneLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        phoneLabel.setText("Phone number:");
+        phoneLabel.setText("Phone number::");
 
-        phoneTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        phoneTextField.setForeground(new java.awt.Color(102, 102, 102));
-        phoneTextField.addActionListener(new java.awt.event.ActionListener() {
+        phonelTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        phonelTextField.setForeground(new java.awt.Color(102, 102, 102));
+        phonelTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneTextFieldActionPerformed(evt);
+                phonelTextFieldActionPerformed(evt);
             }
         });
 
@@ -135,6 +124,17 @@ public class E_customer_insert extends javax.swing.JFrame {
 
         levelLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         levelLabel.setText("Level:");
+
+        levelTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        levelTextField.setForeground(new java.awt.Color(102, 102, 102));
+        levelTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                levelTextFieldActionPerformed(evt);
+            }
+        });
+
+        acc_idLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        acc_idLabel.setText("Account ID:");
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
@@ -178,11 +178,11 @@ public class E_customer_insert extends javax.swing.JFrame {
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pointTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pointTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        pointTextField1.addActionListener(new java.awt.event.ActionListener() {
+        acc_idTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        acc_idTextField.setForeground(new java.awt.Color(102, 102, 102));
+        acc_idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pointTextField1ActionPerformed(evt);
+                acc_idTextFieldActionPerformed(evt);
             }
         });
 
@@ -198,19 +198,19 @@ public class E_customer_insert extends javax.swing.JFrame {
                     .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel)
                     .addComponent(birthLabel)
-                    .addComponent(emailLabel)
                     .addComponent(phoneLabel)
                     .addComponent(pointLabel)
-                    .addComponent(levelLabel))
+                    .addComponent(levelLabel)
+                    .addComponent(acc_idLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                    .addComponent(phoneTextField)
+                    .addComponent(phonelTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                     .addComponent(pointTextField)
+                    .addComponent(levelTextField)
                     .addComponent(nameTextField)
                     .addComponent(idTextField)
                     .addComponent(birthTextField)
-                    .addComponent(pointTextField1))
+                    .addComponent(acc_idTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tempPanelLayout.setVerticalGroup(
@@ -232,11 +232,7 @@ public class E_customer_insert extends javax.swing.JFrame {
                     .addComponent(birthLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailLabel))
-                .addGap(18, 18, 18)
-                .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phonelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,8 +240,12 @@ public class E_customer_insert extends javax.swing.JFrame {
                     .addComponent(pointLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(levelLabel)
-                    .addComponent(pointTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(levelLabel))
+                .addGap(18, 18, 18)
+                .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(acc_idLabel)
+                    .addComponent(acc_idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(temp1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -265,9 +265,9 @@ public class E_customer_insert extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pointTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextField1ActionPerformed
+    private void acc_idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acc_idTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pointTextField1ActionPerformed
+    }//GEN-LAST:event_acc_idTextFieldActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -279,8 +279,8 @@ public class E_customer_insert extends javax.swing.JFrame {
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         String hoten = nameTextField.getText();
         String ngaysinhStr = birthTextField.getText();
-        String email = emailTextField.getText();
-        String sdt = phoneTextField.getText();
+        String email = phonelTextField.getText();
+        String sdt = pointTextField.getText();
         double diemtichluy = 0.0;
         String loaitv = "Bronze";
         
@@ -288,21 +288,17 @@ public class E_customer_insert extends javax.swing.JFrame {
         controller.insertKhachHang(hoten, ngaysinhStr, email, sdt, String.valueOf(diemtichluy), loaitv);
     }//GEN-LAST:event_insertButtonActionPerformed
 
+    private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_levelTextFieldActionPerformed
+
     private void pointTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pointTextFieldActionPerformed
 
-    private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
+    private void phonelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phonelTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_phoneTextFieldActionPerformed
-
-    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailTextFieldActionPerformed
-
-    private void birthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_birthTextFieldActionPerformed
+    }//GEN-LAST:event_phonelTextFieldActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -311,6 +307,10 @@ public class E_customer_insert extends javax.swing.JFrame {
     private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextFieldActionPerformed
+
+    private void birthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_birthTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,23 +342,23 @@ public class E_customer_insert extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel acc_idLabel;
+    private javax.swing.JTextField acc_idTextField;
     private javax.swing.JLabel addLabel;
     private javax.swing.JLabel birthLabel;
     private javax.swing.JTextField birthTextField;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton insertButton;
     private javax.swing.JLabel levelLabel;
+    private javax.swing.JTextField levelTextField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel phoneLabel;
-    private javax.swing.JTextField phoneTextField;
+    private javax.swing.JTextField phonelTextField;
     private javax.swing.JLabel pointLabel;
     private javax.swing.JTextField pointTextField;
-    private javax.swing.JTextField pointTextField1;
     private javax.swing.JPanel temp1Panel;
     private javax.swing.JPanel tempPanel;
     // End of variables declaration//GEN-END:variables

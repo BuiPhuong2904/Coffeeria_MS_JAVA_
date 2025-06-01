@@ -55,20 +55,20 @@
                       <Component id="idLabel" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="birthLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="phoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="pointLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="levelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="acc_idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="emailTextField" alignment="0" pref="341" max="32767" attributes="0"/>
-                      <Component id="phoneTextField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="phonelTextField" alignment="0" pref="341" max="32767" attributes="0"/>
                       <Component id="pointTextField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="levelTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="nameTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="idTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="birthTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="pointTextField1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="acc_idTextField" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -96,23 +96,23 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="emailTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="phoneTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="phonelTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="phoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="pointTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="pointLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="levelTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="levelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="pointTextField1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="acc_idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="acc_idTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="temp1Panel" min="-2" max="-2" attributes="0"/>
@@ -194,27 +194,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birthTextFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="emailLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="16" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Email:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="emailTextField">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailTextFieldActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="phoneLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -223,7 +202,7 @@
             <Property name="text" type="java.lang.String" value="Phone number:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="phoneTextField">
+        <Component class="javax.swing.JTextField" name="phonelTextField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -233,7 +212,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneTextFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phonelTextFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="pointLabel">
@@ -263,6 +242,27 @@
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Level:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="levelTextField">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="levelTextFieldActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="acc_idLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="16" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Account ID:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="temp1Panel">
@@ -311,7 +311,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="pointTextField1">
+        <Component class="javax.swing.JTextField" name="acc_idTextField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -321,7 +321,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pointTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acc_idTextFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

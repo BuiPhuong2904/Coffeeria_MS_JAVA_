@@ -68,7 +68,7 @@ public class E_customer_update extends javax.swing.JFrame {
         phoneTextField = new javax.swing.JTextField();
         pointLabel = new javax.swing.JLabel();
         pointTextField = new javax.swing.JTextField();
-        levelLabel = new javax.swing.JLabel();
+        acc_idLabel = new javax.swing.JLabel();
         temp1Panel = new javax.swing.JPanel();
         insertButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -118,7 +118,7 @@ public class E_customer_update extends javax.swing.JFrame {
         });
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        emailLabel.setText("Email:");
+        emailLabel.setText("Phone number:");
 
         emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emailTextField.setForeground(new java.awt.Color(102, 102, 102));
@@ -129,7 +129,7 @@ public class E_customer_update extends javax.swing.JFrame {
         });
 
         phoneLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        phoneLabel.setText("Phone number:");
+        phoneLabel.setText("Point:");
 
         phoneTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         phoneTextField.setForeground(new java.awt.Color(102, 102, 102));
@@ -140,7 +140,7 @@ public class E_customer_update extends javax.swing.JFrame {
         });
 
         pointLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        pointLabel.setText("Point:");
+        pointLabel.setText("Level:");
 
         pointTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pointTextField.setForeground(new java.awt.Color(102, 102, 102));
@@ -150,8 +150,8 @@ public class E_customer_update extends javax.swing.JFrame {
             }
         });
 
-        levelLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        levelLabel.setText("Level:");
+        acc_idLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        acc_idLabel.setText("Account ID:");
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
@@ -218,7 +218,7 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(emailLabel)
                     .addComponent(phoneLabel)
                     .addComponent(pointLabel)
-                    .addComponent(levelLabel))
+                    .addComponent(acc_idLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
@@ -261,7 +261,7 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(pointLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(levelLabel)
+                    .addComponent(acc_idLabel)
                     .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(temp1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,6 +360,7 @@ public class E_customer_update extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel acc_idLabel;
     private javax.swing.JLabel birthLabel;
     private javax.swing.JTextField birthTextField;
     private javax.swing.JButton cancelButton;
@@ -368,7 +369,6 @@ public class E_customer_update extends javax.swing.JFrame {
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton insertButton;
-    private javax.swing.JLabel levelLabel;
     private javax.swing.JTextField levelTextField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
