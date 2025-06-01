@@ -28,7 +28,6 @@ public class E_customer_detail extends javax.swing.JFrame {
         phoneTextField.setText(kh.getSdt());
         pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
         pointTextField1.setText(kh.getLoaitv());
-//        accountIdTextField.setText(kh.getMatk()); 
 
         // Không cho phép chỉnh sửa các trường
         idTextField.setEditable(false);
@@ -37,7 +36,6 @@ public class E_customer_detail extends javax.swing.JFrame {
         phoneTextField.setEditable(false);
         pointTextField.setEditable(false);
         pointTextField1.setEditable(false);
-//        accountIdTextField.setEditable(false);
     }
 
     /**
@@ -290,8 +288,7 @@ public class E_customer_detail extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_customerPanel customerPanel = new E_customerPanel();
         customerPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void pointTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointTextField1ActionPerformed
@@ -325,13 +322,7 @@ public class E_customer_detail extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_customer_detail().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel birthLabel;

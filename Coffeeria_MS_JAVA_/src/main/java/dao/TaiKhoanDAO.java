@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaiKhoanDAO {
 
@@ -117,7 +119,7 @@ public class TaiKhoanDAO {
             ps.setString(2, tk.getMatKhau());
             ps.setString(3, tk.getLoaiTK());
             ps.setString(4, tk.getTrangThai());
-            ps.setString(5, tk.getMatk());
+            ps.setString(5, tk.getMaTK());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {

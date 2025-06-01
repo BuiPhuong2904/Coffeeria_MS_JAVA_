@@ -273,8 +273,7 @@ public class E_customer_insert extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_customerPanel customerPanel = new E_customerPanel();
         customerPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose(); 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
@@ -340,13 +339,7 @@ public class E_customer_insert extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_customer_insert().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addLabel;
