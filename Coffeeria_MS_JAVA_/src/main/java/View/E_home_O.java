@@ -5,7 +5,6 @@ import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.List;
-import javax.swing.JScrollPane;
 import model.MonAn;
 import model.WrapLayout;
 
@@ -403,7 +402,6 @@ public class E_home_O extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
@@ -434,13 +432,7 @@ public class E_home_O extends javax.swing.JFrame {
 //        }
 //        //</editor-fold>
 //
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_home_O().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkButton;

@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import dao.PhieuKhoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.PhieuKho;
 
 /**
  *
@@ -10,11 +12,54 @@ package View;
  */
 public class E_home_IE extends javax.swing.JFrame {
 
+    private final PhieuKhoDAO phieuKhoDAO = new PhieuKhoDAO();
+    
+    public void loadAll() {
+        List<PhieuKho> list = phieuKhoDAO.findAllPhieuKho(); 
+
+        DefaultTableModel model = (DefaultTableModel) im_exTable.getModel();
+        model.setRowCount(0); 
+
+        for (PhieuKho pk : list) {
+            Object[] row = new Object[]{
+                pk.getMaPhieu(),
+                pk.getNgayGiaoDich(),
+                pk.getLoaiPhieu(),
+                pk.getTongTien(),
+                pk.getMaNV(),
+                pk.getGhiChu()
+            };
+            model.addRow(row);
+        }
+    }
+    
+    public PhieuKho getSelectedPhieuKho() {
+        int selectedRow = im_exTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) im_exTable.getModel();
+
+        String maPhieu = (String) model.getValueAt(selectedRow, 0);
+
+        java.util.Date utilDate = (java.util.Date) model.getValueAt(selectedRow, 1);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        String loaiPhieu = (String) model.getValueAt(selectedRow, 2);
+        double tongTien = (double) model.getValueAt(selectedRow, 3);
+        String maNV = (String) model.getValueAt(selectedRow, 4);
+        String ghiChu = (String) model.getValueAt(selectedRow, 5);
+
+        return new PhieuKho(maPhieu, sqlDate, loaiPhieu, tongTien, maNV, ghiChu);
+    }
+
+
     /**
      * Creates new form E_home_I_E
      */
     public E_home_IE() {
         initComponents();
+        
+        loadAll();
         
         insertButton.setContentAreaFilled(false);
         insertButton.setBorderPainted(false);
@@ -301,7 +346,6 @@ public class E_home_IE extends javax.swing.JFrame {
         ieFrame.setVisible(true);
         ieFrame.pack();
         ieFrame.setLocationRelativeTo(null);
-        //        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -349,45 +393,9 @@ public class E_home_IE extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(E_home_IE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(E_home_IE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(E_home_IE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(E_home_IE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new E_home_IE().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel action1Panel;
