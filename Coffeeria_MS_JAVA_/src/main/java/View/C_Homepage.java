@@ -1,9 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
+import controller.DanhMucBean;
+import controller.C_ChuyenManHinhController;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author nttma
@@ -15,6 +16,18 @@ public class C_Homepage extends javax.swing.JFrame {
      */
     public C_Homepage() {
         initComponents();
+        
+        C_ChuyenManHinhController controller = new C_ChuyenManHinhController(rightPanel);
+        controller.setView(homePanel, homeLabel);
+        
+        List<DanhMucBean> listItem = new ArrayList<>();
+        listItem.add(new DanhMucBean("Home", homePanel, homeLabel));
+        listItem.add(new DanhMucBean("Menu", menuPanel, menuLabel));
+        listItem.add(new DanhMucBean("Deal", discountPanel, discountLabel));
+        listItem.add(new DanhMucBean("History", historyPanel, historyLabel));
+        listItem.add(new DanhMucBean("Profile", profilePanel, profileLabel));
+        
+        controller.setEvent(listItem);
     }
 
     /**
@@ -26,21 +39,264 @@ public class C_Homepage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tempPanel = new javax.swing.JPanel();
+        leftPanel = new javax.swing.JPanel();
+        logoLabel = new javax.swing.JLabel();
+        homePanel = new javax.swing.JPanel();
+        homeLabel = new javax.swing.JLabel();
+        menuPanel = new javax.swing.JPanel();
+        menuLabel = new javax.swing.JLabel();
+        discountPanel = new javax.swing.JPanel();
+        discountLabel = new javax.swing.JLabel();
+        historyPanel = new javax.swing.JPanel();
+        historyLabel = new javax.swing.JLabel();
+        profilePanel = new javax.swing.JPanel();
+        profileLabel = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
+        rightPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        tempPanel.setBackground(new java.awt.Color(255, 255, 255));
+        tempPanel.setPreferredSize(new java.awt.Dimension(1100, 750));
+        tempPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        leftPanel.setBackground(new java.awt.Color(149, 114, 90));
+        leftPanel.setPreferredSize(new java.awt.Dimension(100, 750));
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/logo100.png"))); // NOI18N
+
+        homePanel.setBackground(new java.awt.Color(245, 245, 220));
+
+        homeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        homeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        homeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/home30.png"))); // NOI18N
+        homeLabel.setText("Home");
+        homeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        homeLabel.setPreferredSize(new java.awt.Dimension(70, 70));
+        homeLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        menuPanel.setBackground(new java.awt.Color(245, 245, 220));
+
+        menuLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/menu30.png"))); // NOI18N
+        menuLabel.setText("Menu");
+        menuLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        menuLabel.setPreferredSize(new java.awt.Dimension(70, 70));
+        menuLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        discountPanel.setBackground(new java.awt.Color(245, 245, 220));
+
+        discountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        discountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        discountLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/discount30.png"))); // NOI18N
+        discountLabel.setText("Deal");
+        discountLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        discountLabel.setPreferredSize(new java.awt.Dimension(70, 70));
+        discountLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout discountPanelLayout = new javax.swing.GroupLayout(discountPanel);
+        discountPanel.setLayout(discountPanelLayout);
+        discountPanelLayout.setHorizontalGroup(
+            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(discountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        discountPanelLayout.setVerticalGroup(
+            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(discountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        historyPanel.setBackground(new java.awt.Color(245, 245, 220));
+
+        historyLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        historyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        historyLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/history30.png"))); // NOI18N
+        historyLabel.setText("History");
+        historyLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        historyLabel.setPreferredSize(new java.awt.Dimension(70, 70));
+        historyLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout historyPanelLayout = new javax.swing.GroupLayout(historyPanel);
+        historyPanel.setLayout(historyPanelLayout);
+        historyPanelLayout.setHorizontalGroup(
+            historyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(historyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        historyPanelLayout.setVerticalGroup(
+            historyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(historyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        profilePanel.setBackground(new java.awt.Color(245, 245, 220));
+
+        profileLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        profileLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        profileLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/profile30.png"))); // NOI18N
+        profileLabel.setText("Profile");
+        profileLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        profileLabel.setPreferredSize(new java.awt.Dimension(70, 70));
+        profileLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
+        profilePanel.setLayout(profilePanelLayout);
+        profilePanelLayout.setHorizontalGroup(
+            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        profilePanelLayout.setVerticalGroup(
+            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        logoutButton.setBackground(new java.awt.Color(149, 114, 90));
+        logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(252, 252, 246));
+        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/logout30.png"))); // NOI18N
+        logoutButton.setText("Log out");
+        logoutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(252, 252, 246)));
+        logoutButton.setFocusPainted(false);
+        logoutButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        logoutButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
+        leftPanel.setLayout(leftPanelLayout);
+        leftPanelLayout.setHorizontalGroup(
+            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoLabel))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(discountPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(historyPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profilePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9))
+            .addGroup(leftPanelLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        leftPanelLayout.setVerticalGroup(
+            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leftPanelLayout.createSequentialGroup()
+                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(discountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(historyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tempPanel.add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 750));
+
+        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(rightPanelLayout);
+        rightPanelLayout.setHorizontalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        rightPanelLayout.setVerticalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+
+        tempPanel.add(rightPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 1000, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tempPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(tempPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        C_Signin SigninFrame = new C_Signin();
+        SigninFrame.setVisible(true);
+        SigninFrame.pack();
+        SigninFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +334,20 @@ public class C_Homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel discountLabel;
+    private javax.swing.JPanel discountPanel;
+    private javax.swing.JLabel historyLabel;
+    private javax.swing.JPanel historyPanel;
+    private javax.swing.JLabel homeLabel;
+    private javax.swing.JPanel homePanel;
+    private javax.swing.JPanel leftPanel;
+    private javax.swing.JLabel logoLabel;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JLabel menuLabel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel profileLabel;
+    private javax.swing.JPanel profilePanel;
+    private javax.swing.JPanel rightPanel;
+    private javax.swing.JPanel tempPanel;
     // End of variables declaration//GEN-END:variables
 }
