@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import dao.HoaDonDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
 
 /**
  *
@@ -10,11 +12,40 @@ package View;
  */
 public class C_history_detail extends javax.swing.JFrame {
 
+    private String maHD;
+
     /**
      * Creates new form C_history_detail
      */
     public C_history_detail() {
         initComponents();
+    }
+
+    public C_history_detail(String maHD) {
+        this();
+        this.maHD = maHD;
+        
+        loadChiTietHoaDon();
+    }
+
+    private void loadChiTietHoaDon() {
+        HoaDonDAO dao = new HoaDonDAO();
+        List<CT_HoaDon> list = dao.findChiTietByMaHD(maHD);
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        int stt = 1;
+        for (CT_HoaDon cthd : list) {
+            double thanhTien = cthd.getSoLuong() * cthd.getDonGia();
+            model.addRow(new Object[] {
+                stt++, 
+                cthd.getMaMon(), 
+                cthd.getDonGia(), 
+                cthd.getSoLuong(), 
+                thanhTien
+            });
+        }
     }
 
     /**
@@ -123,8 +154,7 @@ public class C_history_detail extends javax.swing.JFrame {
         // TODO add your handling code here:
         C_historyPanel historyPanel = new C_historyPanel();
         historyPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**

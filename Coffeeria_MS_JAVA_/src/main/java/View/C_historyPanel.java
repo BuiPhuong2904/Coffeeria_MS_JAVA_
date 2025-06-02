@@ -1,7 +1,13 @@
 
 package View;
 
+import dao.HoaDonDAO;
 import dao.KhachHangDAO;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
 import model.TaiKhoan;
 
 /**
@@ -29,6 +35,25 @@ public class C_historyPanel extends javax.swing.JPanel {
             KhachHangDAO khDao = new KhachHangDAO();
             String hoten = khDao.getHoTenKHByMaTK(taiKhoan.getMaTK());
             nameLabel.setText(hoten != null && !hoten.isEmpty() ? hoten : "Khách hàng");
+
+            HoaDonDAO hdDao = new HoaDonDAO();
+            List<HoaDon> list = hdDao.getHoaDonByMaTK(taiKhoan.getMaTK());
+
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(new String[]{"Mã HD", "Ngày lập", "Tiền trước", "Giảm giá", "Tổng tiền", "Hình thức TT"});
+
+            for (HoaDon hd : list) {
+                model.addRow(new Object[]{
+                    hd.getMaHD(),
+                    new SimpleDateFormat("dd/MM/yyyy").format(hd.getNgayLap()),
+                    hd.getTongTienTruoc(),
+                    hd.getTienGiamGia(),
+                    hd.getTongTienSau(),
+                    hd.getHinhThucTT()
+                });
+            }
+
+            billTable.setModel(model);
         }
     }
     
@@ -154,10 +179,14 @@ public class C_historyPanel extends javax.swing.JPanel {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        C_history_detail historyFrame = new C_history_detail();
-        historyFrame.setVisible(true);
-        historyFrame.pack();
-        historyFrame.setLocationRelativeTo(null);
+        int row = billTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hóa đơn để xem chi tiết.");
+            return;
+        }
+        String maHD = billTable.getValueAt(row, 0).toString();
+
+        new C_history_detail(maHD).setVisible(true);
     }//GEN-LAST:event_detailButtonActionPerformed
 
 
