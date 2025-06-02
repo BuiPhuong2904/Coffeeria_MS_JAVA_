@@ -115,4 +115,19 @@ public class MonAnDAO {
         }
         return null;
     }
+    
+    public String getMaMonByTen(String tenMon) throws SQLException {
+        String sql = "SELECT MAMON FROM MONAN WHERE TENMON = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, tenMon);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("MAMON");
+                }
+                return null;
+            }
+        }
+    }
+
 }

@@ -17,38 +17,81 @@ import utils.DBConnection;
  */
 public class HoaDonDAO {
 
-    // Thêm hóa đơn và chi tiết hóa đơn cùng lúc (transaction)
     public boolean insertHoaDon(HoaDon hoaDon, List<CT_HoaDon> chiTietList) {
-        String insertHoaDon = "INSERT INTO HOADON (MAHD, TONGTIENTRUOC, TIENGIAMGIA, TONGTIENSAU, HINHTHUCTT, NGAYLAP, GHICHU, MAKH, MANV, MAKM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertHoaDon = "INSERT INTO HOADON (TONGTIENTRUOC, TIENGIAMGIA, TONGTIENSAU, HINHTHUCTT, NGAYLAP, GHICHU, MAKH, MANV, MAKM) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertChiTiet = "INSERT INTO CHITIET_HD (MAHD, MAMON, DONGIA, SOLUONG) VALUES (?, ?, ?, ?)";
+
+        String selectMaHD = "SELECT MAHD FROM HOADON WHERE MAKH = ? AND NGAYLAP = (SELECT MAX(NGAYLAP) FROM HOADON WHERE MAKH = ?)";
 
         try (Connection conn = DBConnection.getConnection()) {
             conn.setAutoCommit(false);
 
+            if (!existsInTable(conn, "KHACHHANG", "MAKH", hoaDon.getMaKH())) {
+                throw new SQLException("Khách hàng không tồn tại: " + hoaDon.getMaKH());
+            }
+            if (!existsInTable(conn, "NHANVIEN", "MANV", hoaDon.getMaNV())) {
+                throw new SQLException("Nhân viên không tồn tại: " + hoaDon.getMaNV());
+            }
+            if (hoaDon.getMaKM() != null && !hoaDon.getMaKM().trim().isEmpty() &&
+                !existsInTable(conn, "KHUYENMAI", "MAKM", hoaDon.getMaKM())) {
+                throw new SQLException("Khuyến mãi không tồn tại: " + hoaDon.getMaKM());
+            }
+
             try (PreparedStatement psHD = conn.prepareStatement(insertHoaDon);
+                 PreparedStatement psSelect = conn.prepareStatement(selectMaHD);
                  PreparedStatement psCT = conn.prepareStatement(insertChiTiet)) {
 
-                psHD.setString(1, hoaDon.getMaHD());
-                psHD.setDouble(2, hoaDon.getTongTienTruoc());
-                psHD.setDouble(3, hoaDon.getTienGiamGia());
-                psHD.setDouble(4, hoaDon.getTongTienSau());
-                psHD.setString(5, hoaDon.getHinhThucTT());
-                psHD.setDate(6, new java.sql.Date(hoaDon.getNgayLap().getTime()));
-                psHD.setString(7, hoaDon.getGhiChu());
-                psHD.setString(8, hoaDon.getMaKH());
-                psHD.setString(9, hoaDon.getMaNV());
-                psHD.setString(10, hoaDon.getMaKM());
+                psHD.setDouble(1, hoaDon.getTongTienTruoc());
+                psHD.setDouble(2, hoaDon.getTienGiamGia());
+                psHD.setDouble(3, hoaDon.getTongTienSau());
+                psHD.setString(4, hoaDon.getHinhThucTT());
+                psHD.setDate(5, new java.sql.Date(hoaDon.getNgayLap().getTime()));
+
+                if (hoaDon.getGhiChu() == null || hoaDon.getGhiChu().trim().isEmpty()) {
+                    psHD.setNull(6, java.sql.Types.VARCHAR);
+                } else {
+                    psHD.setString(6, hoaDon.getGhiChu());
+                }
+
+                psHD.setString(7, hoaDon.getMaKH());
+                psHD.setString(8, hoaDon.getMaNV());
+
+                if (hoaDon.getMaKM() == null || hoaDon.getMaKM().trim().isEmpty()) {
+                    psHD.setNull(9, java.sql.Types.VARCHAR);
+                } else {
+                    psHD.setString(9, hoaDon.getMaKM());
+                }
+
                 psHD.executeUpdate();
 
+                // Lấy mã hóa đơn mới tạo
+                psSelect.setString(1, hoaDon.getMaKH());
+                psSelect.setString(2, hoaDon.getMaKH());
+
+                String maHD;
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    if (rs.next()) {
+                        maHD = rs.getString("MAHD");
+                    } else {
+                        throw new SQLException("Không lấy được mã hóa đơn mới tạo.");
+                    }
+                }
+
                 for (CT_HoaDon ct : chiTietList) {
-                    psCT.setString(1, ct.getMaHD());
+
+                    if (!existsInTable(conn, "MONAN", "MAMON", ct.getMaMon())) {
+                        throw new SQLException("Món ăn không tồn tại: " + ct.getMaMon());
+                    }
+
+                    psCT.setString(1, maHD);
                     psCT.setString(2, ct.getMaMon());
                     psCT.setDouble(3, ct.getDonGia());
                     psCT.setInt(4, ct.getSoLuong());
                     psCT.addBatch();
                 }
-                psCT.executeBatch();
 
+                psCT.executeBatch();
                 conn.commit();
                 return true;
 
@@ -63,6 +106,16 @@ public class HoaDonDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private boolean existsInTable(Connection conn, String tableName, String columnName, String value) throws SQLException {
+        String sql = "SELECT 1 FROM " + tableName + " WHERE " + columnName + " = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, value);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
     }
 
     // Tìm hóa đơn theo mã
