@@ -1,12 +1,23 @@
 
 package View;
 
+import controller.HoaDonController;
 import dao.KhachHangDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
+import model.HoaDon;
 import model.MonAn;
 import model.TaiKhoan;
 import model.WrapLayout;
@@ -15,9 +26,13 @@ import model.WrapLayout;
  *
  * @author nttma
  */
-public class C_menuPanel extends javax.swing.JPanel {
+public abstract class C_menuPanel extends javax.swing.JPanel implements addItemListener{
 
     private TaiKhoan taiKhoan;
+    
+    private KhachHangDAO khachHangDAO;
+    private MonAnDAO monAnDAO;
+    
     /**
      * Creates new form C_menuPanel
      */
@@ -30,10 +45,27 @@ public class C_menuPanel extends javax.swing.JPanel {
     public C_menuPanel() {
         initComponents();
         
+        khachHangDAO = new KhachHangDAO();
+        monAnDAO = new MonAnDAO();
+        
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Name", "Price", "Quantity", "Total"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 2;
+            }
+        };
+        orderTable.setModel(model);
+        
         menuScrollPane.setViewportView(menuPanel);
+        menuPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 10, 10));
+        
+        dis_textLabel1.setText("0 VND");
         
         SwingUtilities.invokeLater(() -> {
             loadMonAnToMenu();
+            addQuantityChangeListener();
         });
     }
     
@@ -49,9 +81,13 @@ public class C_menuPanel extends javax.swing.JPanel {
         for (MonAn mon : danhSachMonAn) {
             itemPanel item = new itemPanel();
 
+            item.setMonAn(mon);
+                    
             item.setNameLabel(mon.getTenMon());
             item.setPriceLabel(mon.getGiaBan());
             item.setImage(mon.getImageIcon());
+            
+            item.setAddItemListener(this);
 
             menuPanel.add(item);
         }
@@ -69,7 +105,112 @@ public class C_menuPanel extends javax.swing.JPanel {
             nameLabel.setText(hoten != null && !hoten.isEmpty() ? hoten : "Khách hàng");
         }
     }
+    
+    @Override
+    public void onAddItem(MonAn monAn, int quantity) {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        removeEmptyRows(model);
 
+        boolean found = false;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).toString().equals(monAn.getTenMon())) {
+                int oldQuantity = Integer.parseInt(model.getValueAt(i, 2).toString());
+                int newQuantity = oldQuantity + quantity;
+                model.setValueAt(newQuantity, i, 2);
+                model.setValueAt(monAn.getGiaBan() * newQuantity, i, 3);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            double total = monAn.getGiaBan() * quantity;
+            model.addRow(new Object[]{
+                monAn.getTenMon(), monAn.getGiaBan(), quantity, total
+            });
+        }
+
+        updateSubTotalPrice();
+        updateTotalPrice();
+    }
+
+    private void addQuantityChangeListener() {
+        orderTable.getModel().addTableModelListener(e -> {
+            if (e.getType() == TableModelEvent.UPDATE && e.getColumn() == 2) {
+                DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+                int row = e.getFirstRow();
+
+                try {
+                    int quantity = Integer.parseInt(model.getValueAt(row, 2).toString());
+                    if (quantity == 0) {
+                        model.removeRow(row);
+                    } else if (quantity > 0) {
+                        double price = Double.parseDouble(model.getValueAt(row, 1).toString());
+                        model.setValueAt(price * quantity, row, 3);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Số lượng phải >= 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                        model.setValueAt(1, row, 2);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+
+                updateSubTotalPrice();
+                updateTotalPrice();
+            }
+        });
+    }
+
+    private void updateSubTotalPrice() {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        double sum = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object value = model.getValueAt(i, 3);
+            if (value != null) {
+                try {
+                    sum += Double.parseDouble(value.toString());
+                } catch (NumberFormatException e) {
+                    System.err.println("Lỗi parse tiền: " + value);
+                }
+            }
+        }
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        formatter.setDecimalFormatSymbols(symbols);
+    
+        sub_textLabel1.setText(formatter.format(sum) + " VND");
+    }
+
+    private void updateTotalPrice() {
+        double subTotal = parseCurrency(sub_textLabel1.getText());
+        double discount = parseCurrency(dis_textLabel1.getText());
+
+        double total = subTotal - discount;
+        if (total < 0) total = 0;
+
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); 
+        formatter.setDecimalFormatSymbols(symbols);
+        
+        total_textLabel1.setText(formatter.format(total) + " VND");
+    }
+
+    private double parseCurrency(String text) {
+        String cleaned = text.replace("VND", "").replaceAll("\\.", "").trim();
+        return Double.parseDouble(cleaned);
+    }
+
+    private void removeEmptyRows(DefaultTableModel model) {
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((model.getValueAt(i, 0) == null || model.getValueAt(i, 0).toString().trim().isEmpty()) &&
+                (model.getValueAt(i, 2) == null || model.getValueAt(i, 2).toString().trim().isEmpty())) {
+                model.removeRow(i);
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +335,6 @@ public class C_menuPanel extends javax.swing.JPanel {
 
         entercodeTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         entercodeTextField.setForeground(new java.awt.Color(102, 102, 102));
-        entercodeTextField.setText("Discount code");
         entercodeTextField.setPreferredSize(new java.awt.Dimension(123, 40));
         entercodeTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -321,7 +461,7 @@ public class C_menuPanel extends javax.swing.JPanel {
         tempPanelLayout.setHorizontalGroup(
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tempPanelLayout.createSequentialGroup()
-                .addComponent(menuScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                .addComponent(menuScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(billPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -374,6 +514,69 @@ public class C_menuPanel extends javax.swing.JPanel {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
+        if (orderTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn món!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            HoaDon hoaDon = new HoaDon();
+            hoaDon.setTongTienTruoc(parseCurrency(sub_textLabel1.getText()));
+            hoaDon.setTienGiamGia(parseCurrency(dis_textLabel1.getText()));
+            hoaDon.setTongTienSau(parseCurrency(total_textLabel1.getText()));
+
+            hoaDon.setHinhThucTT("Tiền mặt");
+            hoaDon.setNgayLap(new java.util.Date());
+            hoaDon.setGhiChu(null);
+            hoaDon.setMaNV("NV007");
+
+            String maKM = entercodeTextField.getText().trim();
+            hoaDon.setMaKM(maKM.isEmpty() ? null : maKM);
+
+            if (taiKhoan != null) {
+                KhachHangDAO khDao = new KhachHangDAO();
+                String maKH = khDao.getMaKHByMaTK(taiKhoan.getMaTK());
+                hoaDon.setMaKH(maKH != null ? maKH : "KH001");
+            } else {
+                hoaDon.setMaKH("KH001");
+            }
+
+            List<CT_HoaDon> chiTietList = new ArrayList<>();
+            MonAnDAO monAnDAO = new MonAnDAO();
+
+            for (int i = 0; i < orderTable.getRowCount(); i++) {
+                CT_HoaDon ct = new CT_HoaDon();
+
+                String tenMon = orderTable.getValueAt(i, 0).toString();
+                String maMon = monAnDAO.getMaMonByTen(tenMon);
+
+                if (maMon == null) {
+                    JOptionPane.showMessageDialog(this, "Món ăn không tồn tại: " + tenMon, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                ct.setMaMon(maMon);
+                ct.setDonGia(Double.valueOf(orderTable.getValueAt(i, 1).toString()));
+                ct.setSoLuong(Integer.valueOf(orderTable.getValueAt(i, 2).toString()));
+                chiTietList.add(ct);
+            }
+
+            // Gửi sang controller xử lý insert
+            HoaDonController hoaDonController = new HoaDonController();
+            hoaDonController.insertHoaDon(hoaDon, chiTietList);
+
+            JOptionPane.showMessageDialog(this, "Cảm ơn bạn đã đặt món!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+            // Xóa đơn hàng
+            DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+            model.setRowCount(0);
+            updateSubTotalPrice();
+            updateTotalPrice();
+
+        } catch (HeadlessException | NumberFormatException | SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed

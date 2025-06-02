@@ -35,11 +35,10 @@ public class C_history_detail extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
-        int stt = 1;
         for (CT_HoaDon cthd : list) {
             double thanhTien = cthd.getSoLuong() * cthd.getDonGia();
             model.addRow(new Object[] {
-                stt++, 
+                maHD, 
                 cthd.getMaMon(), 
                 cthd.getDonGia(), 
                 cthd.getSoLuong(), 

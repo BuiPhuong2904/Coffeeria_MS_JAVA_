@@ -53,7 +53,7 @@ public class C_Homepage extends javax.swing.JFrame {
         initComponents();
         
         homeCustomPanel = new C_homePanel();
-        menuCustomPanel = new C_menuPanel();
+        menuCustomPanel = new C_menuPanel() {};
         historyCustomPanel = new C_historyPanel();
         profileCustomPanel = new C_profilePanel();
 
