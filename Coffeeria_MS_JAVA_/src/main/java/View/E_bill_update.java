@@ -1,8 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.HoaDonController;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
+import model.HoaDon;
 
 /**
  *
@@ -10,12 +16,68 @@ package View;
  */
 public class E_bill_update extends javax.swing.JFrame {
 
-    /**
-     * Creates new form E_orders_update
-     */
-    public E_bill_update() {
+    private final HoaDon hoaDon;
+    private final List<CT_HoaDon> chiTietList;
+    private final E_billPanel hoaDonView;
+
+    public E_bill_update(HoaDon hoaDon, List<CT_HoaDon> chiTietList, E_billPanel hoaDonView) {
         initComponents();
+        
+        this.hoaDon = hoaDon;
+        this.chiTietList = chiTietList;
+        this.hoaDonView = hoaDonView;
+        
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            String maMon = (String) jTable1.getValueAt(selectedRow, 1);
+            double donGia = (double) jTable1.getValueAt(selectedRow, 2);
+            int soLuong = (int) jTable1.getValueAt(selectedRow, 3);
+            double thanhTien = (double) jTable1.getValueAt(selectedRow, 4);
+
+            item_idTextField.setText(maMon);
+            priceTextField.setText(String.valueOf(donGia));
+            quantityTextField.setText(String.valueOf(soLuong));
+            amountTextField.setText(String.valueOf(thanhTien));
+            
+        }
+    });
+
+        loadDataToForm();
     }
+    
+    private void loadDataToForm() {
+        idTextField.setText(hoaDon.getMaHD());
+        idTextField.setEditable(false);
+
+        createdDateChooser.setDate(hoaDon.getNgayLap());
+        empTextField.setText(hoaDon.getMaNV());
+        ctTextField.setText(hoaDon.getMaKH());
+        dis_idTextField.setText(hoaDon.getMaKM());
+        disTextField.setText(String.valueOf(hoaDon.getTienGiamGia()));
+        subTextField.setText(String.valueOf(hoaDon.getTongTienTruoc()));
+        totalTextField.setText(String.valueOf(hoaDon.getTongTienSau()));
+        paymentTextField.setText(hoaDon.getHinhThucTT());
+        noteTextField.setText(hoaDon.getGhiChu());
+
+        loadChiTietTable(chiTietList);
+    }
+    
+    private void loadChiTietTable(List<CT_HoaDon> list) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (CT_HoaDon ct : list) {
+            Object[] row = new Object[]{
+                ct.getMaHD(),
+                ct.getMaMon(),
+                ct.getDonGia(),
+                ct.getSoLuong(),
+                ct.getSoLuong() * ct.getDonGia()
+            };
+            model.addRow(row);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -464,19 +526,38 @@ public class E_bill_update extends javax.swing.JFrame {
     }//GEN-LAST:event_totalTextFieldActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        //        E_Homepage homeFrame = new E_Homepage();
-        //        homeFrame.setVisible(true);
-        //        homeFrame.pack();
-        //        homeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
+        String maHD = idTextField.getText();
+        Date ngayLap = createdDateChooser.getDate();
+        String maNV = empTextField.getText();
+        String maKH = ctTextField.getText();
+        String maKM = dis_idTextField.getText();
+        double tienGiamGia = Double.parseDouble(disTextField.getText());
+        double tongTruoc = Double.parseDouble(subTextField.getText());
+        double tongSau = Double.parseDouble(totalTextField.getText());
+        String hinhThucTT = paymentTextField.getText();
+        String ghiChu = noteTextField.getText();
+
+        HoaDon hd = new HoaDon(maHD, tongTruoc, tienGiamGia, tongSau, hinhThucTT, ngayLap, ghiChu, maKH, maNV, maKM);
+
+        List<CT_HoaDon> updatedChiTietList = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String maMon = model.getValueAt(i, 1).toString();
+            double donGia = Double.parseDouble(model.getValueAt(i, 2).toString());
+            int soLuong = Integer.parseInt(model.getValueAt(i, 3).toString());
+
+            updatedChiTietList.add(new CT_HoaDon(maHD, maMon, donGia, soLuong));
+        }
+
+        HoaDonController controller = new HoaDonController(this, hoaDonView);
+        controller.updateHoaDon(hd, updatedChiTietList);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         E_billPanel ordersPanel = new E_billPanel();
         ordersPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void subTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subTextFieldActionPerformed
@@ -517,6 +598,45 @@ public class E_bill_update extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
+        String maMon = item_idTextField.getText().trim();
+        String soLuongStr = quantityTextField.getText().trim();
+        String donGiaStr = priceTextField.getText().trim();
+        String maHD = idTextField.getText().trim();
+
+        if (maMon.isEmpty() || soLuongStr.isEmpty() || donGiaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin chi tiết.");
+            return;
+        }
+
+        try {
+            int soLuong = Integer.parseInt(soLuongStr);
+            double donGia = Double.parseDouble(donGiaStr);
+            double thanhTien = soLuong * donGia;
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int selectedRow = jTable1.getSelectedRow();
+
+            if (selectedRow != -1) {
+                model.setValueAt(maHD, selectedRow, 0);
+                model.setValueAt(maMon, selectedRow, 1);
+                model.setValueAt(donGia, selectedRow, 2);
+                model.setValueAt(soLuong, selectedRow, 3);
+                model.setValueAt(thanhTien, selectedRow, 4);
+            } else {
+                Object[] row = {maHD, maMon, donGia, soLuong, thanhTien};
+                model.addRow(row);
+            }
+
+            jTable1.clearSelection();
+            item_idTextField.setText("");
+            priceTextField.setText("");
+            quantityTextField.setText("");
+            amountTextField.setText("");
+            
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số lượng hoặc đơn giá không hợp lệ.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     /**

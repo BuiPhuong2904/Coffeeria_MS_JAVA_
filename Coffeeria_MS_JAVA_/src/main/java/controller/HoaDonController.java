@@ -25,6 +25,10 @@ public class HoaDonController {
         this.hoaDonView = hoaDonView;
     }
 
+    public HoaDonController(E_billPanel aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void insertHoaDon(HoaDon hoaDon, List<CT_HoaDon> chiTietList) {
         if (hoaDon.getMaHD().isEmpty() || hoaDon.getNgayLap() == null ||
             hoaDon.getMaKH().isEmpty() || hoaDon.getMaNV().isEmpty()) {
@@ -52,6 +56,7 @@ public class HoaDonController {
         if (success) {
             JOptionPane.showMessageDialog(view, "Cập nhật hóa đơn thành công!");
             hoaDonView.loadAll();
+            ((Window) view).dispose();
         } else {
             JOptionPane.showMessageDialog(view, "Cập nhật thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }

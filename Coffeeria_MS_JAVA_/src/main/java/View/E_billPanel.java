@@ -1,12 +1,15 @@
 
 package View;
 
+import controller.HoaDonController;
 import dao.HoaDonDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
 import model.HoaDon;
 
 /**
@@ -27,10 +30,15 @@ public class E_billPanel extends javax.swing.JPanel {
         for (HoaDon hd : list) {
             Object[] row = new Object[] {
                 hd.getMaHD(),
+                hd.getTongTienTruoc(),
+                hd.getTienGiamGia(),
+                hd.getTongTienSau(),
+                hd.getHinhThucTT(),
                 sdf.format(hd.getNgayLap()),
-                hd.getMaNV(),
+                hd.getGhiChu(),
                 hd.getMaKH(),
-                hd.getTongTienSau()
+                hd.getMaNV(),
+                hd.getMaKM()
             };
             model.addRow(row);
         }
@@ -44,9 +52,23 @@ public class E_billPanel extends javax.swing.JPanel {
 
         String mahd = (String) model.getValueAt(selectedRow, 0);
 
+        Double tongTienTruoc = null;
+        Object tttObj = model.getValueAt(selectedRow, 1);
+        if (tttObj != null) tongTienTruoc = Double.valueOf(tttObj.toString());
+
+        Double tienGiamGia = null;
+        Object tggObj = model.getValueAt(selectedRow, 2);
+        if (tggObj != null) tienGiamGia = Double.valueOf(tggObj.toString());
+
+        Double tongTienSau = null;
+        Object ttsObj = model.getValueAt(selectedRow, 3);
+        if (ttsObj != null) tongTienSau = Double.valueOf(ttsObj.toString());
+
+        String hinhThucTT = (String) model.getValueAt(selectedRow, 4);
+
         Date ngayLap = null;
         try {
-            String ngayLapStr = (String) model.getValueAt(selectedRow, 1);
+            String ngayLapStr = (String) model.getValueAt(selectedRow, 5);
             if (ngayLapStr != null && !ngayLapStr.trim().isEmpty()) {
                 ngayLap = sdf.parse(ngayLapStr);
             }
@@ -54,14 +76,13 @@ public class E_billPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-        String manv = (String) model.getValueAt(selectedRow, 2);
-        String makh = (String) model.getValueAt(selectedRow, 3);
+        String ghiChu = (String) model.getValueAt(selectedRow, 6);
+        String makh = (String) model.getValueAt(selectedRow, 7);
+        String manv = (String) model.getValueAt(selectedRow, 8);
+        String makm = (String) model.getValueAt(selectedRow, 9);
 
-        Double tongTienSau = null;
-        Object ttsObj = model.getValueAt(selectedRow, 4);
-        if (ttsObj != null) tongTienSau = Double.valueOf(ttsObj.toString());
-
-        return new HoaDon(mahd, null, null, tongTienSau, null, ngayLap, null, makh, manv, null);
+        return new HoaDon(mahd, tongTienTruoc, tienGiamGia, tongTienSau,
+                         hinhThucTT, ngayLap, ghiChu, makh, manv, makm);
     }
     
     public E_billPanel() {
@@ -315,7 +336,18 @@ public class E_billPanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        E_bill_update billFrame = new E_bill_update();
+        int selectedRow = billTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hóa đơn để cập nhật.");
+            return;
+        }
+
+        String maHD = billTable.getValueAt(selectedRow, 0).toString();
+
+        HoaDon hoaDon = hoaDonDAO.findHoaDonById(maHD);
+        List<CT_HoaDon> chiTietList = hoaDonDAO.findChiTietByMaHD(maHD);
+
+        E_bill_update billFrame = new E_bill_update(hoaDon, chiTietList, this);
         billFrame.setVisible(true);
         billFrame.pack();
         billFrame.setLocationRelativeTo(null);
@@ -323,14 +355,34 @@ public class E_billPanel extends javax.swing.JPanel {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        E_bill_detail billFrame = new E_bill_detail();
-        billFrame.setVisible(true);
-        billFrame.pack();
-        billFrame.setLocationRelativeTo(null);
+        int selectedRow = billTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hóa đơn để xem chi tiết.");
+            return;
+        }
+
+        String maHD = billTable.getValueAt(selectedRow, 0).toString();
+
+        HoaDon hd = hoaDonDAO.findHoaDonById(maHD);
+        List<CT_HoaDon> chiTietList = hoaDonDAO.findChiTietByMaHD(maHD);
+
+        E_bill_detail detailFrame = new E_bill_detail(hd, chiTietList);
+        detailFrame.setVisible(true);
+        detailFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = billTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hóa đơn để xóa.");
+            return;
+        }
+
+        String maHD = billTable.getValueAt(selectedRow, 0).toString();
+
+        HoaDonController controller = new HoaDonController(this);
+        controller.deleteHoaDon(maHD, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 

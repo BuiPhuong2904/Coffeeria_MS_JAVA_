@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
+import model.HoaDon;
 
 /**
  *
@@ -10,11 +12,56 @@ package View;
  */
 public class E_bill_detail extends javax.swing.JFrame {
 
-    /**
-     * Creates new form E_orders_detail
-     */
     public E_bill_detail() {
         initComponents();
+    }
+    
+    public E_bill_detail(HoaDon hd, List<CT_HoaDon> chiTietList) {
+        initComponents();
+
+        idTextField.setText(hd.getMaHD());
+        createdDateChooser.setDate(hd.getNgayLap());
+        empTextField.setText(hd.getMaNV());
+        ctTextField.setText(hd.getMaKH());
+        dis_idTextField.setText(hd.getMaKM());
+        disTextField.setText(hd.getTienGiamGia() != null ? hd.getTienGiamGia().toString() : "0");
+        subTextField.setText(hd.getTongTienTruoc() != null ? hd.getTongTienTruoc().toString() : "0");
+        totalTextField.setText(hd.getTongTienSau() != null ? hd.getTongTienSau().toString() : "0");
+        paymentTextField.setText(hd.getHinhThucTT());
+        noteTextField.setText(hd.getGhiChu());
+
+        // Không cho sửa
+        idTextField.setEditable(false);
+        createdDateChooser.setEnabled(false);
+        empTextField.setEditable(false);
+        ctTextField.setEditable(false);
+        dis_idTextField.setEditable(false);
+        disTextField.setEditable(false);
+        subTextField.setEditable(false);
+        totalTextField.setEditable(false);
+        paymentTextField.setEditable(false);
+        noteTextField.setEditable(false);
+
+        loadChiTietTable(chiTietList);
+    }
+    
+    private void loadChiTietTable(List<CT_HoaDon> list) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        for (CT_HoaDon ct : list) {
+            double thanhTien = ct.getSoLuong() * ct.getDonGia();
+            Object[] row = new Object[] {
+                ct.getMaHD(),
+                ct.getMaMon(),
+                ct.getDonGia(),
+                ct.getSoLuong(),
+                thanhTien
+            };
+            model.addRow(row);
+        }
+
+        jTable1.setEnabled(false);
     }
 
     /**
@@ -433,8 +480,7 @@ public class E_bill_detail extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_billPanel ordersPanel = new E_billPanel();
         ordersPanel.setVisible(true);
-        //        inventoryPanel.setLocationRelativeTo(null); // căn giữa màn hình
-        this.dispose(); // đóng form hiện tại
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void subTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subTextFieldActionPerformed
@@ -473,41 +519,6 @@ public class E_bill_detail extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_amountTextFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(E_bill_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(E_bill_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(E_bill_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(E_bill_detail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_bill_detail().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addLabel;
