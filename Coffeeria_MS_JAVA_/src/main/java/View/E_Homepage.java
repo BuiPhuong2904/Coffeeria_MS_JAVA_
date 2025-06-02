@@ -13,7 +13,7 @@ import model.TaiKhoan;
  */
 public class E_Homepage extends javax.swing.JFrame {
     private TaiKhoan taiKhoan;
-    private E_homePanel homePanel;
+    private E_homePanel e_homePanel;
     
     public E_Homepage(TaiKhoan tk) {
         this();
@@ -21,7 +21,7 @@ public class E_Homepage extends javax.swing.JFrame {
 
         System.out.println("Đăng nhập với tài khoản: " + tk.getEmail());
         
-        homePanel = new E_homePanel(tk);
+        e_homePanel = new E_homePanel(tk);
     }
     
     /**
