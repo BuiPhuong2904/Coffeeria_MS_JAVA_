@@ -1,23 +1,42 @@
 
 package View;
 
+import controller.HoaDonController;
 import dao.KhachHangDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import model.CT_HoaDon;
+import model.HoaDon;
 import model.KhachHang;
 import model.MonAn;
 import model.WrapLayout;
 
 public abstract class E_home_O extends javax.swing.JFrame implements addItemListener{
     
+    private HoaDonController hoaDonController;
+    private KhachHangDAO khachHangDAO;
+    private MonAnDAO monAnDAO;
+    
+    private E_billPanel hoaDonView;
+    
     public E_home_O() {
         initComponents();
+        
+        khachHangDAO = new KhachHangDAO();
+        
+        monAnDAO = new MonAnDAO();
+        
+        hoaDonView = new E_billPanel(); 
+        hoaDonController = new HoaDonController(hoaDonView);
         
         DefaultTableModel model = new DefaultTableModel(
             new Object[]{"Name", "Price", "Quantity", "Total"}, 0
@@ -216,6 +235,12 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
             }
         }
     }
+    
+    private double parseCurrency(String text) {
+        String cleaned = text.replace("VND", "").replaceAll("\\.", "").trim();
+        return Double.parseDouble(cleaned);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -452,7 +477,6 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
 
         entercodeTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         entercodeTextField.setForeground(new java.awt.Color(102, 102, 102));
-        entercodeTextField.setText("Discount code");
         entercodeTextField.setPreferredSize(new java.awt.Dimension(123, 40));
         entercodeTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -617,6 +641,68 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            HoaDon hoaDon = new HoaDon();
+
+            hoaDon.setTongTienTruoc(parseCurrency(sub_textLabel.getText()));
+            hoaDon.setTienGiamGia(parseCurrency(dis_textLabel.getText()));
+            hoaDon.setTongTienSau(parseCurrency(total_textLabel.getText()));
+
+            hoaDon.setHinhThucTT("Tiền mặt");
+            hoaDon.setNgayLap(new java.util.Date());
+            hoaDon.setGhiChu(null);
+            hoaDon.setMaNV("NV003");
+
+            String maKM = entercodeTextField.getText().trim();
+            if (maKM.isEmpty()) {
+                hoaDon.setMaKM(null);
+            } else {
+                hoaDon.setMaKM(maKM);
+            }
+
+            String ten = nameTextField.getText().trim();
+
+            if (ten.equalsIgnoreCase("Khách lẻ")) {
+                hoaDon.setMaKH("KH001");
+            } else {
+                String maKH = khachHangDAO.getMaKHByName(ten);
+                if (maKH != null) {
+                    hoaDon.setMaKH(maKH);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng có tên này!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (orderTable.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Đơn hàng trống!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            List<CT_HoaDon> chiTietList = new ArrayList<>();
+            for (int i = 0; i < orderTable.getRowCount(); i++) {
+                CT_HoaDon ct = new CT_HoaDon();
+                
+                String tenMon = orderTable.getValueAt(i, 0).toString();
+                String maMon = monAnDAO.getMaMonByTen(tenMon);
+                if (maMon == null) {
+                    JOptionPane.showMessageDialog(this, "Món ăn không tồn tại: " + tenMon, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                ct.setMaMon(maMon);
+
+                ct.setDonGia(Double.valueOf(orderTable.getValueAt(i, 1).toString()));
+                ct.setSoLuong(Integer.valueOf(orderTable.getValueAt(i, 2).toString()));
+                chiTietList.add(ct);
+            }
+
+            // Gửi sang controller xử lý insert
+            hoaDonController.insertHoaDon(hoaDon, chiTietList);
+
+        } catch (HeadlessException | NumberFormatException | SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
@@ -646,7 +732,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
 
     private void entercodeTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusGained
         // TODO add your handling code here:
-        if (entercodeTextField.getText().equals("Discount code")) {
+        if (entercodeTextField.getText().equals("")) {
             entercodeTextField.setText("");
             entercodeTextField.setForeground(new Color(102, 102, 102));
         }
@@ -655,7 +741,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
     private void entercodeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusLost
         // TODO add your handling code here:
         if (entercodeTextField.getText().equals("")) {
-            entercodeTextField.setText("Discount code");
+            entercodeTextField.setText("");
             entercodeTextField.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_entercodeTextFieldFocusLost
@@ -666,20 +752,6 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
 
     private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed
         // TODO add your handling code here:
-        String phone = phoneTextField.getText().trim();
-        if (phone.isEmpty()) {
-            nameTextField.setText("Khách lẻ");
-            return;
-        }
-
-        KhachHangDAO khDao = new KhachHangDAO();
-        KhachHang kh = khDao.findByPhone(phone);
-
-        if (kh != null) {
-            nameTextField.setText(kh.getHoten());
-        } else {
-            nameTextField.setText("Khách lẻ");
-        }
     }//GEN-LAST:event_checkcodeButtonActionPerformed
 
 

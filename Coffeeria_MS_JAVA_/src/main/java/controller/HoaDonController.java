@@ -16,22 +16,25 @@ import java.awt.*;
 import java.util.List;
 
 public class HoaDonController {
-    private final HoaDonDAO hoaDonDAO = new HoaDonDAO();
-    private final Component view;
-    private final E_billPanel hoaDonView;
+    private HoaDonDAO hoaDonDAO = new HoaDonDAO();
+    private Component view;
+    private E_billPanel hoaDonView;
 
     public HoaDonController(Component view, E_billPanel hoaDonView) {
         this.view = view;
         this.hoaDonView = hoaDonView;
     }
 
-    public HoaDonController(E_billPanel aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public HoaDonController(E_billPanel hoaDonView) {
+        this.hoaDonView = hoaDonView;
     }
 
+    public HoaDonController() {
+        hoaDonDAO = new HoaDonDAO();
+    }
+    
     public void insertHoaDon(HoaDon hoaDon, List<CT_HoaDon> chiTietList) {
-        if (hoaDon.getMaHD().isEmpty() || hoaDon.getNgayLap() == null ||
-            hoaDon.getMaKH().isEmpty() || hoaDon.getMaNV().isEmpty()) {
+        if (hoaDon.getNgayLap() == null || hoaDon.getMaNV().isEmpty()) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin hóa đơn.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }

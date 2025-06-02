@@ -139,4 +139,34 @@ public class KhachHangDAO {
         return null;
     }
 
+    public String getMaKHByName(String ten) throws SQLException {
+        String sql = "SELECT MAKH FROM KHACHHANG WHERE HOTEN = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, ten);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("MAKH");
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean tonTaiSDT(String sdt) {
+        String sql = "SELECT COUNT(*) FROM KHACHHANG WHERE SDT = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, sdt);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

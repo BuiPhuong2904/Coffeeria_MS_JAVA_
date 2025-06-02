@@ -63,14 +63,9 @@ BEGIN
     -- Tính điểm: 1 điểm cho mỗi 1.000 đồng (làm tròn xuống)
     v_diem_cong := FLOOR(:NEW.TONGTIENSAU / 1000);
 
-    -- Cập nhật điểm tích lũy trong bảng KHACHHANG
     UPDATE KHACHHANG
     SET DIEMTICHLUY = NVL(DIEMTICHLUY, 0) + v_diem_cong
     WHERE MAKH = :NEW.MAKH;
-
-    -- (Tùy chọn) Nếu có bảng lịch sử tích lũy, bạn có thể thêm vào đây
-    -- INSERT INTO LICHSUTICHLUY (MAKH, NGAY, DIEMTHAYDOI, LOAI, GHICHU)
-    -- VALUES (:NEW.MAKH, SYSDATE, v_diem_cong, 'CONG', 'Tự động cộng điểm khi lập hóa đơn');
 END;
 
 
@@ -86,14 +81,14 @@ END;
 
 -- Bảng CHITIET_SP
 CREATE OR REPLACE TRIGGER trg_capnhat_tongsl
-AFTER INSERT ON CHITIET_SP
+AFTER INSERT ON PHIEUKHO
 FOR EACH ROW
 BEGIN
-    IF :NEW.LOAIGD = 'NHAP' THEN
+    IF :NEW.LOAIPHIEU = 'NHAP' THEN
         UPDATE SANPHAM
         SET TONG_SL = TONG_SL + :NEW.SL
         WHERE MASP = :NEW.MASP;
-    ELSIF :NEW.LOAIGD = 'XUAT' THEN
+    ELSIF :NEW.LOAIPHIEU = 'XUAT' THEN
         UPDATE SANPHAM
         SET TONG_SL = TONG_SL - :NEW.SL
         WHERE MASP = :NEW.MASP;
@@ -104,7 +99,7 @@ END;
 CREATE OR REPLACE TRIGGER trg_kiemtra_xuat
 BEFORE INSERT ON CHITIET_SP
 FOR EACH ROW
-WHEN (NEW.LOAIGD = 'XUAT')
+WHEN (NEW.LOAIPHIEU = 'XUAT')
 DECLARE
     v_tongsl NUMBER;
 BEGIN
