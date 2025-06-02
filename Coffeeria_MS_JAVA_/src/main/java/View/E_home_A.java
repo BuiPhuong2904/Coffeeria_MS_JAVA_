@@ -1,22 +1,68 @@
 
 package View;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import utils.DBConnection;
+
 /**
  *
  * @author nttma
  */
 public class E_home_A extends javax.swing.JFrame {
 
+    private String matk;
     /**
      * Creates new form E_home_A
      */
-    public E_home_A() {
+    public E_home_A(String matk) {
         initComponents();
+        
+        this.matk = matk;
         
         returnButton.setContentAreaFilled(false);
         returnButton.setBorderPainted(false);
         returnButton.setFocusPainted(false);
+        
+        loadProfile();
     }
+    
+    private void loadProfile() {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String sql = "SELECT * FROM NHANVIEN WHERE MATK = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, matk);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                a_idTextField.setText(rs.getString("MATK"));
+                a_idTextField.setEditable(false);
+
+                idTextField.setText(rs.getString("MANV"));
+                idTextField.setEditable(false);
+
+                nameTextField.setText(rs.getString("HOTEN"));
+                birthTextField.setText(rs.getString("NGAYSINH") != null ? rs.getDate("NGAYSINH").toString() : "");
+                phoneTextField.setText(rs.getString("SDT"));
+                positionTextField.setText(rs.getString("CHUCVU"));
+                salaryTextField.setText(rs.getString("LUONG") + "");
+                if (rs.getDate("NGAYVL") != null) {
+                    startDateChooser.setDate(rs.getDate("NGAYVL"));
+                }
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi tải thông tin người dùng!");
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,6 +274,11 @@ public class E_home_A extends javax.swing.JFrame {
 
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,13 +326,44 @@ public class E_home_A extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            String hoten = nameTextField.getText();
+            String ngaysinh = birthTextField.getText();
+            String sdt = phoneTextField.getText();
+            String chucvu = positionTextField.getText();
+            String luong = salaryTextField.getText();
+            java.util.Date ngayvl = startDateChooser.getDate();
+
+            Connection conn = DBConnection.getConnection();
+            String sql = "UPDATE NHANVIEN SET HOTEN = ?, NGAYSINH = TO_DATE(?, 'YYYY-MM-DD'), SDT = ?, CHUCVU = ?, LUONG = ?, NGAYVL = ? WHERE MATK = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, hoten);
+            stmt.setString(2, ngaysinh);
+            stmt.setString(3, sdt);
+            stmt.setString(4, chucvu);
+            stmt.setDouble(5, Double.parseDouble(luong));
+            stmt.setDate(6, new java.sql.Date(ngayvl.getTime()));
+            stmt.setString(7, matk);
+
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy tài khoản cần cập nhật!");
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật thông tin!");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

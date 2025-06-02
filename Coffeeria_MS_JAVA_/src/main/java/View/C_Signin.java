@@ -289,16 +289,16 @@ public class C_Signin extends javax.swing.JFrame {
     }//GEN-LAST:event_forgotButtonActionPerformed
 
     private void signinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinButtonActionPerformed
-        E_Homepage homeFrame = new E_Homepage(); 
-        homeFrame.setVisible(true);
-        homeFrame.pack();
-        homeFrame.setLocationRelativeTo(null);
-        this.dispose();
+//        E_Homepage homeFrame = new E_Homepage(); 
+//        homeFrame.setVisible(true);
+//        homeFrame.pack();
+//        homeFrame.setLocationRelativeTo(null);
+//        this.dispose();
 
-//        String email = emailTextField.getText();
-//        String password = new String(PasswordField.getPassword());
-//        
-//        controller.handleLogin(email, password);
+        String email = emailTextField.getText();
+        String password = new String(PasswordField.getPassword());
+        
+        controller.handleLogin(email, password);
     }//GEN-LAST:event_signinButtonActionPerformed
 
     private void emailTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusGained

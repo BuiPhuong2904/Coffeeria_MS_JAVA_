@@ -141,7 +141,7 @@ public class NhanVienDAO {
 
         try {
             conn = DBConnection.getConnection();
-            conn.setAutoCommit(false); // dùng transaction để rollback nếu lỗi
+            conn.setAutoCommit(false);
 
             // Lấy mã tài khoản
             selectStmt = conn.prepareStatement(selectSQL);
@@ -199,5 +199,5 @@ public class NhanVienDAO {
         }
         return tenNV;
     }
-
+    
 }

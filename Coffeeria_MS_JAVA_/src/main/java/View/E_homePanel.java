@@ -1,6 +1,9 @@
 
 package View;
 
+import javax.swing.JOptionPane;
+import model.TaiKhoan;
+
 /**
  *
  * @author nttma
@@ -11,6 +14,13 @@ public class E_homePanel extends javax.swing.JPanel {
      * Creates new form E_homePanel
      */
     public E_homePanel() {
+        initComponents();
+    }
+    
+    private TaiKhoan taiKhoan;
+
+    public E_homePanel(TaiKhoan taiKhoan) {
+        this.taiKhoan = taiKhoan;
         initComponents();
     }
 
@@ -165,10 +175,15 @@ public class E_homePanel extends javax.swing.JPanel {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // TODO add your handling code here:
-        E_home_A accFrame = new E_home_A();
-        accFrame.setVisible(true);
-        accFrame.pack();
-        accFrame.setLocationRelativeTo(null);
+        if (taiKhoan != null) {
+            String matk = taiKhoan.getMaTK();
+            E_home_A accFrame = new E_home_A(matk);
+            accFrame.pack();
+            accFrame.setLocationRelativeTo(null);
+            accFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Lỗi: Không tìm thấy tài khoản!");
+        }
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void revenueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueButtonActionPerformed
