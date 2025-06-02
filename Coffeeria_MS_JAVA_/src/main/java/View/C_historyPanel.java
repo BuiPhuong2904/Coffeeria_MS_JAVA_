@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
+
+import dao.KhachHangDAO;
+import model.TaiKhoan;
 
 /**
  *
@@ -10,6 +10,8 @@ package View;
  */
 public class C_historyPanel extends javax.swing.JPanel {
 
+    private TaiKhoan taiKhoan;
+    
     /**
      * Creates new form C_historyPanel
      */
@@ -17,6 +19,19 @@ public class C_historyPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+        loadData();
+    }
+
+    private void loadData() {
+        if (taiKhoan != null) {
+            KhachHangDAO khDao = new KhachHangDAO();
+            String hoten = khDao.getHoTenKHByMaTK(taiKhoan.getMaTK());
+            nameLabel.setText(hoten != null && !hoten.isEmpty() ? hoten : "Khách hàng");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

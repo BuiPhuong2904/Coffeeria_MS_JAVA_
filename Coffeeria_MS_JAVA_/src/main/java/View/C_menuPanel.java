@@ -1,15 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
 
+import dao.KhachHangDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.SwingUtilities;
 import model.MonAn;
+import model.TaiKhoan;
 import model.WrapLayout;
 
 /**
@@ -18,9 +17,16 @@ import model.WrapLayout;
  */
 public class C_menuPanel extends javax.swing.JPanel {
 
+    private TaiKhoan taiKhoan;
     /**
      * Creates new form C_menuPanel
      */
+    
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+        loadData();
+    }
+        
     public C_menuPanel() {
         initComponents();
         
@@ -32,8 +38,8 @@ public class C_menuPanel extends javax.swing.JPanel {
     }
     
     public void loadMonAnToMenu() {
-        MonAnDAO monAnDAO = new MonAnDAO(); // tạo DAO
-        List<MonAn> danhSachMonAn = monAnDAO.findAll(); // lấy danh sách món
+        MonAnDAO monAnDAO = new MonAnDAO(); 
+        List<MonAn> danhSachMonAn = monAnDAO.findAll();
 
         menuPanel.removeAll();
         
@@ -43,7 +49,6 @@ public class C_menuPanel extends javax.swing.JPanel {
         for (MonAn mon : danhSachMonAn) {
             itemPanel item = new itemPanel();
 
-            // Đặt dữ liệu
             item.setNameLabel(mon.getTenMon());
             item.setPriceLabel(mon.getGiaBan());
             item.setImage(mon.getImageIcon());
@@ -55,6 +60,14 @@ public class C_menuPanel extends javax.swing.JPanel {
 
         menuPanel.revalidate();
         menuPanel.repaint();
+    }
+    
+    private void loadData() {
+        if (taiKhoan != null) {
+            KhachHangDAO khDao = new KhachHangDAO();
+            String hoten = khDao.getHoTenKHByMaTK(taiKhoan.getMaTK());
+            nameLabel.setText(hoten != null && !hoten.isEmpty() ? hoten : "Khách hàng");
+        }
     }
 
     /**
@@ -341,7 +354,7 @@ public class C_menuPanel extends javax.swing.JPanel {
 
     private void entercodeTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusGained
         // TODO add your handling code here:
-        if (entercodeTextField.getText().equals("Discount code")) {
+        if (entercodeTextField.getText().equals("")) {
             entercodeTextField.setText("");
             entercodeTextField.setForeground(new Color(102, 102, 102));
         }
@@ -350,7 +363,7 @@ public class C_menuPanel extends javax.swing.JPanel {
     private void entercodeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusLost
         // TODO add your handling code here:
         if (entercodeTextField.getText().equals("")) {
-            entercodeTextField.setText("Discount code");
+            entercodeTextField.setText("");
             entercodeTextField.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_entercodeTextFieldFocusLost

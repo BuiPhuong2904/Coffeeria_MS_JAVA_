@@ -1,14 +1,18 @@
 
 package View;
 
+import dao.KhachHangDAO;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import model.TaiKhoan;
 
 /**
  *
  * @author nttma
  */
 public class C_homePanel extends javax.swing.JPanel {
+    
+    private TaiKhoan taiKhoan;
 
     public C_homePanel() {
         initComponents();
@@ -26,6 +30,19 @@ public class C_homePanel extends javax.swing.JPanel {
         return new ImageIcon(img);
     }
 
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+        loadData(); 
+    }
+
+    private void loadData() {
+        System.out.println("loadData(), matk: " + (taiKhoan != null ? taiKhoan.getMaTK() : "null"));
+        if (taiKhoan != null) {
+            KhachHangDAO khDao = new KhachHangDAO();
+            String hoten = khDao.getHoTenKHByMaTK(taiKhoan.getMaTK());
+            nameLabel.setText(hoten != null && !hoten.isEmpty() ? hoten : "Khách hàng");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,7 +118,7 @@ public class C_homePanel extends javax.swing.JPanel {
                         .addComponent(welcomeLabel)
                         .addComponent(nameLabel))
                     .addComponent(menuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         midPanel.setLayout(null);
@@ -338,7 +355,7 @@ public class C_homePanel extends javax.swing.JPanel {
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tempPanelLayout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(midPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bestLabel)

@@ -13,13 +13,38 @@ import model.TaiKhoan;
 public class C_Homepage extends javax.swing.JFrame {
 
     private TaiKhoan taiKhoan;
+    
+    private C_homePanel homeCustomPanel;
+    private C_menuPanel menuCustomPanel;
+    private C_historyPanel historyCustomPanel;
+    private C_profilePanel profileCustomPanel;
 
+    
     public C_Homepage(TaiKhoan tk) {
         this();
         this.taiKhoan = tk;
         
+        homeCustomPanel.setTaiKhoan(taiKhoan);
+        menuCustomPanel.setTaiKhoan(taiKhoan);
+        historyCustomPanel.setTaiKhoan(taiKhoan);
+        profileCustomPanel.setTaiKhoan(taiKhoan);
+        
         System.out.println("Đăng nhập với tài khoản: " + tk.getEmail());
         
+        C_ChuyenManHinhController controller = new C_ChuyenManHinhController(rightPanel);
+        controller.setTaiKhoan(taiKhoan);
+
+        controller.setView(homeCustomPanel, homeLabel);
+        
+        List<DanhMucBean> listItem = new ArrayList<>();
+        listItem.add(new DanhMucBean("Home", homeCustomPanel, homeLabel));
+        listItem.add(new DanhMucBean("Menu", menuCustomPanel, menuLabel));
+        listItem.add(new DanhMucBean("Deal", discountPanel, discountLabel)); 
+        listItem.add(new DanhMucBean("History", historyCustomPanel, historyLabel));
+        listItem.add(new DanhMucBean("Profile", profileCustomPanel, profileLabel));
+        
+        controller.setEvent(listItem);
+                
     }
     /**
      * Creates new form C_Homepage
@@ -27,15 +52,20 @@ public class C_Homepage extends javax.swing.JFrame {
     public C_Homepage() {
         initComponents();
         
+        homeCustomPanel = new C_homePanel();
+        menuCustomPanel = new C_menuPanel();
+        historyCustomPanel = new C_historyPanel();
+        profileCustomPanel = new C_profilePanel();
+
         C_ChuyenManHinhController controller = new C_ChuyenManHinhController(rightPanel);
-        controller.setView(homePanel, homeLabel);
+        controller.setView(homeCustomPanel, homeLabel);
         
         List<DanhMucBean> listItem = new ArrayList<>();
-        listItem.add(new DanhMucBean("Home", homePanel, homeLabel));
-        listItem.add(new DanhMucBean("Menu", menuPanel, menuLabel));
-        listItem.add(new DanhMucBean("Deal", discountPanel, discountLabel));
-        listItem.add(new DanhMucBean("History", historyPanel, historyLabel));
-        listItem.add(new DanhMucBean("Profile", profilePanel, profileLabel));
+        listItem.add(new DanhMucBean("Home", homeCustomPanel, homeLabel));
+        listItem.add(new DanhMucBean("Menu", menuCustomPanel, menuLabel));
+        listItem.add(new DanhMucBean("Deal", discountPanel, discountLabel)); 
+        listItem.add(new DanhMucBean("History", historyCustomPanel, historyLabel));
+        listItem.add(new DanhMucBean("Profile", profileCustomPanel, profileLabel));
         
         controller.setEvent(listItem);
     }
