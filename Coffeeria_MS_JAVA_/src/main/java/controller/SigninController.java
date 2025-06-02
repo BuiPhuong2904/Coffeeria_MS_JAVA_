@@ -1,6 +1,7 @@
 
 package controller;
 
+import View.C_Homepage;
 import View.C_Signin;
 import View.E_Homepage;
 import dao.TaiKhoanDAO;
@@ -36,7 +37,8 @@ public class SigninController {
 
         // Mở giao diện tương ứng
         switch (tk.getLoaiTK()) {
-            case "Employee" , "Manager" -> new E_Homepage(tk).setVisible(true);
+            case "Employee", "Manager" -> new E_Homepage(tk).setVisible(true);
+            case "Customer" -> new C_Homepage(tk).setVisible(true);
             default -> {
                 JOptionPane.showMessageDialog(view, "Không xác định được quyền truy cập.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
