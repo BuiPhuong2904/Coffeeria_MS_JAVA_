@@ -8,6 +8,7 @@ import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.List;
+import javax.swing.SwingUtilities;
 import model.MonAn;
 import model.WrapLayout;
 
@@ -23,7 +24,11 @@ public class C_menuPanel extends javax.swing.JPanel {
     public C_menuPanel() {
         initComponents();
         
-        loadMonAnToMenu();
+        menuScrollPane.setViewportView(menuPanel);
+        
+        SwingUtilities.invokeLater(() -> {
+            loadMonAnToMenu();
+        });
     }
     
     public void loadMonAnToMenu() {
@@ -31,8 +36,9 @@ public class C_menuPanel extends javax.swing.JPanel {
         List<MonAn> danhSachMonAn = monAnDAO.findAll(); // lấy danh sách món
 
         menuPanel.removeAll();
-        menuPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 10, 10));
-
+        
+        WrapLayout layout = new WrapLayout(FlowLayout.CENTER, 10, 10);
+        menuPanel.setLayout(layout);
 
         for (MonAn mon : danhSachMonAn) {
             itemPanel item = new itemPanel();
@@ -44,6 +50,8 @@ public class C_menuPanel extends javax.swing.JPanel {
 
             menuPanel.add(item);
         }
+        
+        menuPanel.setPreferredSize(menuPanel.getPreferredSize());
 
         menuPanel.revalidate();
         menuPanel.repaint();
