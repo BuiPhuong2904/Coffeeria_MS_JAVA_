@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import model.CT_HoaDon;
 import model.HoaDon;
 import utils.DBConnection;
@@ -333,4 +335,30 @@ public class HoaDonDAO {
         }
         return false;
     }
+    
+    public Map<String, Double> getDoanhThuTheoThang() {
+        Map<String, Double> doanhThuMap = new LinkedHashMap<>();
+        String sql = "SELECT TO_CHAR(NGAYLAP, 'MM-YYYY') AS THANG_NAM, " +
+                     "SUM(TONGTIENSAU) AS DOANHTHU " +
+                     "FROM HOADON " +
+                     "GROUP BY TO_CHAR(NGAYLAP, 'MM-YYYY') " +
+                     "ORDER BY TO_DATE(TO_CHAR(NGAYLAP, 'MM-YYYY'), 'MM-YYYY')";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                String thangNam = rs.getString("THANG_NAM");
+                double doanhThu = rs.getDouble("DOANHTHU");
+                doanhThuMap.put(thangNam, doanhThu);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return doanhThuMap;
+    }
+
 }
