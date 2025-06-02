@@ -151,6 +151,7 @@ View\E_voucher_update$3.class
 View\E_home_IE_detail$6.class
 View\C_profilePanel.class
 View\E_bill_update$13.class
+View\C_profilePanel.class
 View\E_inventoryPanel$6.class
 View\E_inventory_detail$6.class
 View\E_inventoryPanel.class
