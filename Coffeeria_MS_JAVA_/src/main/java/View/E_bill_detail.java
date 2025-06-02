@@ -98,14 +98,6 @@ public class E_bill_detail extends javax.swing.JFrame {
         dis_idLabel = new javax.swing.JLabel();
         dis_idTextField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        item_idLabel = new javax.swing.JLabel();
-        item_idTextField = new javax.swing.JTextField();
-        quantityLabel = new javax.swing.JLabel();
-        quantityTextField = new javax.swing.JTextField();
-        priceLabel = new javax.swing.JLabel();
-        priceTextField = new javax.swing.JTextField();
-        amoutLabel = new javax.swing.JLabel();
-        amountTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -253,50 +245,6 @@ public class E_bill_detail extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        item_idLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        item_idLabel.setText("Item ID:");
-
-        item_idTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        item_idTextField.setForeground(new java.awt.Color(102, 102, 102));
-        item_idTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_idTextFieldActionPerformed(evt);
-            }
-        });
-
-        quantityLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        quantityLabel.setText("Quantity:");
-
-        quantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        quantityTextField.setForeground(new java.awt.Color(102, 102, 102));
-        quantityTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quantityTextFieldActionPerformed(evt);
-            }
-        });
-
-        priceLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        priceLabel.setText("Price:");
-
-        priceTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        priceTextField.setForeground(new java.awt.Color(102, 102, 102));
-        priceTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceTextFieldActionPerformed(evt);
-            }
-        });
-
-        amoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        amoutLabel.setText("Amount:");
-
-        amountTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        amountTextField.setForeground(new java.awt.Color(102, 102, 102));
-        amountTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                amountTextFieldActionPerformed(evt);
-            }
-        });
-
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,20 +300,7 @@ public class E_bill_detail extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(tempPanelLayout.createSequentialGroup()
-                        .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(quantityLabel)
-                            .addComponent(item_idLabel)
-                            .addComponent(priceLabel)
-                            .addComponent(amoutLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(item_idTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(quantityTextField)
-                            .addComponent(priceTextField)
-                            .addComponent(amountTextField)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(addLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(temp1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -419,26 +354,8 @@ public class E_bill_detail extends javax.swing.JFrame {
                         .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dis_idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dis_idLabel)))
-                    .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tempPanelLayout.createSequentialGroup()
-                            .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(item_idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(item_idLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(quantityLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(priceLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(amoutLabel))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(temp1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
@@ -503,27 +420,9 @@ public class E_bill_detail extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dis_idTextFieldActionPerformed
 
-    private void item_idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_idTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_item_idTextFieldActionPerformed
-
-    private void quantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quantityTextFieldActionPerformed
-
-    private void priceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceTextFieldActionPerformed
-
-    private void amountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_amountTextFieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addLabel;
-    private javax.swing.JTextField amountTextField;
-    private javax.swing.JLabel amoutLabel;
     private javax.swing.JButton cancelButton;
     private com.toedter.calendar.JDateChooser createdDateChooser;
     private javax.swing.JLabel createdLabel;
@@ -537,8 +436,6 @@ public class E_bill_detail extends javax.swing.JFrame {
     private javax.swing.JTextField empTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
-    private javax.swing.JLabel item_idLabel;
-    private javax.swing.JTextField item_idTextField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
@@ -546,10 +443,6 @@ public class E_bill_detail extends javax.swing.JFrame {
     private javax.swing.JTextField noteTextField;
     private javax.swing.JLabel paymentLabel;
     private javax.swing.JTextField paymentTextField;
-    private javax.swing.JLabel priceLabel;
-    private javax.swing.JTextField priceTextField;
-    private javax.swing.JLabel quantityLabel;
-    private javax.swing.JTextField quantityTextField;
     private javax.swing.JLabel subLabel;
     private javax.swing.JTextField subTextField;
     private javax.swing.JPanel temp1Panel;
