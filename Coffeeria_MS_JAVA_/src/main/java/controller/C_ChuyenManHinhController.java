@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.TaiKhoan;
 
 /**
  *
@@ -23,7 +24,13 @@ public class C_ChuyenManHinhController {
     private String kindSelected = "";
     
     private List<DanhMucBean> listItem = null;
+    
+    private TaiKhoan taiKhoan;
 
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+    }
+        
     public C_ChuyenManHinhController(JPanel jpnRoot) {
         this.root = jpnRoot;
     }
@@ -35,7 +42,11 @@ public class C_ChuyenManHinhController {
         
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new C_homePanel());
+
+        C_homePanel homePanel = new C_homePanel();
+        homePanel.setTaiKhoan(taiKhoan);  // truyền tài khoản
+        root.add(homePanel);
+        
         root.validate();
         root.repaint();
     }
@@ -66,21 +77,26 @@ public class C_ChuyenManHinhController {
             switch(kind) {
                 case "Home":
                     node = new C_homePanel();
+                    ((C_homePanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Menu":
                     node = new C_menuPanel();
+                    ((C_menuPanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Deal":
                     node = new C_dealPanel();
                     break;
                 case "History":
                     node = new C_historyPanel();
+                    ((C_historyPanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Profile":
                     node = new C_profilePanel();
+                    ((C_profilePanel)node).setTaiKhoan(taiKhoan);
                     break;
                 default:
                     node = new C_homePanel();
+                    ((C_homePanel)node).setTaiKhoan(taiKhoan);
                     break;
                  
             }

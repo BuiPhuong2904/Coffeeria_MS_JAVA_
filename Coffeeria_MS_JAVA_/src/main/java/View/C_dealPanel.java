@@ -71,10 +71,8 @@ public class C_dealPanel extends javax.swing.JPanel {
         menuLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        nameLabel.setText("name");
 
         welcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        welcomeLabel.setText("Welcome,");
 
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);

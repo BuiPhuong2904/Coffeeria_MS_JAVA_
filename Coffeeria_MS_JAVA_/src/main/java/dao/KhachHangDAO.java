@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class KhachHangDAO {
@@ -167,6 +168,65 @@ public class KhachHangDAO {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public String getHoTenKHByMaTK(String matk) {
+        String hoten = "";
+        String sql = "SELECT HOTEN FROM KHACHHANG WHERE MATK = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, matk);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                hoten = rs.getString("HOTEN");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hoten;
+    }
+
+    public KhachHang getKhachHangByMaTK(String maTK) {
+        String sql = "SELECT * FROM KHACHHANG WHERE MATK = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, maTK);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                KhachHang kh = new KhachHang();
+                kh.setMakh(rs.getString("MAKH"));
+                kh.setHoten(rs.getString("HOTEN"));
+                kh.setNgaysinh(rs.getDate("NGAYSINH"));
+                kh.setSdt(rs.getString("SDT"));
+                kh.setDiemtichluy(rs.getDouble("DIEMTICHLUY"));
+                kh.setLoaitv(rs.getString("LOAITV"));
+                kh.setMatk(rs.getString("MATK"));
+                return kh;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateThongTinCaNhan(String maTK, String hoTen, Date ngaySinh, String sdt) {
+        String sql = "UPDATE KHACHHANG SET HOTEN = ?, NGAYSINH = ?, SDT = ? WHERE MATK = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, hoTen);
+            ps.setDate(2, new java.sql.Date(ngaySinh.getTime()));
+            ps.setString(3, sdt);
+            ps.setString(4, maTK);
+
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

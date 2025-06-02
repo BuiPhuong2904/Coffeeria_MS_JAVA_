@@ -1,8 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
+
+import dao.KhachHangDAO;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.KhachHang;
+import model.TaiKhoan;
 
 /**
  *
@@ -10,11 +13,38 @@ package View;
  */
 public class C_profilePanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form C_profilePanel
-     */
+    private TaiKhoan taiKhoan;
+
     public C_profilePanel() {
         initComponents();
+        
+        idTextField.setEditable(false);
+        acc_idTextField.setEditable(false);
+        pointTextField.setEditable(false);
+        levelTextField.setEditable(false);
+    }
+    
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+        loadProfileInfo();
+    }
+
+    private void loadProfileInfo() {
+        if (taiKhoan != null) {
+            KhachHangDAO khDao = new KhachHangDAO();
+            KhachHang kh = khDao.getKhachHangByMaTK(taiKhoan.getMaTK());
+
+            if (kh != null) {
+                nameLabel1.setText(kh.getHoten());
+                idTextField.setText(kh.getMakh());
+                acc_idTextField.setText(kh.getMatk());
+                nameTextField.setText(kh.getHoten());
+                phoneTextField.setText(kh.getSdt());
+                pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
+                levelTextField.setText(kh.getLoaitv());
+                birthDateChooser.setDate(kh.getNgaysinh());
+            }
+        }
     }
 
     /**
@@ -245,6 +275,28 @@ public class C_profilePanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        if (taiKhoan != null) {
+            String newName = nameTextField.getText().trim();
+            String newPhone = phoneTextField.getText().trim();
+            Date newBirth = birthDateChooser.getDate();
+
+            if (newName.isEmpty() || newPhone.isEmpty() || newBirth == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin.");
+                return;
+            }
+
+            KhachHangDAO khDao = new KhachHangDAO();
+            boolean success = khDao.updateThongTinCaNhan(
+                taiKhoan.getMaTK(), newName, newBirth, newPhone
+            );
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                loadProfileInfo();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+            }
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
 

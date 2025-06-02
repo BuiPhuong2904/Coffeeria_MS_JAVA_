@@ -361,4 +361,36 @@ public class HoaDonDAO {
         return doanhThuMap;
     }
 
+    public List<HoaDon> getHoaDonByMaTK(String maTK) {
+        List<HoaDon> list = new ArrayList<>();
+        String sql = """
+            SELECT hd.MAHD, hd.NGAYLAP, hd.TONGTIENTRUOC, hd.TIENGIAMGIA, hd.TONGTIENSAU, hd.HINHTHUCTT 
+            FROM HOADON hd
+            JOIN KHACHHANG kh ON hd.MAKH = kh.MAKH
+            WHERE kh.MATK = ?
+            ORDER BY hd.NGAYLAP DESC
+        """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, maTK);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHD(rs.getString("MAHD"));
+                hd.setNgayLap(rs.getDate("NGAYLAP"));
+                hd.setTongTienTruoc(rs.getDouble("TONGTIENTRUOC"));
+                hd.setTienGiamGia(rs.getDouble("TIENGIAMGIA"));
+                hd.setTongTienSau(rs.getDouble("TONGTIENSAU"));
+                hd.setHinhThucTT(rs.getString("HINHTHUCTT"));
+                list.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }
