@@ -104,10 +104,14 @@ public class C_Homepage extends javax.swing.JFrame {
 
         leftPanel.setBackground(new java.awt.Color(149, 114, 90));
         leftPanel.setPreferredSize(new java.awt.Dimension(100, 750));
+        leftPanel.setLayout(null);
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/logo100.png"))); // NOI18N
+        leftPanel.add(logoLabel);
+        logoLabel.setBounds(0, 0, 100, 100);
 
         homePanel.setBackground(new java.awt.Color(245, 245, 220));
+        homePanel.setLayout(null);
 
         homeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         homeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -116,25 +120,14 @@ public class C_Homepage extends javax.swing.JFrame {
         homeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         homeLabel.setPreferredSize(new java.awt.Dimension(70, 70));
         homeLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        homePanel.add(homeLabel);
+        homeLabel.setBounds(6, 6, 70, 70);
 
-        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
-        homePanel.setLayout(homePanelLayout);
-        homePanelLayout.setHorizontalGroup(
-            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        homePanelLayout.setVerticalGroup(
-            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        leftPanel.add(homePanel);
+        homePanel.setBounds(9, 112, 82, 82);
 
         menuPanel.setBackground(new java.awt.Color(245, 245, 220));
+        menuPanel.setLayout(null);
 
         menuLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         menuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -143,25 +136,14 @@ public class C_Homepage extends javax.swing.JFrame {
         menuLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         menuLabel.setPreferredSize(new java.awt.Dimension(70, 70));
         menuLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        menuPanel.add(menuLabel);
+        menuLabel.setBounds(6, 6, 70, 70);
 
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(menuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(menuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        leftPanel.add(menuPanel);
+        menuPanel.setBounds(9, 206, 82, 82);
 
         discountPanel.setBackground(new java.awt.Color(245, 245, 220));
+        discountPanel.setLayout(null);
 
         discountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         discountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -170,25 +152,14 @@ public class C_Homepage extends javax.swing.JFrame {
         discountLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         discountLabel.setPreferredSize(new java.awt.Dimension(70, 70));
         discountLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        discountPanel.add(discountLabel);
+        discountLabel.setBounds(6, 6, 70, 70);
 
-        javax.swing.GroupLayout discountPanelLayout = new javax.swing.GroupLayout(discountPanel);
-        discountPanel.setLayout(discountPanelLayout);
-        discountPanelLayout.setHorizontalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        discountPanelLayout.setVerticalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        leftPanel.add(discountPanel);
+        discountPanel.setBounds(9, 300, 82, 82);
 
         historyPanel.setBackground(new java.awt.Color(245, 245, 220));
+        historyPanel.setLayout(null);
 
         historyLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         historyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -197,25 +168,14 @@ public class C_Homepage extends javax.swing.JFrame {
         historyLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         historyLabel.setPreferredSize(new java.awt.Dimension(70, 70));
         historyLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        historyPanel.add(historyLabel);
+        historyLabel.setBounds(6, 6, 70, 70);
 
-        javax.swing.GroupLayout historyPanelLayout = new javax.swing.GroupLayout(historyPanel);
-        historyPanel.setLayout(historyPanelLayout);
-        historyPanelLayout.setHorizontalGroup(
-            historyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(historyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        historyPanelLayout.setVerticalGroup(
-            historyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(historyPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(historyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        leftPanel.add(historyPanel);
+        historyPanel.setBounds(9, 394, 82, 82);
 
         profilePanel.setBackground(new java.awt.Color(245, 245, 220));
+        profilePanel.setLayout(null);
 
         profileLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         profileLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -224,23 +184,11 @@ public class C_Homepage extends javax.swing.JFrame {
         profileLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         profileLabel.setPreferredSize(new java.awt.Dimension(70, 70));
         profileLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        profilePanel.add(profileLabel);
+        profileLabel.setBounds(6, 6, 70, 70);
 
-        javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
-        profilePanel.setLayout(profilePanelLayout);
-        profilePanelLayout.setHorizontalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        profilePanelLayout.setVerticalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        leftPanel.add(profilePanel);
+        profilePanel.setBounds(9, 488, 82, 82);
 
         logoutButton.setBackground(new java.awt.Color(149, 114, 90));
         logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -256,49 +204,10 @@ public class C_Homepage extends javax.swing.JFrame {
                 logoutButtonActionPerformed(evt);
             }
         });
+        leftPanel.add(logoutButton);
+        logoutButton.setBounds(9, 662, 82, 82);
 
-        javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
-        leftPanel.setLayout(leftPanelLayout);
-        leftPanelLayout.setHorizontalGroup(
-            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoLabel))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(discountPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(historyPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profilePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9))
-            .addGroup(leftPanelLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        leftPanelLayout.setVerticalGroup(
-            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftPanelLayout.createSequentialGroup()
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(discountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(historyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tempPanel.add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 750));
+        tempPanel.add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 750));
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);

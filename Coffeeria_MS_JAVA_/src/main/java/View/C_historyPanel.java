@@ -130,7 +130,9 @@ public class C_historyPanel extends javax.swing.JPanel {
         billTable.setRowHeight(30);
         billScrollPane.setViewportView(billTable);
 
+        detailButton.setBackground(new java.awt.Color(173, 181, 189));
         detailButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        detailButton.setForeground(new java.awt.Color(33, 37, 41));
         detailButton.setText("DETAIL");
         detailButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
