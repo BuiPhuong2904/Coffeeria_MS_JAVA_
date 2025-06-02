@@ -229,4 +229,22 @@ public class KhachHangDAO {
         }
     }
 
+    public String getMaKHByMaTK(String maTK) {
+        String sql = "SELECT MAKH FROM KHACHHANG WHERE MATK = ?";
+        try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setString(1, maTK);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("MAKH");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

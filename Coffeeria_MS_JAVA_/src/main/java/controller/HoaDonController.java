@@ -35,7 +35,7 @@ public class HoaDonController {
     }
     
     public void insertHoaDon(HoaDon hoaDon, List<CT_HoaDon> chiTietList) {
-        if (hoaDon.getNgayLap() == null || hoaDon.getMaNV().isEmpty()) {
+        if (hoaDon.getNgayLap() == null) {
             JOptionPane.showMessageDialog(view, "Vui lòng nhập đầy đủ thông tin hóa đơn.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -43,7 +43,9 @@ public class HoaDonController {
         boolean success = hoaDonDAO.insertHoaDon(hoaDon, chiTietList);
         if (success) {
             JOptionPane.showMessageDialog(view, "Thêm hóa đơn thành công!");
-            hoaDonView.loadAll();
+            if (hoaDonView != null) {
+                hoaDonView.loadAll();
+            }
         } else {
             JOptionPane.showMessageDialog(view, "Thêm hóa đơn thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }

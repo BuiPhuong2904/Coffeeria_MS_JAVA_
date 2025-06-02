@@ -80,7 +80,7 @@ public class C_ChuyenManHinhController {
                     ((C_homePanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Menu":
-                    node = new C_menuPanel();
+                    node = new C_menuPanel() {};
                     ((C_menuPanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Deal":

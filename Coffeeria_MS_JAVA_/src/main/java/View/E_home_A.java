@@ -52,6 +52,14 @@ public class E_home_A extends javax.swing.JFrame {
                 if (rs.getDate("NGAYVL") != null) {
                     startDateChooser.setDate(rs.getDate("NGAYVL"));
                 }
+                
+                String maql = rs.getString("MAQL");
+                if (maql != null) {
+                    m_idTextField.setText(maql);
+                } else {
+                    m_idTextField.setText("");
+                }
+                m_idTextField.setEditable(false);
             }
 
             rs.close();

@@ -12,16 +12,36 @@ import model.TaiKhoan;
  * @author nttma
  */
 public class E_Homepage extends javax.swing.JFrame {
+    
     private TaiKhoan taiKhoan;
-    private E_homePanel e_homePanel;
+    
+    private E_homePanel homeCustomPanel;
     
     public E_Homepage(TaiKhoan tk) {
         this();
         this.taiKhoan = tk;
+        
+        homeCustomPanel.setTaiKhoan(taiKhoan);
 
         System.out.println("Đăng nhập với tài khoản: " + tk.getEmail());
         
-        e_homePanel = new E_homePanel(tk);
+        ChuyenManHinhController controller = new ChuyenManHinhController(rightPanel);
+        controller.setTaiKhoan(taiKhoan);
+
+        controller.setView(homeCustomPanel, homeLabel);
+        
+        List<DanhMucBean> listItem = new ArrayList<>();
+        listItem.add(new DanhMucBean("Home", homeCustomPanel, homeLabel));
+        
+        listItem.add(new DanhMucBean("Menu", menuPanel, menuLabel));
+        listItem.add(new DanhMucBean("Bill", billPanel, billLabel));
+        listItem.add(new DanhMucBean("Inventory", inventoryPanel, inventoryLabel));
+        listItem.add(new DanhMucBean("Customer", customerPanel, customerLabel));
+        listItem.add(new DanhMucBean("Voucher", voucherPanel, voucherLabel));
+        listItem.add(new DanhMucBean("Employee", employeePanel, employeeLabel));
+        
+        controller.setEvent(listItem);
+                
     }
     
     /**
@@ -30,11 +50,13 @@ public class E_Homepage extends javax.swing.JFrame {
     public E_Homepage() {
         initComponents();
         
+        homeCustomPanel = new E_homePanel();
+        
         ChuyenManHinhController controller = new ChuyenManHinhController(rightPanel);
-        controller.setView(homePanel, homeLabel);
+        controller.setView(homeCustomPanel, homeLabel);
         
         List<DanhMucBean> listItem = new ArrayList<>();
-        listItem.add(new DanhMucBean("Home", homePanel, homeLabel));
+        listItem.add(new DanhMucBean("Home", homeCustomPanel, homeLabel));
         listItem.add(new DanhMucBean("Menu", menuPanel, menuLabel));
         listItem.add(new DanhMucBean("Bill", billPanel, billLabel));
         listItem.add(new DanhMucBean("Inventory", inventoryPanel, inventoryLabel));
@@ -45,8 +67,6 @@ public class E_Homepage extends javax.swing.JFrame {
         controller.setEvent(listItem);
     }
     
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
