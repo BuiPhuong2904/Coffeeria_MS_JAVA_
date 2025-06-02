@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
+
+import dao.KhuyenMaiDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.KhuyenMai;
 
 /**
  *
@@ -10,11 +12,32 @@ package View;
  */
 public class C_dealPanel extends javax.swing.JPanel {
 
+    private DefaultTableModel voucherModel;
+    private KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
     /**
      * Creates new form C_dealPanel
      */
     public C_dealPanel() {
         initComponents();
+        
+        initVoucherTable();
+    }
+    
+    private void initVoucherTable() {
+        voucherModel = new DefaultTableModel(new String[]{"Mã KM", "Tên KM", "Loại KM", "Giá trị giảm", "Điều kiện", "Ngày BD", "Ngày KT"}, 0);
+        voucherTable.setModel(voucherModel);
+        loadVoucherData();
+    }
+
+    private void loadVoucherData() {
+        voucherModel.setRowCount(0);
+        List<KhuyenMai> list = khuyenMaiDAO.getKhuyenMaiDangApDung();
+        for (KhuyenMai km : list) {
+            voucherModel.addRow(new Object[]{
+                km.getMaKM(), km.getTenKM(), km.getLoaiKM(), km.getGiaTriGiam(),
+                km.getDieuKien(), km.getNgayBD(), km.getNgayKT()
+            });
+        }
     }
 
     /**

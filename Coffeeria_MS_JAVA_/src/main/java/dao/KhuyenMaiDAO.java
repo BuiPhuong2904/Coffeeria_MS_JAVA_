@@ -130,4 +130,29 @@ public class KhuyenMaiDAO {
         }
         return false;
     }
+    
+    public List<KhuyenMai> getKhuyenMaiDangApDung() {
+        List<KhuyenMai> list = new ArrayList<>();
+        String sql = "SELECT * FROM KHUYENMAI WHERE TRANGTHAI = 'Đang áp dụng'";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKM(rs.getString("MAKM"));
+                km.setTenKM(rs.getString("TENKM"));
+                km.setLoaiKM(rs.getString("LOAIKM"));
+                km.setGiaTriGiam(rs.getDouble("GIATRIGIAM"));
+                km.setDieuKien(rs.getString("DIEUKIEN"));
+                km.setNgayBD(rs.getDate("NGAYBD"));
+                km.setNgayKT(rs.getDate("NGAYKT"));
+                km.setTrangThai(rs.getString("TRANGTHAI"));
+                list.add(km);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
