@@ -36,6 +36,9 @@ INSERT INTO MONAN VALUES ('MN028', 'Mousse Dâu', 'Bánh ngọt', 39000, NULL, '
 
 INSERT INTO MONAN VALUES ('MN029', 'Soda Xoài Nhiệt Đới', 'Thức Uống Khác', 55000, NULL, 'Soda xoài kết hợp syrup nhiệt đới, màu đẹp, vị chua ngọt mát lạnh');
 INSERT INTO MONAN VALUES ('MN030', 'Soda Việt Quất', 'Thức Uống Khác', 55000, NULL, 'Soda chua ngọt kết hợp vị việt quất độc đáo và tươi mới');
+INSERT INTO MONAN VALUES ('MN031', 'Bánh Flan Caramel', 'Tráng Miệng', 35000, 'Bánh flan mềm mịn, phủ lớp caramel ngọt nhẹ, thơm béo');
+INSERT INTO MONAN VALUES ('MN032', 'Nước Ép Cam Tươi', 'Thức Uống Khác', 39000, 'Nước ép cam nguyên chất 100%, giàu vitamin C');
+
 commit;
 
 --Bảng Tài khoản - Nhân viên 
