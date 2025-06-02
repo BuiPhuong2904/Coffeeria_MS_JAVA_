@@ -79,37 +79,71 @@ BEGIN
     SELECT 'SP' || LPAD(seq_sanpham.NEXTVAL, 3, '0') INTO :NEW.MASP FROM dual;
 END;
 
--- Bảng CHITIET_SP
+-- Bảng CHITIET_PHIEUKHO 
 CREATE OR REPLACE TRIGGER trg_capnhat_tongsl
-AFTER INSERT ON PHIEUKHO
+AFTER INSERT OR UPDATE OR DELETE ON CT_PHIEUKHO
 FOR EACH ROW
+DECLARE
+    v_loaiphieu PHIEUKHO.LOAIPHIEU%TYPE;
 BEGIN
-    IF :NEW.LOAIPHIEU = 'NHAP' THEN
-        UPDATE SANPHAM
-        SET TONG_SL = TONG_SL + :NEW.SL
-        WHERE MASP = :NEW.MASP;
-    ELSIF :NEW.LOAIPHIEU = 'XUAT' THEN
-        UPDATE SANPHAM
-        SET TONG_SL = TONG_SL - :NEW.SL
-        WHERE MASP = :NEW.MASP;
+    IF INSERTING OR UPDATING THEN
+        SELECT LOAIPHIEU INTO v_loaiphieu FROM PHIEUKHO WHERE MAPHIEU = :NEW.MAPHIEU;
+
+        IF v_loaiphieu = 'NHAP' THEN
+
+            IF INSERTING THEN
+                UPDATE SANPHAM
+                SET TONG_SL = TONG_SL + :NEW.SOLUONG
+                WHERE MASP = :NEW.MASP;
+            ELSIF UPDATING THEN
+                UPDATE SANPHAM
+                SET TONG_SL = TONG_SL - :OLD.SOLUONG + :NEW.SOLUONG
+                WHERE MASP = :NEW.MASP;
+            END IF;
+        ELSIF v_loaiphieu = 'XUAT' THEN
+
+            IF INSERTING THEN
+                UPDATE SANPHAM
+                SET TONG_SL = TONG_SL - :NEW.SOLUONG
+                WHERE MASP = :NEW.MASP;
+            ELSIF UPDATING THEN
+                UPDATE SANPHAM
+                SET TONG_SL = TONG_SL + :OLD.SOLUONG - :NEW.SOLUONG
+                WHERE MASP = :NEW.MASP;
+            END IF;
+        END IF;
+    ELSIF DELETING THEN
+        SELECT LOAIPHIEU INTO v_loaiphieu FROM PHIEUKHO WHERE MAPHIEU = :OLD.MAPHIEU;
+
+        IF v_loaiphieu = 'NHAP' THEN
+            UPDATE SANPHAM
+            SET TONG_SL = TONG_SL - :OLD.SOLUONG
+            WHERE MASP = :OLD.MASP;
+        ELSIF v_loaiphieu = 'XUAT' THEN
+            UPDATE SANPHAM
+            SET TONG_SL = TONG_SL + :OLD.SOLUONG
+            WHERE MASP = :OLD.MASP;
+        END IF;
     END IF;
 END;
 
-
+-- Trigger kiểm tra đủ hàng tồn trước khi xuất kho
 CREATE OR REPLACE TRIGGER trg_kiemtra_xuat
-BEFORE INSERT ON CHITIET_SP
+BEFORE INSERT ON CT_PHIEUKHO
 FOR EACH ROW
-WHEN (NEW.LOAIPHIEU = 'XUAT')
 DECLARE
+    v_loaiphieu PHIEUKHO.LOAIPHIEU%TYPE;
     v_tongsl NUMBER;
 BEGIN
-    SELECT TONG_SL INTO v_tongsl
-    FROM SANPHAM
-    WHERE MASP = :NEW.MASP;
+    SELECT LOAIPHIEU INTO v_loaiphieu FROM PHIEUKHO WHERE MAPHIEU = :NEW.MAPHIEU;
 
-    IF v_tongsl < :NEW.SL THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Không đủ hàng trong kho để xuất.');
+    IF v_loaiphieu = 'XUAT' THEN
+        SELECT TONG_SL INTO v_tongsl FROM SANPHAM WHERE MASP = :NEW.MASP;
+
+        IF v_tongsl < :NEW.SOLUONG THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Không đủ hàng trong kho để xuất.');
+        END IF;
     END IF;
 END;
 
-
+commit;

@@ -1,9 +1,12 @@
 
 package View;
 
+import controller.PhieuKhoController;
 import dao.PhieuKhoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CT_PhieuKho;
 import model.PhieuKho;
 
 /**
@@ -350,43 +353,43 @@ public class E_home_IE extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-//        ChamCong selected = getSelectedChamCong();
-//        if (selected != null) {
-//            E_home_IE_update ieFrame = new E_home_IE_update(selected, this);
-            E_home_IE_update ieFrame = new E_home_IE_update(this); // chạy thì nhớ xóa dòng này để dòng trên nha, test nên thêm vô
+        PhieuKho selected = getSelectedPhieuKho();
+        if (selected != null) {
+            List<CT_PhieuKho> chiTietList = new PhieuKhoDAO().findChiTietByMaPhieu(selected.getMaPhieu());
+            E_home_IE_update ieFrame = new E_home_IE_update(selected, chiTietList, this);
             ieFrame.setVisible(true);
             ieFrame.pack();
             ieFrame.setLocationRelativeTo(null);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để cập nhật.");
-//        }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một phiếu để cập nhật.");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-//        ChamCong selected = getSelectedChamCong();
-//        if (selected == null) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//
-//        ChamCongController controller = new ChamCongController(this, this);
-//        controller.deleteChamCong(selected.getMaChamCong(), this::loadAll);
+        PhieuKho selected = getSelectedPhieuKho();
+        if (selected == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một phiếu để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        PhieuKhoController controller = new PhieuKhoController(this, this);
+        controller.deletePhieuKho(selected.getMaPhieu(), this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-//        ChamCong selected = getSelectedChamCong();
-//        if (selected != null) {
-//            M_home_T_detail detailFrame = new M_home_T_detail(selected);
-// chạy thì nhớ xóa dòng dưới để dòng trên nha, test nên thêm vô
-            E_home_IE_detail ieFrame = new E_home_IE_detail(this); 
-            ieFrame.setVisible(true);
-            ieFrame.pack();
-            ieFrame.setLocationRelativeTo(null);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xem chi tiết.");
-//        }
+        PhieuKho selected = getSelectedPhieuKho();
+        if (selected != null) {
+            List<CT_PhieuKho> chiTietList = phieuKhoDAO.findChiTietByMaPhieu(selected.getMaPhieu());
+
+            E_home_IE_detail detailFrame = new E_home_IE_detail(selected, chiTietList);
+            detailFrame.setVisible(true);
+            detailFrame.pack();
+            detailFrame.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một phiếu để xem chi tiết.");
+        }
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed

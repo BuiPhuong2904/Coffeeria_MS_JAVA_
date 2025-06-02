@@ -1,10 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
-import java.util.Date;
+import controller.PhieuKhoController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.CT_PhieuKho;
+import model.PhieuKho;
 
 /**
  *
@@ -13,6 +15,7 @@ import java.util.Date;
 public class E_home_IE_insert extends javax.swing.JFrame {
 
     private E_home_IE parent;
+    private List<CT_PhieuKho> chiTietList = new ArrayList<>();
     
     public E_home_IE_insert(E_home_IE parent) {
         initComponents();
@@ -211,6 +214,11 @@ public class E_home_IE_insert extends javax.swing.JFrame {
         addButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         addButton.setForeground(new java.awt.Color(80, 60, 40));
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -386,16 +394,33 @@ public class E_home_IE_insert extends javax.swing.JFrame {
     }//GEN-LAST:event_noteTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-//        Date workDate = transactionDateChooser.getDate();
-//        String maNV = e_idTextField.getText().trim();
-//
-//        ChamCongController controller = new ChamCongController(this, parent);
-//        controller.insertChamCong(workDate, soGioLam, maNV);
+        String maPhieu = ie_idTextField.getText();
+        java.util.Date utilDate = transactionDateChooser.getDate();
+        java.sql.Date ngayGiaoDich = new java.sql.Date(utilDate.getTime());
+
+        String loaiPhieu = typeComboBox.getSelectedItem().toString();
+        String maNV = e_idTextField.getText();
+        String ghiChu = noteTextField.getText();
+
+        double tongTien = 0;
+        for (CT_PhieuKho ct : chiTietList) {
+            tongTien += ct.getSoLuong() * ct.getDonGia();
+        }
+
+        PhieuKho phieuKho = new PhieuKho(maPhieu, ngayGiaoDich, loaiPhieu, tongTien, maNV, ghiChu);
+
+        PhieuKhoController controller = new PhieuKhoController(parent);
+        controller.insertPhieuKho(phieuKho, chiTietList);
+
+        // Đóng form sau khi lưu
+        this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        if (parent != null) {
+            parent.setVisible(true); 
+        }
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -414,6 +439,20 @@ public class E_home_IE_insert extends javax.swing.JFrame {
     private void e_idTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_idTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_e_idTextField1ActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        String maPhieu = ie_idTextField.getText();
+        String maSP = ie_item_idTextField.getText();
+        int soLuong = Integer.parseInt(quantityTextField.getText());
+        double donGia = Double.parseDouble(priceTextField.getText());
+
+        CT_PhieuKho ct = new CT_PhieuKho(maPhieu, maSP, soLuong, donGia);
+        chiTietList.add(ct);
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{maPhieu, maSP, soLuong, donGia});
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.CT_PhieuKho;
+import model.PhieuKho;
 
 /**
  *
@@ -15,9 +17,65 @@ public class E_home_IE_detail extends javax.swing.JFrame {
     public E_home_IE_detail(E_home_IE parent) {
         initComponents();
         this.parent = parent;
+    }
+    
+    public E_home_IE_detail(PhieuKho pk, List<CT_PhieuKho> chiTietList) {
+        initComponents();
         
+        ie_idTextField.setText(pk.getMaPhieu());
+        transactionDateChooser.setDate(pk.getNgayGiaoDich());
+        typeComboBox.setSelectedItem(pk.getLoaiPhieu());
+        e_idTextField.setText(pk.getMaNV());
+        e_idTextField1.setText(String.valueOf(pk.getTongTien()));
+        noteTextField.setText(pk.getGhiChu());
+
+        // Khóa chỉnh sửa
         ie_idTextField.setEditable(false);
-        ie_idTextField.setEnabled(false); 
+        transactionDateChooser.setEnabled(false);
+        typeComboBox.setEnabled(false);
+        e_idTextField.setEditable(false);
+        e_idTextField1.setEditable(false);
+        noteTextField.setEditable(false);
+
+        loadChiTietTable(chiTietList);
+    }
+    
+    private void loadChiTietTable(List<CT_PhieuKho> list) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        for (CT_PhieuKho ct : list) {
+            double thanhTien = ct.getSoLuong() * ct.getDonGia();
+            Object[] row = new Object[] {
+                ct.getMaPhieu(),
+                ct.getMaSP(),
+                ct.getSoLuong(),
+                ct.getDonGia(),
+                thanhTien
+            };
+            model.addRow(row);
+        }
+
+        jTable1.setEnabled(true);
+
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
+                int selectedRow = jTable1.getSelectedRow();
+                DefaultTableModel selectedModel = (DefaultTableModel) jTable1.getModel();
+
+                String maSP = selectedModel.getValueAt(selectedRow, 1).toString();
+                String soLuong = selectedModel.getValueAt(selectedRow, 2).toString();
+                String donGia = selectedModel.getValueAt(selectedRow, 3).toString();
+
+                ie_item_idTextField.setText(maSP);
+                quantityTextField.setText(soLuong);
+                priceTextField.setText(donGia);
+                
+                ie_item_idTextField.setEditable(false);
+                quantityTextField.setEditable(false);
+                priceTextField.setEditable(false);
+            }
+        });
     }
     
     public E_home_IE_detail() {
@@ -339,7 +397,9 @@ public class E_home_IE_detail extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        if (parent != null) {
+            parent.setVisible(true); 
+        }
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

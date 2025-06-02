@@ -16,12 +16,16 @@ import java.util.List;
 
 public class PhieuKhoController {
     private final PhieuKhoDAO phieuKhoDAO = new PhieuKhoDAO();
-    private final Component view;
+    private Component view;
     private final E_home_IE phieuKhoView;
 
     public PhieuKhoController(Component view, E_home_IE phieuKhoView) {
         this.view = view;
         this.phieuKhoView = phieuKhoView;
+    }
+
+    public PhieuKhoController(E_home_IE parent) {
+        this.phieuKhoView = parent;
     }
 
     // Thêm phiếu kho mới cùng chi tiết

@@ -1,8 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
+
+import controller.PhieuKhoController;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.CT_PhieuKho;
+import model.PhieuKho;
 
 /**
  *
@@ -12,16 +18,62 @@ public class E_home_IE_update extends javax.swing.JFrame {
 
     private E_home_IE parent;
     
+    private PhieuKho phieuKho;
+    private List<CT_PhieuKho> chiTietList;
+    
     public E_home_IE_update(E_home_IE parent) {
         initComponents();
         this.parent = parent;
-        
-        ie_idTextField.setEditable(false);
-        ie_idTextField.setEnabled(false); 
     }
     
-    public E_home_IE_update() {
+    public E_home_IE_update(PhieuKho phieuKho, List<CT_PhieuKho> chiTietList, E_home_IE phieuKhoView) {
         initComponents();
+        
+        this.phieuKho = phieuKho;
+        this.chiTietList = chiTietList;
+        this.parent = phieuKhoView;
+        
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            int selectedRow = jTable1.getSelectedRow();
+            if (selectedRow != -1) {
+                String maSP = (String) jTable1.getValueAt(selectedRow, 1);
+                double donGia = (double) jTable1.getValueAt(selectedRow, 2);
+                int soLuong = (int) jTable1.getValueAt(selectedRow, 3);
+
+                ie_item_idTextField.setText(maSP);
+                priceTextField.setText(String.valueOf(donGia));
+                quantityTextField.setText(String.valueOf(soLuong));
+            }
+        });
+
+        loadDataToForm();
+    }
+    
+    private void loadDataToForm() {
+        ie_idTextField.setText(phieuKho.getMaPhieu());
+        ie_idTextField.setEditable(false);
+
+        transactionDateChooser.setDate(phieuKho.getNgayGiaoDich());
+        e_idTextField.setText(phieuKho.getMaNV());
+        typeComboBox.setSelectedItem(phieuKho.getLoaiPhieu());
+        e_idTextField1.setText(String.valueOf(phieuKho.getTongTien()));
+        noteTextField.setText(phieuKho.getGhiChu());
+
+        loadChiTietTable(chiTietList);
+    }
+
+    private void loadChiTietTable(List<CT_PhieuKho> list) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (CT_PhieuKho ct : list) {
+            Object[] row = new Object[] {
+                ct.getMaPhieu(),
+                ct.getMaSP(),
+                ct.getDonGia(),
+                ct.getSoLuong(),
+            };
+            model.addRow(row);
+        }
     }
 
     /**
@@ -212,6 +264,11 @@ public class E_home_IE_update extends javax.swing.JFrame {
         updateButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         updateButton.setForeground(new java.awt.Color(80, 60, 40));
         updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -387,16 +444,37 @@ public class E_home_IE_update extends javax.swing.JFrame {
     }//GEN-LAST:event_noteTextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //        Date workDate = transactionDateChooser.getDate();
-        //        String maNV = e_idTextField.getText().trim();
-        //
-        //        ChamCongController controller = new ChamCongController(this, parent);
-        //        controller.insertChamCong(workDate, soGioLam, maNV);
+        String maPhieu = ie_idTextField.getText();
+        
+        java.util.Date ngayGD = transactionDateChooser.getDate();
+        java.sql.Date sqlNgayGD = new java.sql.Date(ngayGD.getTime());
+        
+        String maNV = e_idTextField.getText();
+        String loaiPhieu = typeComboBox.getSelectedItem().toString();
+        double tongTien = Double.parseDouble(e_idTextField1.getText());
+        String ghiChu = noteTextField.getText();
+
+        PhieuKho updatedPK = new PhieuKho(maPhieu, sqlNgayGD, loaiPhieu, tongTien, maNV, ghiChu);
+
+        List<CT_PhieuKho> updatedCTList = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String maSP = model.getValueAt(i, 1).toString();
+            double donGia = Double.parseDouble(model.getValueAt(i, 2).toString());
+            int soLuong = Integer.parseInt(model.getValueAt(i, 3).toString());
+
+            updatedCTList.add(new CT_PhieuKho(maPhieu, maSP, soLuong, donGia));
+        }
+
+        PhieuKhoController controller = new PhieuKhoController(this, parent);
+        controller.updatePhieuKho(updatedPK, updatedCTList);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        parent.setVisible(true); // Hiện lại form cha
+        if (parent != null) {
+            parent.setVisible(true); 
+        }
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -415,6 +493,45 @@ public class E_home_IE_update extends javax.swing.JFrame {
     private void e_idTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_idTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_e_idTextField1ActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        String maSP = ie_item_idTextField.getText().trim();
+        String donGiaStr = priceTextField.getText().trim();
+        String soLuongStr = quantityTextField.getText().trim();
+        String maPhieu = ie_idTextField.getText().trim();
+
+        if (maSP.isEmpty() || donGiaStr.isEmpty() || soLuongStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin chi tiết.");
+            return;
+        }
+
+        try {
+            double donGia = Double.parseDouble(donGiaStr);
+            int soLuong = Integer.parseInt(soLuongStr);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int selectedRow = jTable1.getSelectedRow();
+
+            if (selectedRow != -1) {
+                model.setValueAt(maPhieu, selectedRow, 0);
+                model.setValueAt(maSP, selectedRow, 1);
+                model.setValueAt(donGia, selectedRow, 2);
+                model.setValueAt(soLuong, selectedRow, 3);
+            } else {
+                Object[] row = {maPhieu, maSP, donGia, soLuong};
+                model.addRow(row);
+            }
+
+            jTable1.clearSelection();
+            ie_item_idTextField.setText("");
+            priceTextField.setText("");
+            quantityTextField.setText("");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Đơn giá hoặc số lượng không hợp lệ.");
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
