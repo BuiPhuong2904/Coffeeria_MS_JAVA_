@@ -131,9 +131,9 @@ public class E_home_U_update extends javax.swing.JFrame {
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
-        saveButton.setBackground(new java.awt.Color(250, 239, 217));
+        saveButton.setBackground(new java.awt.Color(40, 167, 69));
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        saveButton.setForeground(new java.awt.Color(80, 60, 40));
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("Save");
         saveButton.setFocusPainted(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -142,9 +142,9 @@ public class E_home_U_update extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(250, 239, 217));
+        cancelButton.setBackground(new java.awt.Color(173, 181, 189));
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(80, 60, 40));
+        cancelButton.setForeground(new java.awt.Color(33, 37, 41));
         cancelButton.setText("Cancel");
         cancelButton.setFocusPainted(false);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {

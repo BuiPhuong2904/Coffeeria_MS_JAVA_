@@ -294,6 +294,7 @@ public class E_home_U extends javax.swing.JFrame {
         tempPanel.add(action2Panel);
         action2Panel.setBounds(570, 120, 210, 60);
 
+        jPanel2.setBackground(new java.awt.Color(207, 178, 145));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 40));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

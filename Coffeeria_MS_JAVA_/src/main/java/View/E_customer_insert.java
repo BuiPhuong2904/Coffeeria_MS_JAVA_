@@ -138,9 +138,9 @@ public class E_customer_insert extends javax.swing.JFrame {
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
-        insertButton.setBackground(new java.awt.Color(250, 239, 217));
+        insertButton.setBackground(new java.awt.Color(40, 167, 69));
         insertButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        insertButton.setForeground(new java.awt.Color(80, 60, 40));
+        insertButton.setForeground(new java.awt.Color(255, 255, 255));
         insertButton.setText("Save");
         insertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,9 +148,9 @@ public class E_customer_insert extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(250, 239, 217));
+        cancelButton.setBackground(new java.awt.Color(173, 181, 189));
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(80, 60, 40));
+        cancelButton.setForeground(new java.awt.Color(33, 37, 41));
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

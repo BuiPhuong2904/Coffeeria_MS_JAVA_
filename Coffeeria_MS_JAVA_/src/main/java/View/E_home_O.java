@@ -283,7 +283,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         tempPanel.setBackground(new java.awt.Color(252, 252, 246));
         tempPanel.setPreferredSize(new java.awt.Dimension(1100, 750));
 
-        topPanel.setBackground(new java.awt.Color(153, 255, 204));
+        topPanel.setBackground(new java.awt.Color(207, 178, 145));
 
         returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/return20.png"))); // NOI18N
         returnButton.setFocusPainted(false);
@@ -311,6 +311,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                 .addContainerGap())
         );
 
+        orderPanel.setBackground(new java.awt.Color(245, 245, 220));
         orderPanel.setPreferredSize(new java.awt.Dimension(473, 696));
 
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -351,6 +352,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
             }
         });
 
+        checkButton.setBackground(new java.awt.Color(252, 252, 246));
         checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
         checkButton.setPreferredSize(new java.awt.Dimension(40, 40));
         checkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -381,9 +383,12 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         orderTable.setPreferredSize(new java.awt.Dimension(452, 392));
         orderScrollPane.setViewportView(orderTable);
 
+        conPanel.setBackground(new java.awt.Color(245, 245, 220));
         conPanel.setPreferredSize(new java.awt.Dimension(473, 44));
 
+        confirmButton.setBackground(new java.awt.Color(40, 167, 69));
         confirmButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        confirmButton.setForeground(new java.awt.Color(255, 255, 255));
         confirmButton.setText("Confirm Payment");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -405,26 +410,26 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
             .addComponent(confirmButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
         );
 
-        totalPanel.setBackground(new java.awt.Color(255, 255, 255));
+        totalPanel.setBackground(new java.awt.Color(245, 245, 220));
 
         subLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         subLabel.setText("Subtotal");
 
         sub_textLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        sub_textLabel.setText("jLabel");
+        sub_textLabel.setText("0 VND");
         sub_textLabel.setPreferredSize(new java.awt.Dimension(44, 20));
 
         disLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         disLabel.setText("Discount:");
 
         dis_textLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dis_textLabel.setText("jLabel3");
+        dis_textLabel.setText("0 VND");
 
         totalLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalLabel.setText("TOTAL");
 
         total_textLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        total_textLabel.setText("jLabel3");
+        total_textLabel.setText("0 VND");
 
         javax.swing.GroupLayout totalPanelLayout = new javax.swing.GroupLayout(totalPanel);
         totalPanel.setLayout(totalPanelLayout);
@@ -464,6 +469,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                 .addContainerGap())
         );
 
+        checkcodeButton.setBackground(new java.awt.Color(252, 252, 246));
         checkcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
         checkcodeButton.setPreferredSize(new java.awt.Dimension(40, 40));
         checkcodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -552,6 +558,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         orderLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         orderLabel1.setText("MENU");
 
+        menuPanel.setBackground(new java.awt.Color(252, 252, 246));
         menuScrollPane.setViewportView(menuPanel);
 
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);

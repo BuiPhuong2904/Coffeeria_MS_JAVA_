@@ -104,12 +104,14 @@ public class E_home_A extends javax.swing.JFrame {
         salaryTextField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(1100, 750));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        topPanel.setBackground(new java.awt.Color(153, 255, 204));
+        topPanel.setBackground(new java.awt.Color(207, 178, 145));
 
         returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/return20.png"))); // NOI18N
         returnButton.setFocusPainted(false);
@@ -137,7 +139,9 @@ public class E_home_A extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        infoPanel.setBackground(new java.awt.Color(204, 255, 204));
+        getContentPane().add(topPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1104, -1));
+
+        infoPanel.setBackground(new java.awt.Color(245, 245, 220));
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         nameLabel.setText("Name:");
@@ -280,7 +284,13 @@ public class E_home_A extends javax.swing.JFrame {
                 .addGap(52, 52, 52))
         );
 
+        getContentPane().add(infoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 123, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(252, 252, 246));
+
+        saveButton.setBackground(new java.awt.Color(40, 167, 69));
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("SAVE");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,28 +314,22 @@ public class E_home_A extends javax.swing.JFrame {
                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(150, 150, 150))
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 667, 801, -1));
+
+        jPanel2.setBackground(new java.awt.Color(252, 252, 246));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1110, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -383,6 +387,7 @@ public class E_home_A extends javax.swing.JFrame {
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel m_idLabel;
     private javax.swing.JTextField m_idTextField;
     private javax.swing.JLabel nameLabel;
