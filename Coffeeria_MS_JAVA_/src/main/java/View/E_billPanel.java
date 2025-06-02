@@ -1,14 +1,77 @@
 
 package View;
 
+import dao.HoaDonDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
+
 /**
  *
  * @author nttma
  */
 public class E_billPanel extends javax.swing.JPanel {
 
+    private final HoaDonDAO hoaDonDAO = new HoaDonDAO();
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
+    public void loadAll() {
+        List<HoaDon> list = hoaDonDAO.findAllHoaDon();
+
+        DefaultTableModel model = (DefaultTableModel) billTable.getModel();
+        model.setRowCount(0);
+
+        for (HoaDon hd : list) {
+            Object[] row = new Object[] {
+                hd.getMaHD(),
+                sdf.format(hd.getNgayLap()),
+                hd.getMaNV(),
+                hd.getMaKH(),
+                hd.getTongTienSau()
+            };
+            model.addRow(row);
+        }
+    }
+
+    public HoaDon getSelectedHoaDon() {
+        int selectedRow = billTable.getSelectedRow();
+        if (selectedRow == -1) return null;
+
+        DefaultTableModel model = (DefaultTableModel) billTable.getModel();
+
+        String mahd = (String) model.getValueAt(selectedRow, 0);
+
+        Date ngayLap = null;
+        try {
+            String ngayLapStr = (String) model.getValueAt(selectedRow, 1);
+            if (ngayLapStr != null && !ngayLapStr.trim().isEmpty()) {
+                ngayLap = sdf.parse(ngayLapStr);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String manv = (String) model.getValueAt(selectedRow, 2);
+        String makh = (String) model.getValueAt(selectedRow, 3);
+
+        Double tongTienSau = null;
+        Object ttsObj = model.getValueAt(selectedRow, 4);
+        if (ttsObj != null) tongTienSau = Double.valueOf(ttsObj.toString());
+
+        return new HoaDon(mahd, null, null, tongTienSau, null, ngayLap, null, makh, manv, null);
+    }
+    
     public E_billPanel() {
         initComponents();
+        
+        loadAll();
+        
+        insertButton.setContentAreaFilled(false);
+        insertButton.setBorderPainted(false);
+        insertButton.setFocusPainted(false);
         
         updateButton.setContentAreaFilled(false);
         updateButton.setBorderPainted(false);
@@ -250,6 +313,13 @@ public class E_billPanel extends javax.swing.JPanel {
     private void allTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_allTextFieldActionPerformed
+    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
+        // TODO add your handling code here:
+//        E_bill_insert billFrame = new E_bill_insert();
+//        billFrame.setVisible(true);
+//        billFrame.pack();
+//        billFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
