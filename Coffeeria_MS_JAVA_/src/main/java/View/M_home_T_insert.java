@@ -114,9 +114,9 @@ public class M_home_T_insert extends javax.swing.JFrame {
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
-        insertButton.setBackground(new java.awt.Color(250, 239, 217));
+        insertButton.setBackground(new java.awt.Color(40, 167, 69));
         insertButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        insertButton.setForeground(new java.awt.Color(80, 60, 40));
+        insertButton.setForeground(new java.awt.Color(255, 255, 255));
         insertButton.setText("Save");
         insertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,9 +124,9 @@ public class M_home_T_insert extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(250, 239, 217));
+        cancelButton.setBackground(new java.awt.Color(173, 181, 189));
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(80, 60, 40));
+        cancelButton.setForeground(new java.awt.Color(33, 37, 41));
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +164,7 @@ public class M_home_T_insert extends javax.swing.JFrame {
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addComponent(workdateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(workdateDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +178,7 @@ public class M_home_T_insert extends javax.swing.JFrame {
                             .addComponent(hoursTextField)
                             .addComponent(tk_idTextField)
                             .addComponent(e_idTextField))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addComponent(temp1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tempPanelLayout.setVerticalGroup(

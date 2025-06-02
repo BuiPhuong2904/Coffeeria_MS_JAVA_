@@ -151,9 +151,9 @@ public class M_home_T_update extends javax.swing.JFrame {
 
         temp1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
-        insertButton.setBackground(new java.awt.Color(250, 239, 217));
+        insertButton.setBackground(new java.awt.Color(40, 167, 69));
         insertButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        insertButton.setForeground(new java.awt.Color(80, 60, 40));
+        insertButton.setForeground(new java.awt.Color(255, 255, 255));
         insertButton.setText("Save");
         insertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,9 +161,9 @@ public class M_home_T_update extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(250, 239, 217));
+        cancelButton.setBackground(new java.awt.Color(173, 181, 189));
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(80, 60, 40));
+        cancelButton.setForeground(new java.awt.Color(33, 37, 41));
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,13 +195,13 @@ public class M_home_T_update extends javax.swing.JFrame {
         tempPanel.setLayout(tempPanelLayout);
         tempPanelLayout.setHorizontalGroup(
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(updateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(updateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
             .addGroup(tempPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addComponent(workdateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(workdateDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tempPanelLayout.createSequentialGroup()
                         .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

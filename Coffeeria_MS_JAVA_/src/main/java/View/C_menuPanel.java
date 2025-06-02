@@ -246,6 +246,8 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
         tempPanel.setBackground(new java.awt.Color(252, 252, 246));
         tempPanel.setPreferredSize(new java.awt.Dimension(1000, 750));
 
+        billPanel.setBackground(new java.awt.Color(245, 245, 220));
+
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         orderLabel.setText("ORDER");
 
@@ -271,26 +273,26 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
         orderTable.setPreferredSize(new java.awt.Dimension(452, 392));
         orderScrollPane.setViewportView(orderTable);
 
-        totalPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        totalPanel1.setBackground(new java.awt.Color(245, 245, 220));
 
         subLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         subLabel1.setText("Subtotal");
 
         sub_textLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        sub_textLabel1.setText("jLabel");
+        sub_textLabel1.setText("0 VND");
         sub_textLabel1.setPreferredSize(new java.awt.Dimension(44, 20));
 
         disLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         disLabel1.setText("Discount:");
 
         dis_textLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dis_textLabel1.setText("jLabel3");
+        dis_textLabel1.setText("0 VND");
 
         totalLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalLabel1.setText("TOTAL");
 
         total_textLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        total_textLabel1.setText("jLabel3");
+        total_textLabel1.setText("0 VND");
 
         javax.swing.GroupLayout totalPanel1Layout = new javax.swing.GroupLayout(totalPanel1);
         totalPanel1.setLayout(totalPanel1Layout);
@@ -358,6 +360,7 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
             }
         });
 
+        checkcodeButton.setBackground(new java.awt.Color(252, 252, 246));
         checkcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
         checkcodeButton.setPreferredSize(new java.awt.Dimension(40, 40));
         checkcodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -454,6 +457,7 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        menuPanel.setBackground(new java.awt.Color(252, 252, 246));
         menuScrollPane.setViewportView(menuPanel);
 
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
@@ -461,7 +465,7 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
         tempPanelLayout.setHorizontalGroup(
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tempPanelLayout.createSequentialGroup()
-                .addComponent(menuScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                .addComponent(menuScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(billPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

@@ -93,12 +93,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         searchLabel = new javax.swing.JLabel();
         search2Panel = new javax.swing.JPanel();
         searchTextField = new javax.swing.JTextField();
-        allTextField = new javax.swing.JTextField();
         menuLabel = new javax.swing.JLabel();
-        price1Panel = new javax.swing.JPanel();
-        priceLabel = new javax.swing.JLabel();
-        price2Panel = new javax.swing.JPanel();
-        priceTextField = new javax.swing.JTextField();
         action1Panel = new javax.swing.JPanel();
         actionLabel1 = new javax.swing.JLabel();
         action2Panel = new javax.swing.JPanel();
@@ -140,7 +135,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         }
 
         tempPanel.add(menuScrollPane);
-        menuScrollPane.setBounds(10, 222, 780, 520);
+        menuScrollPane.setBounds(10, 142, 780, 600);
 
         search1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
@@ -177,99 +172,31 @@ public class E_menuPanel extends javax.swing.JPanel {
             }
         });
 
-        allTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        allTextField.setForeground(new java.awt.Color(102, 102, 102));
-        allTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allTextFieldActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout search2PanelLayout = new javax.swing.GroupLayout(search2Panel);
         search2Panel.setLayout(search2PanelLayout);
         search2PanelLayout.setHorizontalGroup(
             search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search2PanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200))
+                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
         );
         search2PanelLayout.setVerticalGroup(
             search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search2PanelLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(allTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         tempPanel.add(search2Panel);
-        search2Panel.setBounds(20, 60, 570, 60);
+        search2Panel.setBounds(20, 60, 520, 60);
 
         menuLabel.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
         menuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuLabel.setText("menu Management");
         tempPanel.add(menuLabel);
         menuLabel.setBounds(0, 10, 800, 33);
-
-        price1Panel.setBackground(new java.awt.Color(252, 252, 246));
-
-        priceLabel.setBackground(new java.awt.Color(252, 252, 246));
-        priceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        priceLabel.setText("Price");
-
-        javax.swing.GroupLayout price1PanelLayout = new javax.swing.GroupLayout(price1Panel);
-        price1Panel.setLayout(price1PanelLayout);
-        price1PanelLayout.setHorizontalGroup(
-            price1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(price1PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        price1PanelLayout.setVerticalGroup(
-            price1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, price1PanelLayout.createSequentialGroup()
-                .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        tempPanel.add(price1Panel);
-        price1Panel.setBounds(640, 50, 50, 20);
-
-        price2Panel.setBackground(new java.awt.Color(252, 252, 246));
-        price2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        priceTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        priceTextField.setForeground(new java.awt.Color(102, 102, 102));
-        priceTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout price2PanelLayout = new javax.swing.GroupLayout(price2Panel);
-        price2Panel.setLayout(price2PanelLayout);
-        price2PanelLayout.setHorizontalGroup(
-            price2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(price2PanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        price2PanelLayout.setVerticalGroup(
-            price2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, price2PanelLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tempPanel.add(price2Panel);
-        price2Panel.setBounds(620, 60, 160, 60);
 
         action1Panel.setBackground(new java.awt.Color(252, 252, 246));
 
@@ -293,7 +220,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         );
 
         tempPanel.add(action1Panel);
-        action1Panel.setBounds(590, 130, 60, 20);
+        action1Panel.setBounds(590, 50, 60, 20);
 
         action2Panel.setBackground(new java.awt.Color(252, 252, 246));
         action2Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -360,7 +287,7 @@ public class E_menuPanel extends javax.swing.JPanel {
         );
 
         tempPanel.add(action2Panel);
-        action2Panel.setBounds(570, 140, 210, 60);
+        action2Panel.setBounds(570, 60, 210, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -418,14 +345,6 @@ public class E_menuPanel extends javax.swing.JPanel {
         insertFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_insertButtonActionPerformed
 
-    private void priceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceTextFieldActionPerformed
-
-    private void allTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_allTextFieldActionPerformed
-
     private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextFieldActionPerformed
@@ -449,7 +368,6 @@ public class E_menuPanel extends javax.swing.JPanel {
     private javax.swing.JPanel action1Panel;
     private javax.swing.JPanel action2Panel;
     private javax.swing.JLabel actionLabel1;
-    private javax.swing.JTextField allTextField;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton detailButton;
     private javax.swing.JButton insertButton;
@@ -457,10 +375,6 @@ public class E_menuPanel extends javax.swing.JPanel {
     private javax.swing.JLabel menuLabel;
     private javax.swing.JScrollPane menuScrollPane;
     private javax.swing.JTable menuTable;
-    private javax.swing.JPanel price1Panel;
-    private javax.swing.JPanel price2Panel;
-    private javax.swing.JLabel priceLabel;
-    private javax.swing.JTextField priceTextField;
     private javax.swing.JPanel search1Panel;
     private javax.swing.JPanel search2Panel;
     private javax.swing.JLabel searchLabel;

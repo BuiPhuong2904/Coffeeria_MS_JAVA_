@@ -140,7 +140,6 @@ public class M_employeePanel extends javax.swing.JPanel {
         searchLabel = new javax.swing.JLabel();
         search2Panel = new javax.swing.JPanel();
         searchTextField = new javax.swing.JTextField();
-        allTextField = new javax.swing.JTextField();
         voucherLabel = new javax.swing.JLabel();
         action1Panel = new javax.swing.JPanel();
         actionLabel1 = new javax.swing.JLabel();
@@ -205,32 +204,20 @@ public class M_employeePanel extends javax.swing.JPanel {
             }
         });
 
-        allTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        allTextField.setForeground(new java.awt.Color(102, 102, 102));
-        allTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allTextFieldActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout search2PanelLayout = new javax.swing.GroupLayout(search2Panel);
         search2Panel.setLayout(search2PanelLayout);
         search2PanelLayout.setHorizontalGroup(
             search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search2PanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(253, 253, 253))
+                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
         );
         search2PanelLayout.setVerticalGroup(
             search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search2PanelLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(search2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(allTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -354,10 +341,6 @@ public class M_employeePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextFieldActionPerformed
 
-    private void allTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_allTextFieldActionPerformed
-
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
         M_employee_insert employeeFrame = new M_employee_insert(this);
@@ -420,7 +403,6 @@ public class M_employeePanel extends javax.swing.JPanel {
     private javax.swing.JPanel action1Panel;
     private javax.swing.JPanel action2Panel;
     private javax.swing.JLabel actionLabel1;
-    private javax.swing.JTextField allTextField;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton detailButton;
     private javax.swing.JTable employeeTable;
