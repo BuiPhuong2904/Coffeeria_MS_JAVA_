@@ -73,12 +73,12 @@ public class C_menuPanel extends javax.swing.JPanel {
         enterLabel = new javax.swing.JLabel();
         entercodeTextField = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
-        menuScrollPane = new javax.swing.JScrollPane();
-        menuPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         menuLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
+        menuScrollPane = new javax.swing.JScrollPane();
+        menuPanel = new javax.swing.JPanel();
 
         tempPanel.setBackground(new java.awt.Color(252, 252, 246));
         tempPanel.setPreferredSize(new java.awt.Dimension(1000, 750));
@@ -242,8 +242,6 @@ public class C_menuPanel extends javax.swing.JPanel {
                 .addGap(7, 7, 7))
         );
 
-        menuScrollPane.setViewportView(menuPanel);
-
         topPanel.setBackground(new java.awt.Color(245, 245, 220));
 
         menuLabel.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
@@ -280,6 +278,8 @@ public class C_menuPanel extends javax.swing.JPanel {
                     .addComponent(nameLabel))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        menuScrollPane.setViewportView(menuPanel);
 
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
         tempPanel.setLayout(tempPanelLayout);
