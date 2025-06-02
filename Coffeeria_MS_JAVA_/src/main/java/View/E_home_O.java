@@ -1,16 +1,36 @@
 
 package View;
 
+import dao.KhachHangDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.text.DecimalFormat;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
+import model.KhachHang;
 import model.MonAn;
 import model.WrapLayout;
 
-public class E_home_O extends javax.swing.JFrame {
+public abstract class E_home_O extends javax.swing.JFrame implements addItemListener{
+    
     public E_home_O() {
         initComponents();
+        
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Name", "Price", "Quantity", "Total"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 2;
+            }
+        };
+        
+        orderTable.setModel(model);
+        
+        dis_textLabel.setText("0 VND");
         
         returnButton.setContentAreaFilled(false);
         returnButton.setBorderPainted(false);
@@ -18,12 +38,14 @@ public class E_home_O extends javax.swing.JFrame {
         
         loadMonAnToMenu();
         
+        addQuantityChangeListener();
+        
 //        orderFrame.refreshMenu(updatedDrinkList);
     }
     
     public void loadMonAnToMenu() {
-        MonAnDAO monAnDAO = new MonAnDAO(); // tạo DAO
-        List<MonAn> danhSachMonAn = monAnDAO.findAll(); // lấy danh sách món
+        MonAnDAO monAnDAO = new MonAnDAO();
+        List<MonAn> danhSachMonAn = monAnDAO.findAll(); 
 
         menuPanel.removeAll();
         menuPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 10, 10));
@@ -31,8 +53,10 @@ public class E_home_O extends javax.swing.JFrame {
 
         for (MonAn mon : danhSachMonAn) {
             itemPanel item = new itemPanel();
+            
+            item.setMonAn(mon);
+            item.setAddItemListener(this);
 
-            // Đặt dữ liệu
             item.setNameLabel(mon.getTenMon());
             item.setPriceLabel(mon.getGiaBan());
             item.setImage(mon.getImageIcon());
@@ -42,6 +66,155 @@ public class E_home_O extends javax.swing.JFrame {
 
         menuPanel.revalidate();
         menuPanel.repaint();
+    }
+    
+    @Override
+    public void onAddItem(MonAn monAn, int quantity) {
+        System.out.println("Đã thêm món: " + monAn.getTenMon() + ", số lượng: " + quantity);
+
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel(); 
+        removeEmptyRows(model);
+
+        boolean found = false;
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object tenMonObj = model.getValueAt(i, 0); 
+
+            if (tenMonObj != null && tenMonObj.toString().equals(monAn.getTenMon())) {
+                Object oldQtyObj = model.getValueAt(i, 2);
+                int oldQuantity = oldQtyObj != null ? Integer.parseInt(oldQtyObj.toString()) : 0;
+
+                int newQuantity = oldQuantity + quantity;
+                model.setValueAt(newQuantity, i, 2);
+
+                double newTotal = monAn.getGiaBan() * newQuantity;
+                model.setValueAt(newTotal, i, 3);
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            double total = monAn.getGiaBan() * quantity;
+            model.addRow(new Object[]{
+                monAn.getTenMon(),
+                monAn.getGiaBan(),
+                quantity,
+                total
+            });
+        }
+
+        updateSubTotalPrice();
+        
+        updateTotalPrice();
+
+    }
+    
+    private void addQuantityChangeListener() {
+        orderTable.getModel().addTableModelListener(e -> {
+            if (e.getType() == TableModelEvent.UPDATE) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+
+                if (column == 2) { 
+                    DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+
+                    try {
+                        int quantity = Integer.parseInt(model.getValueAt(row, 2).toString());
+                        if (quantity == 0) {
+                            // Xóa dòng nếu số lượng = 0
+                            model.removeRow(row);
+                        } else if (quantity > 0) {
+                            double price = Double.parseDouble(model.getValueAt(row, 1).toString());
+                            double total = price * quantity;
+                            model.setValueAt(total, row, 3);
+                        } else {
+                            // Số lượng âm không hợp lệ, báo lỗi và đặt lại 1
+                            JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn hoặc bằng 0.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            model.setValueAt(1, row, 2);
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    updateSubTotalPrice();
+                    updateTotalPrice();
+                }
+            }
+        });
+    }
+
+    private void updateSubTotalPrice() {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        double sum = 0;
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object value = model.getValueAt(i, 3); 
+            if (value != null) {
+                if (value instanceof Number) {
+                    sum += ((Number) value).doubleValue();
+                } else {
+                    try {
+                        sum += Double.parseDouble(value.toString());
+                    } catch (NumberFormatException e) {
+
+                        System.err.println("Lỗi chuyển dữ liệu sang số: " + value);
+                    }
+                }
+            }
+        }
+
+//        sub_textLabel.setText(String.format("%.0f VNĐ", sum));
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        sub_textLabel.setText(formatter.format(sum) + " VND");
+
+    }
+    
+    private void updateTotalPrice() {
+        double subTotal = 0;
+        double discount = 0;
+
+        try {
+            String subText = sub_textLabel.getText().replace(" VND", "").replace(",", "").replace(".", "").trim();
+            subTotal = Double.parseDouble(subText);
+
+        } catch (NumberFormatException e) {
+            System.err.println("Lỗi đọc tổng tiền trước: " + e.getMessage());
+        }
+
+        try {
+            String disText = dis_textLabel.getText().replace(" VND", "").replace(",", "").replace(".", "").trim();
+            if (disText.isEmpty()) {
+                discount = 0;
+            } else {
+                discount = Double.parseDouble(disText);
+            }
+        } catch (NumberFormatException e) {
+            discount = 0;
+            System.err.println("Lỗi đọc giảm giá: " + e.getMessage());
+        }
+
+        double total = subTotal - discount;
+
+        if (total < 0) total = 0;
+
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        total_textLabel.setText(formatter.format(total) + " VND");
+    }
+
+    private void removeEmptyRows(DefaultTableModel model) {
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Object tenMonObj = model.getValueAt(i, 0);
+            Object quantityObj = model.getValueAt(i, 2);
+
+            boolean isEmptyRow = (tenMonObj == null || tenMonObj.toString().trim().isEmpty())
+                              && (quantityObj == null || quantityObj.toString().trim().isEmpty());
+
+            if (isEmptyRow) {
+                model.removeRow(i);
+            }
+        }
     }
 
     /**
@@ -152,6 +325,11 @@ public class E_home_O extends javax.swing.JFrame {
 
         checkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
         checkButton.setPreferredSize(new java.awt.Dimension(40, 40));
+        checkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkButtonActionPerformed(evt);
+            }
+        });
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -233,11 +411,11 @@ public class E_home_O extends javax.swing.JFrame {
                     .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(totalLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(disLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 17, Short.MAX_VALUE)
-                .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sub_textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total_textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dis_textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dis_textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(total_textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(sub_textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         totalPanelLayout.setVerticalGroup(
@@ -263,26 +441,24 @@ public class E_home_O extends javax.swing.JFrame {
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(conPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
-                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(orderPanelLayout.createSequentialGroup()
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(orderScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(orderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, orderPanelLayout.createSequentialGroup()
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(orderLabel)
+                            .addGroup(orderPanelLayout.createSequentialGroup()
                                 .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(orderPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(orderLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,33 +581,23 @@ public class E_home_O extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(E_home_O.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(E_home_O.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(E_home_O.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(E_home_O.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
+    private void checkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtonActionPerformed
+        // TODO add your handling code here:
+        String phone = phoneTextField.getText().trim();
+        if (phone.isEmpty()) {
+            nameTextField.setText("Khách lẻ");
+            return;
+        }
+
+        KhachHangDAO khDao = new KhachHangDAO();
+        KhachHang kh = khDao.findByPhone(phone);
+
+        if (kh != null) {
+            nameTextField.setText(kh.getHoten());
+        } else {
+            nameTextField.setText("Khách lẻ");
+        }
+    }//GEN-LAST:event_checkButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

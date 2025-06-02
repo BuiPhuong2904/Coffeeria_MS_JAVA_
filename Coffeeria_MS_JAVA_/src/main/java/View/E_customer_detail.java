@@ -25,14 +25,16 @@ public class E_customer_detail extends javax.swing.JFrame {
         birthTextField.setText(
             kh.getNgaysinh() != null ? new SimpleDateFormat("dd/MM/yyyy").format(kh.getNgaysinh()) : ""
         );
-        pointTextField.setText(kh.getSdt());
-        levelTextField.setText(String.valueOf(kh.getDiemtichluy()));
-        acc_idTextField.setText(kh.getLoaitv());
+        phonelTextField.setText(kh.getSdt());
+        pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
+        levelTextField.setText(kh.getLoaitv());
+        acc_idTextField.setText(kh.getMatk());
 
         // Không cho phép chỉnh sửa các trường
         idTextField.setEditable(false);
         nameTextField.setEditable(false);
         birthTextField.setEditable(false);
+        phonelTextField.setEditable(false);
         pointTextField.setEditable(false);
         levelTextField.setEditable(false);
         acc_idTextField.setEditable(false);

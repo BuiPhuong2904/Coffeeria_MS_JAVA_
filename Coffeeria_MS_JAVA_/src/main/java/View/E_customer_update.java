@@ -43,6 +43,8 @@ public class E_customer_update extends javax.swing.JFrame {
         pointTextField.setText(String.valueOf(kh.getDiemtichluy()));
 
         levelTextField.setText(kh.getLoaitv() != null ? kh.getLoaitv() : "");
+        
+        acc_idTextField.setText(kh.getMatk());
     }
 
     /**
@@ -63,16 +65,16 @@ public class E_customer_update extends javax.swing.JFrame {
         birthLabel = new javax.swing.JLabel();
         birthTextField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
-        phoneLabel = new javax.swing.JLabel();
         phoneTextField = new javax.swing.JTextField();
-        pointLabel = new javax.swing.JLabel();
+        phoneLabel = new javax.swing.JLabel();
         pointTextField = new javax.swing.JTextField();
+        pointLabel = new javax.swing.JLabel();
+        levelTextField = new javax.swing.JTextField();
         acc_idLabel = new javax.swing.JLabel();
         temp1Panel = new javax.swing.JPanel();
         insertButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        levelTextField = new javax.swing.JTextField();
+        acc_idTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -120,17 +122,6 @@ public class E_customer_update extends javax.swing.JFrame {
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         emailLabel.setText("Phone number:");
 
-        emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        emailTextField.setForeground(new java.awt.Color(102, 102, 102));
-        emailTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTextFieldActionPerformed(evt);
-            }
-        });
-
-        phoneLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        phoneLabel.setText("Point:");
-
         phoneTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         phoneTextField.setForeground(new java.awt.Color(102, 102, 102));
         phoneTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -139,14 +130,25 @@ public class E_customer_update extends javax.swing.JFrame {
             }
         });
 
-        pointLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        pointLabel.setText("Level:");
+        phoneLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        phoneLabel.setText("Point:");
 
         pointTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pointTextField.setForeground(new java.awt.Color(102, 102, 102));
         pointTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pointTextFieldActionPerformed(evt);
+            }
+        });
+
+        pointLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        pointLabel.setText("Level:");
+
+        levelTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        levelTextField.setForeground(new java.awt.Color(102, 102, 102));
+        levelTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                levelTextFieldActionPerformed(evt);
             }
         });
 
@@ -195,11 +197,11 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        levelTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        levelTextField.setForeground(new java.awt.Color(102, 102, 102));
-        levelTextField.addActionListener(new java.awt.event.ActionListener() {
+        acc_idTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        acc_idTextField.setForeground(new java.awt.Color(102, 102, 102));
+        acc_idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                levelTextFieldActionPerformed(evt);
+                acc_idTextFieldActionPerformed(evt);
             }
         });
 
@@ -221,13 +223,13 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(acc_idLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                    .addComponent(phoneTextField)
+                    .addComponent(phoneTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                     .addComponent(pointTextField)
+                    .addComponent(levelTextField)
                     .addComponent(nameTextField)
                     .addComponent(idTextField)
                     .addComponent(birthTextField)
-                    .addComponent(levelTextField))
+                    .addComponent(acc_idTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tempPanelLayout.setVerticalGroup(
@@ -249,20 +251,20 @@ public class E_customer_update extends javax.swing.JFrame {
                     .addComponent(birthLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pointTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pointTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pointLabel))
                 .addGap(18, 18, 18)
                 .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acc_idLabel)
-                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acc_idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(temp1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -294,10 +296,6 @@ public class E_customer_update extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_birthTextFieldActionPerformed
 
-    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailTextFieldActionPerformed
-
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
@@ -306,17 +304,21 @@ public class E_customer_update extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pointTextFieldActionPerformed
 
+    private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_levelTextFieldActionPerformed
+
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         String makh = idTextField.getText();
         String hoten = nameTextField.getText();
         String ngaysinhStr = birthTextField.getText();
-        String email = emailTextField.getText(); 
         String sdt = phoneTextField.getText();
         String diemtichluy = pointTextField.getText(); 
-        String loaitv = levelTextField.getText();      
+        String loaitv = levelTextField.getText();
+        String matk = acc_idTextField.getText(); 
 
         KhachHangController controller = new KhachHangController(this, customerPanel);
-        controller.handleUpdate(makh, hoten, ngaysinhStr, email, sdt, diemtichluy, loaitv, customerPanel::loadAll);
+        controller.handleUpdate(makh, hoten, ngaysinhStr, sdt, diemtichluy, loaitv, matk, customerPanel::loadAll);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -326,9 +328,9 @@ public class E_customer_update extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed
+    private void acc_idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acc_idTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_levelTextFieldActionPerformed
+    }//GEN-LAST:event_acc_idTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,11 +363,11 @@ public class E_customer_update extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_idLabel;
+    private javax.swing.JTextField acc_idTextField;
     private javax.swing.JLabel birthLabel;
     private javax.swing.JTextField birthTextField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton insertButton;

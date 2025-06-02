@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
 
 /**
@@ -160,11 +157,10 @@ public class E_homePanel extends javax.swing.JPanel {
 
     private void takeoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_takeoButtonActionPerformed
         // TODO add your handling code here:
-        E_home_O takeorderFrame = new E_home_O();
+        E_home_O takeorderFrame = new E_home_O() {};
         takeorderFrame.setVisible(true);
         takeorderFrame.pack();
         takeorderFrame.setLocationRelativeTo(null);
-//        this.dispose();
     }//GEN-LAST:event_takeoButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
@@ -173,7 +169,6 @@ public class E_homePanel extends javax.swing.JPanel {
         accFrame.setVisible(true);
         accFrame.pack();
         accFrame.setLocationRelativeTo(null);
-//        this.dispose();
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void revenueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueButtonActionPerformed
@@ -182,7 +177,6 @@ public class E_homePanel extends javax.swing.JPanel {
         revenueFrame.setVisible(true);
         revenueFrame.pack();
         revenueFrame.setLocationRelativeTo(null);
-//        this.dispose()
     }//GEN-LAST:event_revenueButtonActionPerformed
 
     private void timeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeButtonActionPerformed
@@ -191,7 +185,6 @@ public class E_homePanel extends javax.swing.JPanel {
         timekeepingFrame.setVisible(true);
         timekeepingFrame.pack();
         timekeepingFrame.setLocationRelativeTo(null);
-//        this.dispose();
     }//GEN-LAST:event_timeButtonActionPerformed
 
     private void im_exButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_im_exButtonActionPerformed
@@ -221,7 +214,4 @@ public class E_homePanel extends javax.swing.JPanel {
     private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

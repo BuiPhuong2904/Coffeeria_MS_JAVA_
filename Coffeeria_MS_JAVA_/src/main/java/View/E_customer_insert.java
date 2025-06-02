@@ -279,13 +279,13 @@ public class E_customer_insert extends javax.swing.JFrame {
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         String hoten = nameTextField.getText();
         String ngaysinhStr = birthTextField.getText();
-        String email = phonelTextField.getText();
         String sdt = pointTextField.getText();
         double diemtichluy = 0.0;
         String loaitv = "Bronze";
+        String matk = acc_idTextField.getText();
         
         KhachHangController controller = new KhachHangController(this, customerPanel);
-        controller.insertKhachHang(hoten, ngaysinhStr, email, sdt, String.valueOf(diemtichluy), loaitv);
+        controller.insertKhachHang(hoten, ngaysinhStr, sdt, String.valueOf(diemtichluy), loaitv, matk);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed

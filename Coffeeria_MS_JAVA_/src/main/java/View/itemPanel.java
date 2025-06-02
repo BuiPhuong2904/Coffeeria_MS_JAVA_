@@ -8,6 +8,13 @@ import model.MonAn;
 
 
 public class itemPanel extends javax.swing.JPanel {
+    
+    private addItemListener addItemListener;
+    private MonAn monAn;
+    
+    public void setAddItemListener(addItemListener listener) {
+        this.addItemListener = listener;
+    }
 
     public itemPanel() {
         initComponents();
@@ -15,6 +22,11 @@ public class itemPanel extends javax.swing.JPanel {
         this.setPreferredSize(new Dimension(150, 250));
     }
     
+    public void setMonAn(MonAn mon) {
+        this.monAn = mon;
+        setData(mon);
+    }
+        
     public void setData(MonAn mon) {
         setNameLabel(mon.getTenMon());
         setPriceLabel(mon.getGiaBan());
@@ -146,6 +158,12 @@ public class itemPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
+        if (addItemListener != null && monAn != null) {
+            int quantity = (int) quantitySpinner.getValue();
+            if (quantity > 0) {
+                addItemListener.onAddItem(monAn, quantity);
+            }
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
 

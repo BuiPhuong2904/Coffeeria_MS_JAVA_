@@ -113,4 +113,30 @@ public class KhachHangDAO {
         }
         return list;
     }
+    
+    public KhachHang findByPhone(String phone) {
+        String sql = "SELECT * FROM KHACHHANG WHERE SDT = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new KhachHang(
+                    rs.getString("MAKH"),
+                    rs.getString("HOTEN"),
+                    rs.getDate("NGAYSINH"),
+                    rs.getString("SDT"),
+                    rs.getDouble("DIEMTICHLUY"),
+                    rs.getString("LOAITV"),
+                    rs.getString("MATK")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
