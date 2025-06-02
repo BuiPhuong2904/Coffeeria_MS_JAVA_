@@ -18,7 +18,7 @@ public class E_billPanel extends javax.swing.JPanel {
     private final HoaDonDAO hoaDonDAO = new HoaDonDAO();
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
-    public void loadAll() {
+    private void loadAll() {
         List<HoaDon> list = hoaDonDAO.findAllHoaDon();
 
         DefaultTableModel model = (DefaultTableModel) billTable.getModel();
@@ -68,11 +68,7 @@ public class E_billPanel extends javax.swing.JPanel {
         initComponents();
         
         loadAll();
-        
-        insertButton.setContentAreaFilled(false);
-        insertButton.setBorderPainted(false);
-        insertButton.setFocusPainted(false);
-        
+             
         updateButton.setContentAreaFilled(false);
         updateButton.setBorderPainted(false);
         updateButton.setFocusPainted(false);
@@ -315,10 +311,6 @@ public class E_billPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_allTextFieldActionPerformed
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         // TODO add your handling code here:
-//        E_bill_insert billFrame = new E_bill_insert();
-//        billFrame.setVisible(true);
-//        billFrame.pack();
-//        billFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
