@@ -10,10 +10,6 @@ public class E_billPanel extends javax.swing.JPanel {
     public E_billPanel() {
         initComponents();
         
-        insertButton.setContentAreaFilled(false);
-        insertButton.setBorderPainted(false);
-        insertButton.setFocusPainted(false);
-        
         updateButton.setContentAreaFilled(false);
         updateButton.setBorderPainted(false);
         updateButton.setFocusPainted(false);
@@ -51,7 +47,6 @@ public class E_billPanel extends javax.swing.JPanel {
         actionLabel1 = new javax.swing.JLabel();
         action2Panel = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        insertButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         detailButton = new javax.swing.JButton();
@@ -63,15 +58,16 @@ public class E_billPanel extends javax.swing.JPanel {
         billTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         billTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Created date", "Employee", "Customer", "Total"
+                "ID", "Subtotal", "Discount", "Total", "Payment", "Created date", "Note", "Employee ID", "Customer ID", "Discount ID"
             }
         ));
+        billTable.setRowHeight(30);
         billScrollPane.setViewportView(billTable);
 
         tempPanel.add(billScrollPane);
@@ -179,13 +175,6 @@ public class E_billPanel extends javax.swing.JPanel {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        insertButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/add_30.png"))); // NOI18N
-        insertButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertButtonActionPerformed(evt);
-            }
-        });
-
         updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/update30.png"))); // NOI18N
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,8 +202,6 @@ public class E_billPanel extends javax.swing.JPanel {
             action2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(action2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(insertButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +209,7 @@ public class E_billPanel extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(detailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         action2PanelLayout.setVerticalGroup(
             action2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,13 +220,12 @@ public class E_billPanel extends javax.swing.JPanel {
                     .addGroup(action2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                         .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(insertButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap())
         );
 
         tempPanel.add(action2Panel);
-        action2Panel.setBounds(570, 60, 210, 60);
+        action2Panel.setBounds(570, 60, 170, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -264,15 +250,6 @@ public class E_billPanel extends javax.swing.JPanel {
     private void allTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_allTextFieldActionPerformed
-
-    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        // TODO add your handling code here:
-        E_bill_insert billFrame = new E_bill_insert();
-        billFrame.setVisible(true);
-        billFrame.pack();
-        billFrame.setLocationRelativeTo(null);
-        //        this.dispose();
-    }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
@@ -305,7 +282,6 @@ public class E_billPanel extends javax.swing.JPanel {
     private javax.swing.JTable billTable;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton detailButton;
-    private javax.swing.JButton insertButton;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel search1Panel;
     private javax.swing.JPanel search2Panel;
