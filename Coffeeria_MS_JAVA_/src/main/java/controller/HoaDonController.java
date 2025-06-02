@@ -83,5 +83,9 @@ public class HoaDonController {
     public Map<String, Double> getDoanhThuTheoThang() {
         return hoaDonDAO.getDoanhThuTheoThang();
     }
+    
+    public Map<String, Integer> getTiLeDanhMucMonAn() {
+        return hoaDonDAO.getTiLeDanhMucMonAn();
+    }
 
 }

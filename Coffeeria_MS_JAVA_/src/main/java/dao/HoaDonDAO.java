@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -360,6 +361,32 @@ public class HoaDonDAO {
 
         return doanhThuMap;
     }
+    
+    public Map<String, Integer> getTiLeDanhMucMonAn() {
+        Map<String, Integer> tiLeMap = new HashMap<>();
+
+        String sql = "SELECT MA.DANHMUC, SUM(CT.SOLUONG) AS TONG_SOLUONG " +
+                     "FROM CHITIET_HD CT " +
+                     "JOIN MONAN MA ON CT.MAMON = MA.MAMON " +
+                     "GROUP BY MA.DANHMUC";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                String danhMuc = rs.getString("DANHMUC");
+                int soLuong = rs.getInt("TONG_SOLUONG");
+                tiLeMap.put(danhMuc, soLuong);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tiLeMap;
+    }
+
 
     public List<HoaDon> getHoaDonByMaTK(String maTK) {
         List<HoaDon> list = new ArrayList<>();

@@ -8,8 +8,10 @@ import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -26,6 +28,7 @@ public class E_home_R extends javax.swing.JFrame {
         returnButton.setFocusPainted(false);
 
         veBieuDoDoanhThuTheoThang();
+        veBieuDoTiLeDanhMuc();
     }
          
     public void veBieuDoDoanhThuTheoThang() {
@@ -47,19 +50,59 @@ public class E_home_R extends javax.swing.JFrame {
                 PlotOrientation.VERTICAL,
                 true, true, false
         );
+        
+        lineChart.setBackgroundPaint(Color.WHITE); 
+        lineChart.getPlot().setBackgroundPaint(new Color(220, 220, 220));
 
         ChartPanel chartPanel = new ChartPanel(lineChart);
         chartPanel.setPreferredSize(chartPanelContainer.getSize());
         chartPanelContainer.removeAll();
-        chartPanelContainer.setLayout(new BorderLayout()); // thêm dòng này nếu cần
+        chartPanelContainer.setLayout(new BorderLayout()); 
         chartPanelContainer.add(chartPanel, BorderLayout.CENTER);
-
-//        chartPanelContainer.add(chartPanel);
         chartPanelContainer.revalidate();
         chartPanelContainer.repaint();
     }
+    
+    public void veBieuDoTiLeDanhMuc() {
+        HoaDonController controller = new HoaDonController();
+        Map<String, Integer> tiLeDanhMuc = controller.getTiLeDanhMucMonAn();
+
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        for (Map.Entry<String, Integer> entry : tiLeDanhMuc.entrySet()) {
+            String danhMuc = entry.getKey();
+            int soLuong = entry.getValue();
+            dataset.setValue(danhMuc, soLuong);
+        }
+
+        JFreeChart pieChart = ChartFactory.createPieChart(
+                "Tỉ lệ danh mục món ăn được mua",
+                dataset,
+                true, true, false
+        );
+
+        PiePlot plot = (PiePlot) pieChart.getPlot();
+        plot.setCircular(true);
+        plot.setLabelBackgroundPaint(new Color(255, 255, 255));
+        
+        pieChart.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(new Color(255, 255, 224)); 
 
 
+        // 🟢 THÊM DÒNG SAU ĐỂ HIỂN THỊ %:
+        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
+            "{0}: {1} món ({2})"  // {0}=danh mục, {1}=số lượng, {2}=phần trăm
+        ));
+
+        ChartPanel chartPanel = new ChartPanel(pieChart);
+        chartPanel.setPreferredSize(chartPanelContainer1.getSize());
+
+        chartPanelContainer1.removeAll();
+        chartPanelContainer1.setLayout(new BorderLayout());
+        chartPanelContainer1.add(chartPanel, BorderLayout.CENTER);
+        chartPanelContainer1.revalidate();
+        chartPanelContainer1.repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,12 +115,17 @@ public class E_home_R extends javax.swing.JFrame {
 
         topPanel = new javax.swing.JPanel();
         returnButton = new javax.swing.JButton();
+        chartPanelContainer1 = new javax.swing.JPanel();
+        tempPanel = new javax.swing.JPanel();
+        monthLabel = new javax.swing.JLabel();
         chartPanelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(252, 252, 246));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        topPanel.setBackground(new java.awt.Color(153, 255, 204));
+        topPanel.setBackground(new java.awt.Color(207, 178, 145));
 
         returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/return20.png"))); // NOI18N
         returnButton.setFocusPainted(false);
@@ -105,6 +153,32 @@ public class E_home_R extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(topPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        chartPanelContainer1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout chartPanelContainer1Layout = new javax.swing.GroupLayout(chartPanelContainer1);
+        chartPanelContainer1.setLayout(chartPanelContainer1Layout);
+        chartPanelContainer1Layout.setHorizontalGroup(
+            chartPanelContainer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 499, Short.MAX_VALUE)
+        );
+        chartPanelContainer1Layout.setVerticalGroup(
+            chartPanelContainer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(chartPanelContainer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 48, -1, 232));
+
+        tempPanel.setBackground(new java.awt.Color(252, 252, 246));
+
+        monthLabel.setFont(new java.awt.Font("Microsoft Tai Le", 1, 70)); // NOI18N
+        monthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        monthLabel.setText("<html><div align='center'>THỐNG KÊ</div></html>");
+        monthLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        chartPanelContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout chartPanelContainerLayout = new javax.swing.GroupLayout(chartPanelContainer);
         chartPanelContainer.setLayout(chartPanelContainerLayout);
         chartPanelContainerLayout.setHorizontalGroup(
@@ -116,24 +190,30 @@ public class E_home_R extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
+        tempPanel.setLayout(tempPanelLayout);
+        tempPanelLayout.setHorizontalGroup(
+            tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempPanelLayout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        tempPanelLayout.setVerticalGroup(
+            tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tempPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(tempPanelLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
-                .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+
+        getContentPane().add(tempPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,7 +263,10 @@ public class E_home_R extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartPanelContainer;
+    private javax.swing.JPanel chartPanelContainer1;
+    private javax.swing.JLabel monthLabel;
     private javax.swing.JButton returnButton;
+    private javax.swing.JPanel tempPanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }
