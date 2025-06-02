@@ -10,6 +10,7 @@ import model.TaiKhoan;
  */
 public class E_homePanel extends javax.swing.JPanel {
 
+    private TaiKhoan taiKhoan;
     /**
      * Creates new form E_homePanel
      */
@@ -17,11 +18,11 @@ public class E_homePanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    private TaiKhoan taiKhoan;
-
-    public E_homePanel(TaiKhoan taiKhoan) {
-        this.taiKhoan = taiKhoan;
-        initComponents();
+    
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+        
+        System.out.println("setTaiKhoan được gọi với: " + (tk != null ? tk.getEmail() : "null"));
     }
 
     /**
@@ -175,6 +176,7 @@ public class E_homePanel extends javax.swing.JPanel {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("profileButton clicked, taiKhoan: " + (taiKhoan != null ? taiKhoan.getEmail() : "null"));
         if (taiKhoan != null) {
             String matk = taiKhoan.getMaTK();
             E_home_A accFrame = new E_home_A(matk);

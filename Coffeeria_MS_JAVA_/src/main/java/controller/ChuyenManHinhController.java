@@ -16,6 +16,7 @@ import View.M_employeePanel;
 import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import model.TaiKhoan;
 /**
  *
  * @author nttma
@@ -25,6 +26,12 @@ public class ChuyenManHinhController {
     private String kindSelected = "";
     
     private List<DanhMucBean> listItem = null;
+    
+    private TaiKhoan taiKhoan;
+
+    public void setTaiKhoan(TaiKhoan tk) {
+        this.taiKhoan = tk;
+    }
 
     public ChuyenManHinhController(JPanel jpnRoot) {
         this.root = jpnRoot;
@@ -37,7 +44,11 @@ public class ChuyenManHinhController {
         
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new E_homePanel());
+        
+        E_homePanel homePanel = new E_homePanel();
+        homePanel.setTaiKhoan(taiKhoan); 
+        root.add(homePanel);
+        
         root.validate();
         root.repaint();
     }
@@ -68,6 +79,7 @@ public class ChuyenManHinhController {
             switch(kind) {
                 case "Home":
                     node = new E_homePanel();
+                    ((E_homePanel)node).setTaiKhoan(taiKhoan);
                     break;
                 case "Menu":
                     node = new E_menuPanel();
@@ -89,6 +101,7 @@ public class ChuyenManHinhController {
                     break;
                 default:
                     node = new E_homePanel();
+                    ((E_homePanel)node).setTaiKhoan(taiKhoan);
                     break;
                  
             }
