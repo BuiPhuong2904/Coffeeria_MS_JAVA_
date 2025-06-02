@@ -1,11 +1,14 @@
 
 package View;
 
+import controller.HoaDonController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -22,32 +25,40 @@ public class E_home_R extends javax.swing.JFrame {
         returnButton.setBorderPainted(false);
         returnButton.setFocusPainted(false);
 
-        createLineChart();
+        veBieuDoDoanhThuTheoThang();
     }
          
-    private void createLineChart() {
+    public void veBieuDoDoanhThuTheoThang() {
+        HoaDonController hoaDonController = new HoaDonController();
+        Map<String, Double> doanhThuTheoThang = hoaDonController.getDoanhThuTheoThang();
+
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(10000000, "Revenue", "January");
-        dataset.addValue(12500000, "Revenue", "February");
-        dataset.addValue(14000000, "Revenue", "March");
-        dataset.addValue(18000000, "Revenue", "April");
-        dataset.addValue(16000000, "Revenue", "May");
-        
-        JFreeChart chart = ChartFactory.createLineChart(
-                "Monthly Revenue Statistics",
-                "Month",
-                "Revenue (VND)",
-                dataset
+
+        for (Map.Entry<String, Double> entry : doanhThuTheoThang.entrySet()) {
+            String thang = entry.getKey();         // "05-2025"
+            double doanhThu = entry.getValue();    // 1_500_000
+            dataset.addValue(doanhThu, "Doanh thu", thang);
+        }
+
+        JFreeChart lineChart = ChartFactory.createLineChart(
+                "Biểu đồ doanh thu theo tháng",
+                "Tháng", "Doanh thu (VND)",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false
         );
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(chartPanelContainer.getSize()); 
+        ChartPanel chartPanel = new ChartPanel(lineChart);
+        chartPanel.setPreferredSize(chartPanelContainer.getSize());
+        chartPanelContainer.removeAll();
+        chartPanelContainer.setLayout(new BorderLayout()); // thêm dòng này nếu cần
+        chartPanelContainer.add(chartPanel, BorderLayout.CENTER);
 
-        chartPanelContainer.removeAll();  
-        chartPanelContainer.setLayout(new java.awt.BorderLayout());
-        chartPanelContainer.add(chartPanel, java.awt.BorderLayout.CENTER);
-        chartPanelContainer.validate(); 
+//        chartPanelContainer.add(chartPanel);
+        chartPanelContainer.revalidate();
+        chartPanelContainer.repaint();
     }
+
 
 
     /**
@@ -62,7 +73,6 @@ public class E_home_R extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         returnButton = new javax.swing.JButton();
         chartPanelContainer = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -99,36 +109,30 @@ public class E_home_R extends javax.swing.JFrame {
         chartPanelContainer.setLayout(chartPanelContainerLayout);
         chartPanelContainerLayout.setHorizontalGroup(
             chartPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
         chartPanelContainerLayout.setVerticalGroup(
             chartPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "Month", "Year" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                 .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -145,41 +149,40 @@ public class E_home_R extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_home_R().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new E_home_R().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartPanelContainer;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton returnButton;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables

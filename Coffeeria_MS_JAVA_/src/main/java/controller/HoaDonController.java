@@ -14,6 +14,7 @@ import model.CT_HoaDon;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class HoaDonController {
     private HoaDonDAO hoaDonDAO = new HoaDonDAO();
@@ -78,4 +79,9 @@ public class HoaDonController {
             }
         }
     }
+    
+    public Map<String, Double> getDoanhThuTheoThang() {
+        return hoaDonDAO.getDoanhThuTheoThang();
+    }
+
 }
