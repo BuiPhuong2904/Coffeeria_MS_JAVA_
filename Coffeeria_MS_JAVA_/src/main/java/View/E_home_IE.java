@@ -122,10 +122,10 @@ public class E_home_IE extends javax.swing.JFrame {
         im_exTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         im_exTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Transaction date", "Type", "Employee ID", "Note"
+                "ID", "Transaction date", "Type", "Total", "Employee ID", "Note"
             }
         ));
         im_exTable.setRowHeight(30);
