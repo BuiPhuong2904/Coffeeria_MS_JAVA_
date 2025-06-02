@@ -18,7 +18,7 @@ public class E_billPanel extends javax.swing.JPanel {
     private final HoaDonDAO hoaDonDAO = new HoaDonDAO();
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
-    private void loadAll() {
+    public void loadAll() {
         List<HoaDon> list = hoaDonDAO.findAllHoaDon();
 
         DefaultTableModel model = (DefaultTableModel) billTable.getModel();
