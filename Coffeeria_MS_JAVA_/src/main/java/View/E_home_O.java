@@ -245,6 +245,9 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         dis_textLabel = new javax.swing.JLabel();
         totalLabel = new javax.swing.JLabel();
         total_textLabel = new javax.swing.JLabel();
+        checkcodeButton = new javax.swing.JButton();
+        enterLabel = new javax.swing.JLabel();
+        entercodeTextField = new javax.swing.JTextField();
         orderLabel1 = new javax.swing.JLabel();
         menuScrollPane = new javax.swing.JScrollPane();
         menuPanel = new javax.swing.JPanel();
@@ -436,6 +439,35 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                 .addContainerGap())
         );
 
+        checkcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
+        checkcodeButton.setPreferredSize(new java.awt.Dimension(40, 40));
+        checkcodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkcodeButtonActionPerformed(evt);
+            }
+        });
+
+        enterLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enterLabel.setText("Enter discount code:");
+
+        entercodeTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        entercodeTextField.setForeground(new java.awt.Color(102, 102, 102));
+        entercodeTextField.setText("Discount code");
+        entercodeTextField.setPreferredSize(new java.awt.Dimension(123, 40));
+        entercodeTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                entercodeTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                entercodeTextFieldFocusLost(evt);
+            }
+        });
+        entercodeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entercodeTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
@@ -444,7 +476,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
             .addGroup(orderPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(orderScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                    .addComponent(orderScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -456,8 +488,14 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(enterLabel)
+                                .addGap(5, 5, 5)
+                                .addComponent(entercodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         orderPanelLayout.setVerticalGroup(
@@ -472,8 +510,15 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                         .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(orderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(enterLabel))
+                    .addComponent(entercodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(conPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,13 +644,54 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         }
     }//GEN-LAST:event_checkButtonActionPerformed
 
+    private void entercodeTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusGained
+        // TODO add your handling code here:
+        if (entercodeTextField.getText().equals("Discount code")) {
+            entercodeTextField.setText("");
+            entercodeTextField.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_entercodeTextFieldFocusGained
+
+    private void entercodeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_entercodeTextFieldFocusLost
+        // TODO add your handling code here:
+        if (entercodeTextField.getText().equals("")) {
+            entercodeTextField.setText("Discount code");
+            entercodeTextField.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_entercodeTextFieldFocusLost
+
+    private void entercodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entercodeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entercodeTextFieldActionPerformed
+
+    private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed
+        // TODO add your handling code here:
+        String phone = phoneTextField.getText().trim();
+        if (phone.isEmpty()) {
+            nameTextField.setText("Khách lẻ");
+            return;
+        }
+
+        KhachHangDAO khDao = new KhachHangDAO();
+        KhachHang kh = khDao.findByPhone(phone);
+
+        if (kh != null) {
+            nameTextField.setText(kh.getHoten());
+        } else {
+            nameTextField.setText("Khách lẻ");
+        }
+    }//GEN-LAST:event_checkcodeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkButton;
+    private javax.swing.JButton checkcodeButton;
     private javax.swing.JPanel conPanel;
     private javax.swing.JButton confirmButton;
     private javax.swing.JLabel disLabel;
     private javax.swing.JLabel dis_textLabel;
+    private javax.swing.JLabel enterLabel;
+    private javax.swing.JTextField entercodeTextField;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JScrollPane menuScrollPane;
     private javax.swing.JTextField nameTextField;

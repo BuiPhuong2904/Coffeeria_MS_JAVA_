@@ -81,6 +81,7 @@ public class C_menuPanel extends javax.swing.JPanel {
         enterLabel = new javax.swing.JLabel();
         entercodeTextField = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
+        checkcodeButton = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
         menuLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
@@ -204,6 +205,14 @@ public class C_menuPanel extends javax.swing.JPanel {
             }
         });
 
+        checkcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/check35.png"))); // NOI18N
+        checkcodeButton.setPreferredSize(new java.awt.Dimension(40, 40));
+        checkcodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkcodeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout billPanelLayout = new javax.swing.GroupLayout(billPanel);
         billPanel.setLayout(billPanelLayout);
         billPanelLayout.setHorizontalGroup(
@@ -222,15 +231,19 @@ public class C_menuPanel extends javax.swing.JPanel {
                             .addComponent(orderScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(billPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(enterLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(entercodeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
-            .addGroup(billPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(billPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(billPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(enterLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(entercodeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(billPanelLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         billPanelLayout.setVerticalGroup(
             billPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,11 +251,14 @@ public class C_menuPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(orderLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(billPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterLabel)
-                    .addComponent(entercodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(billPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(billPanelLayout.createSequentialGroup()
+                        .addComponent(orderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(billPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(enterLabel)
+                            .addComponent(entercodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(checkcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(totalPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -349,9 +365,15 @@ public class C_menuPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmButtonActionPerformed
 
+    private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_checkcodeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel billPanel;
+    private javax.swing.JButton checkcodeButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JLabel disLabel1;
     private javax.swing.JLabel dis_textLabel1;
