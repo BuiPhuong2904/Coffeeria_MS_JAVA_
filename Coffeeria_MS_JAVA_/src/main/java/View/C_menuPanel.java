@@ -352,7 +352,9 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
             }
         });
 
+        confirmButton.setBackground(new java.awt.Color(40, 167, 69));
         confirmButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        confirmButton.setForeground(new java.awt.Color(255, 255, 255));
         confirmButton.setText("Confirm Payment");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

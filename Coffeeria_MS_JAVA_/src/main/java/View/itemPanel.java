@@ -84,14 +84,21 @@ public class itemPanel extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
 
         itemLabel.setBackground(new java.awt.Color(255, 255, 255));
+        itemLabel.setLayout(null);
 
         picLabel.setText("hinh");
         picLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         picLabel.setPreferredSize(new java.awt.Dimension(120, 120));
+        itemLabel.add(picLabel);
+        picLabel.setBounds(15, 6, 120, 120);
 
         priceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         priceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         priceLabel.setText("Price");
+        itemLabel.add(priceLabel);
+        priceLabel.setBounds(6, 190, 138, 20);
+        itemLabel.add(quantitySpinner);
+        quantitySpinner.setBounds(6, 216, 56, 28);
 
         addButton.setBackground(new java.awt.Color(0, 191, 255));
         addButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -101,6 +108,8 @@ public class itemPanel extends javax.swing.JPanel {
                 addButtonActionPerformed(evt);
             }
         });
+        itemLabel.add(addButton);
+        addButton.setBounds(74, 216, 70, 28);
 
         namePanel.setBackground(new java.awt.Color(255, 255, 255));
         namePanel.setLayout(null);
@@ -111,40 +120,8 @@ public class itemPanel extends javax.swing.JPanel {
         namePanel.add(nameLabel);
         nameLabel.setBounds(10, 0, 130, 50);
 
-        javax.swing.GroupLayout itemLabelLayout = new javax.swing.GroupLayout(itemLabel);
-        itemLabel.setLayout(itemLabelLayout);
-        itemLabelLayout.setHorizontalGroup(
-            itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLabelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLabelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(itemLabelLayout.createSequentialGroup()
-                        .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(priceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addComponent(namePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        itemLabelLayout.setVerticalGroup(
-            itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLabelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(namePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(priceLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(itemLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(quantitySpinner)
-                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
-        );
+        itemLabel.add(namePanel);
+        namePanel.setBounds(0, 132, 150, 52);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
