@@ -286,6 +286,11 @@ public class C_Signin extends javax.swing.JFrame {
 
     private void forgotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotButtonActionPerformed
         // TODO add your handling code here:
+        C_ForgotPassword forgotFrame = new C_ForgotPassword(); 
+        forgotFrame.setVisible(true);
+        forgotFrame.pack();
+        forgotFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_forgotButtonActionPerformed
 
     private void signinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinButtonActionPerformed
