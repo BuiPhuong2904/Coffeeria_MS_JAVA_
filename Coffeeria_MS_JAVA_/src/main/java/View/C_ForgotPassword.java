@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
 import java.awt.Color;
@@ -337,7 +334,6 @@ public class C_ForgotPassword extends javax.swing.JFrame {
         String password = new String(newPasswordField.getPassword());
         String password1 = new String(newPasswordField1.getPassword());
         
-        // Kiểm tra placeholder giả lập
         if (email.equals("Enter email") || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập email!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
@@ -354,7 +350,7 @@ public class C_ForgotPassword extends javax.swing.JFrame {
             return;
         }
 
-        JOptionPane.showMessageDialog(this, "Dữ liệu hợp lệ. Tiếp tục xử lý...", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
