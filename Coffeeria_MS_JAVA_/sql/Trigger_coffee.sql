@@ -147,3 +147,20 @@ BEGIN
 END;
 
 commit;
+
+-- Bảng khách hàng
+CREATE OR REPLACE TRIGGER trg_set_loaitv
+BEFORE INSERT OR UPDATE ON KHACHHANG
+FOR EACH ROW
+BEGIN
+    IF :NEW.DIEMTICHLUY <= 500 THEN
+        :NEW.LOAITV := 'Bronze';
+    ELSIF :NEW.DIEMTICHLUY <= 1000 THEN
+        :NEW.LOAITV := 'Silver';
+    ELSIF :NEW.DIEMTICHLUY <= 2999 THEN
+        :NEW.LOAITV := 'Gold';
+    ELSE
+        :NEW.LOAITV := 'Platinum';
+    END IF;
+END;
+
