@@ -13,7 +13,6 @@ public class MonAn {
     private String tenMon;
     private String danhMuc;
     private double giaBan;
-//    private ImageIcon hinhAnh;
     private String moTa;
     
     public MonAn() {}

@@ -319,12 +319,11 @@ public class E_voucherPanel extends javax.swing.JPanel {
         voucherFrame.setVisible(true);
         voucherFrame.pack();
         voucherFrame.setLocationRelativeTo(null);
-        //        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        KhuyenMai selected = getSelectedKhuyenMai(); // bạn đã có hàm này trong panel
+        KhuyenMai selected = getSelectedKhuyenMai();
         if (selected != null) {
             E_voucher_update voucherFrame = new E_voucher_update(selected, this);
             voucherFrame.setVisible(true);

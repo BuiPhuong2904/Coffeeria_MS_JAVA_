@@ -16,9 +16,8 @@ public class E_menu_detail extends javax.swing.JFrame {
      */
     public E_menu_detail(MonAn monAn) {
         initComponents();
-        setLocationRelativeTo(null); // căn giữa
+        setLocationRelativeTo(null);
 
-        // Gán dữ liệu vào các trường
         idTextField.setText(monAn.getMaMon());
         nameTextField.setText(monAn.getTenMon());
         categoryTextField.setText(monAn.getDanhMuc());
@@ -42,8 +41,6 @@ public class E_menu_detail extends javax.swing.JFrame {
             imageLabel.setText("Không có ảnh");
         }
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.

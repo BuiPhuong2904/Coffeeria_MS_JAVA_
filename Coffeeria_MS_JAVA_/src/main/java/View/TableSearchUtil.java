@@ -6,7 +6,6 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -40,7 +39,6 @@ public class TableSearchUtil {
                 if (text.trim().isEmpty()) {
                     rowSorter.setRowFilter(null);
                 } else {
-                    // Lọc toàn bộ các cột, không phân biệt hoa thường
                     rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                 }
             }

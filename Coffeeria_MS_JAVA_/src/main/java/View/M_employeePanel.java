@@ -347,7 +347,6 @@ public class M_employeePanel extends javax.swing.JPanel {
         employeeFrame.setVisible(true);
         employeeFrame.pack();
         employeeFrame.setLocationRelativeTo(null);
-        //        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed

@@ -58,7 +58,7 @@ public class itemPanel extends javax.swing.JPanel {
             ImageIcon icon = new ImageIcon(imagePath);
             Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
             picLabel.setIcon(new ImageIcon(img));
-            picLabel.setText(""); // xóa text placeholder "hinh"
+            picLabel.setText("");
         } catch (Exception e) {
             System.err.println("Không thể tải ảnh: " + imagePath);
             picLabel.setText("No Image");

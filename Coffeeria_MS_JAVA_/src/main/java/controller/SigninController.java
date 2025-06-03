@@ -35,7 +35,6 @@ public class SigninController {
 
         JOptionPane.showMessageDialog(view, "Đăng nhập thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 
-        // Mở giao diện tương ứng
         switch (tk.getLoaiTK()) {
             case "Employee", "Manager" -> new E_Homepage(tk).setVisible(true);
             case "Customer" -> new C_Homepage(tk).setVisible(true);

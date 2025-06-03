@@ -43,7 +43,7 @@ public class E_menu_update extends javax.swing.JFrame {
         priceTextField.setText(String.valueOf(monAn.getGiaBan()));
         
         desTextField.setText(monAn.getMoTa());
-        idTextField.setEditable(false); // Không cho sửa mã món
+        idTextField.setEditable(false);
         
         ImageIcon icon = monAn.getImageIcon();
         if (icon != null) {
@@ -346,15 +346,15 @@ public class E_menu_update extends javax.swing.JFrame {
         String moTa = desTextField.getText();
         
         if (selectedImageFile != null) {
-        try {
-            String extension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf("."));
-            File destFile = new File("resources/drink/" + monAn.getMaMon() + extension);
-            Files.copy(selectedImageFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi lưu ảnh: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
+            try {
+                String extension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf("."));
+                File destFile = new File("resources/drink/" + monAn.getMaMon() + extension);
+                Files.copy(selectedImageFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi lưu ảnh: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
-    }
 
         MenuController controller = new MenuController(this, menuPanel);
         controller.handleUpdate(monAn.getMaMon(), tenMon, danhMuc, giaStr, moTa, menuPanel::loadAll);
@@ -380,10 +380,8 @@ public class E_menu_update extends javax.swing.JFrame {
 
             int result = fileChooser.showOpenDialog(this);
             if (result == JFileChooser.APPROVE_OPTION) {
-//                File selectedFile = fileChooser.getSelectedFile();
                 selectedImageFile = fileChooser.getSelectedFile();
 
-                // Load ảnh và resize
                 ImageIcon icon = new ImageIcon(selectedImageFile.getAbsolutePath());
                 Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(image);
@@ -396,34 +394,6 @@ public class E_menu_update extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không thể chọn ảnh.");
         }
     }//GEN-LAST:event_addButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(E_menu_update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(E_menu_update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(E_menu_update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(E_menu_update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

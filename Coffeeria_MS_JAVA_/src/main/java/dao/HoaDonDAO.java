@@ -121,7 +121,6 @@ public class HoaDonDAO {
         }
     }
 
-    // Tìm hóa đơn theo mã
     public HoaDon findHoaDonById(String maHD) {
         String sql = "SELECT * FROM HOADON WHERE MAHD = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -148,7 +147,6 @@ public class HoaDonDAO {
         return null;
     }
 
-    // Lấy danh sách tất cả hóa đơn
     public List<HoaDon> findAllHoaDon() {
         List<HoaDon> list = new ArrayList<>();
         String sql = "SELECT * FROM HOADON";
@@ -197,7 +195,7 @@ public class HoaDonDAO {
         return false;
     }
 
-    // Xóa hóa đơn và chi tiết hóa đơn (transaction)
+    // Xóa hóa đơn và chi tiết hóa đơn
     public boolean deleteHoaDon(String maHD) {
         String deleteCT = "DELETE FROM CHITIET_HD WHERE MAHD = ?";
         String deleteHD = "DELETE FROM HOADON WHERE MAHD = ?";
@@ -229,7 +227,6 @@ public class HoaDonDAO {
         return false;
     }
 
-    // Lấy danh sách chi tiết hóa đơn theo mã hóa đơn
     public List<CT_HoaDon> findChiTietByMaHD(String maHD) {
         List<CT_HoaDon> list = new ArrayList<>();
         String sql = "SELECT * FROM CHITIET_HD WHERE MAHD = ?";
@@ -251,7 +248,6 @@ public class HoaDonDAO {
         return list;
     }
 
-    // Cập nhật chi tiết hóa đơn
     public boolean updateChiTiet(CT_HoaDon ct) {
         String sql = "UPDATE CHITIET_HD SET SOLUONG = ?, DONGIA = ? WHERE MAHD = ? AND MAMON = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -281,7 +277,7 @@ public class HoaDonDAO {
         return false;
     }
 
-    // Cập nhật hóa đơn và chi tiết hóa đơn cùng lúc (update chi tiết bằng cách xóa hết rồi insert lại)
+    // Cập nhật hóa đơn và chi tiết hóa đơn cùng lúc
     public boolean updateHoaDonWithChiTiet(HoaDon hoaDon, List<CT_HoaDon> chiTietList) {
         String updateHoaDon = "UPDATE HOADON SET TONGTIENTRUOC = ?, TIENGIAMGIA = ?, TONGTIENSAU = ?, HINHTHUCTT = ?, NGAYLAP = ?, GHICHU = ?, MAKH = ?, MANV = ?, MAKM = ? WHERE MAHD = ?";
         String deleteCT = "DELETE FROM CHITIET_HD WHERE MAHD = ?";

@@ -1,7 +1,6 @@
 
 package controller;
 
-//import com.mycompany.java_coffeeria_ms.controller.*;
 import View.E_customerPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
