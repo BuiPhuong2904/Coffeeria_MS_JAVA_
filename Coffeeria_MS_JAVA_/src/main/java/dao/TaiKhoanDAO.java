@@ -155,4 +155,17 @@ public class TaiKhoanDAO {
         }
         return list;
     }
+    
+    public boolean updatePasswordByEmail(String email, String newPassword) {
+        String sql = "UPDATE TAIKHOAN SET MATKHAU = ? WHERE EMAIL = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newPassword);
+            ps.setString(2, email);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
