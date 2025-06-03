@@ -7,11 +7,14 @@ import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
@@ -571,6 +574,9 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
             hoaDonController.insertHoaDon(hoaDon, chiTietList);
 
             JOptionPane.showMessageDialog(this, "Cảm ơn bạn đã đặt món!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Gọi xuất hóa đơn PDF
+            hoaDonController.xuatHoaDonPDF(hoaDon, chiTietList);
 
             // Xóa đơn hàng
             DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
@@ -581,6 +587,8 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
         } catch (HeadlessException | NumberFormatException | SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(C_menuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
 

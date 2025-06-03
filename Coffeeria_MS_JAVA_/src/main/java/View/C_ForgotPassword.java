@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
+import dao.TaiKhoanDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -333,11 +331,10 @@ public class C_ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_newPasswordFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        String email = emailTextField.getText();
-        String password = new String(newPasswordField.getPassword());
-        String password1 = new String(newPasswordField1.getPassword());
-        
-        // Kiểm tra placeholder giả lập
+        String email = emailTextField.getText().trim();
+        String password = new String(newPasswordField.getPassword()).trim();
+        String password1 = new String(newPasswordField1.getPassword()).trim();
+
         if (email.equals("Enter email") || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập email!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
@@ -354,8 +351,25 @@ public class C_ForgotPassword extends javax.swing.JFrame {
             return;
         }
 
-        JOptionPane.showMessageDialog(this, "Dữ liệu hợp lệ. Tiếp tục xử lý...", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        
+        TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO();
+        if (!taiKhoanDAO.existsByEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Email không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        boolean success = taiKhoanDAO.updatePasswordByEmail(email, password);
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+            C_Signin SigninFrame = new C_Signin();
+            SigninFrame.setVisible(true);
+            SigninFrame.pack();
+            SigninFrame.setLocationRelativeTo(null);
+            this.dispose();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void showCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCheckBoxActionPerformed
@@ -409,40 +423,6 @@ public class C_ForgotPassword extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_signinButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(C_ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(C_ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(C_ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(C_ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new C_ForgotPassword().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel emailLabel;
