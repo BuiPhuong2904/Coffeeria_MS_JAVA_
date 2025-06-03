@@ -3,7 +3,6 @@ package View;
 
 import controller.PhieuKhoController;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -532,10 +531,6 @@ public class E_home_IE_update extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đơn giá hoặc số lượng không hợp lệ.");
         }
     }//GEN-LAST:event_updateButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

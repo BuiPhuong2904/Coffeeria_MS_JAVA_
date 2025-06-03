@@ -130,7 +130,7 @@
                           <Component id="updateButton" min="-2" pref="159" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
               <Component id="addLabel" alignment="0" max="32767" attributes="0"/>
           </Group>

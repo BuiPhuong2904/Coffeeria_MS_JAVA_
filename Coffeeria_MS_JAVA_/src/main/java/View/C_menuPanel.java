@@ -565,7 +565,6 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
                 chiTietList.add(ct);
             }
 
-            // Gửi sang controller xử lý insert
             HoaDonController hoaDonController = new HoaDonController();
             hoaDonController.insertHoaDon(hoaDon, chiTietList);
 
