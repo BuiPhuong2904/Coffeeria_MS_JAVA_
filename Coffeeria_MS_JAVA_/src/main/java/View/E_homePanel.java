@@ -176,7 +176,6 @@ public class E_homePanel extends javax.swing.JPanel {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("profileButton clicked, taiKhoan: " + (taiKhoan != null ? taiKhoan.getEmail() : "null"));
         if (taiKhoan != null) {
             String matk = taiKhoan.getMaTK();
             E_home_A accFrame = new E_home_A(matk);

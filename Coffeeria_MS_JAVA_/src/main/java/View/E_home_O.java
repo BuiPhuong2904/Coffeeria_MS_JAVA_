@@ -59,7 +59,6 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         
         addQuantityChangeListener();
         
-//        orderFrame.refreshMenu(updatedDrinkList);
     }
     
     public void loadMonAnToMenu() {
@@ -149,7 +148,7 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                             double total = price * quantity;
                             model.setValueAt(total, row, 3);
                         } else {
-                            // Số lượng âm không hợp lệ, báo lỗi và đặt lại 1
+
                             JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn hoặc bằng 0.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                             model.setValueAt(1, row, 2);
                         }
@@ -184,7 +183,6 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
             }
         }
 
-//        sub_textLabel.setText(String.format("%.0f VNĐ", sum));
         DecimalFormat formatter = new DecimalFormat("#,###");
         sub_textLabel.setText(formatter.format(sum) + " VND");
 
@@ -703,7 +701,6 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
                 chiTietList.add(ct);
             }
 
-            // Gửi sang controller xử lý insert
             hoaDonController.insertHoaDon(hoaDon, chiTietList);
 
         } catch (HeadlessException | NumberFormatException | SQLException ex) {

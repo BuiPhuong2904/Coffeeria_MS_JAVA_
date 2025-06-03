@@ -21,7 +21,6 @@ public class E_home_R extends javax.swing.JFrame {
 
     public E_home_R() {
         initComponents();
-//        getContentPane ().setBackground(new Color(250, 250, 250)) ;
 
         returnButton.setContentAreaFilled(false);
         returnButton.setBorderPainted(false);
@@ -38,8 +37,8 @@ public class E_home_R extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Map.Entry<String, Double> entry : doanhThuTheoThang.entrySet()) {
-            String thang = entry.getKey();         // "05-2025"
-            double doanhThu = entry.getValue();    // 1_500_000
+            String thang = entry.getKey();
+            double doanhThu = entry.getValue();
             dataset.addValue(doanhThu, "Doanh thu", thang);
         }
 
@@ -89,9 +88,8 @@ public class E_home_R extends javax.swing.JFrame {
         plot.setBackgroundPaint(new Color(255, 255, 224)); 
 
 
-        // 🟢 THÊM DÒNG SAU ĐỂ HIỂN THỊ %:
         plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
-            "{0}: {1} món ({2})"  // {0}=danh mục, {1}=số lượng, {2}=phần trăm
+            "{0}: {1} món ({2})" 
         ));
 
         ChartPanel chartPanel = new ChartPanel(pieChart);
@@ -222,44 +220,9 @@ public class E_home_R extends javax.swing.JFrame {
         // TODO add your handling code here:
         E_homePanel homePanel = new E_homePanel();
         homePanel.setVisible(true);
-        //        homePanel.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(E_home_R.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new E_home_R().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartPanelContainer;

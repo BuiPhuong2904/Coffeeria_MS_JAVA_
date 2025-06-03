@@ -411,7 +411,6 @@ public class E_home_IE_insert extends javax.swing.JFrame {
         PhieuKhoController controller = new PhieuKhoController(parent);
         controller.insertPhieuKho(phieuKho, chiTietList);
 
-        // Đóng form sau khi lưu
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -453,9 +452,6 @@ public class E_home_IE_insert extends javax.swing.JFrame {
         model.addRow(new Object[]{maPhieu, maSP, soLuong, donGia});
     }//GEN-LAST:event_addButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

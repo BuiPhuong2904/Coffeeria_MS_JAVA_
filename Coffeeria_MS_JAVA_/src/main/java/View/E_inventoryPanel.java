@@ -1,9 +1,6 @@
 
 package View;
 
-//import View.TableButton.ButtonEditor;
-//import View.TableButton.ButtonRenderer;
-//import javax.swing.JCheckBox;
 import controller.SanPhamController;
 import dao.SanPhamDAO;
 import java.util.List;
@@ -333,14 +330,12 @@ public class E_inventoryPanel extends javax.swing.JPanel {
         inventoryFrame.setVisible(true);
         inventoryFrame.pack();
         inventoryFrame.setLocationRelativeTo(null);
-//        this.dispose();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        SanPham selected = getSelectedSanPham(); // hàm bạn đã có tương tự getSelectedKhuyenMai
+        SanPham selected = getSelectedSanPham();
         if (selected != null) {
-            // Mở form cập nhật sản phẩm, truyền sản phẩm và panel hiện tại để gọi lại loadAll() sau khi cập nhật
             E_inventory_update updateFrame = new E_inventory_update(selected, this);
             updateFrame.setVisible(true);
             updateFrame.pack();
@@ -385,7 +380,6 @@ public class E_inventoryPanel extends javax.swing.JPanel {
         controller.handleDelete(maSP, this::loadAll);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel action1Panel;
