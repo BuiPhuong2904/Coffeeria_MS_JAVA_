@@ -124,7 +124,7 @@ public class HoaDonController {
             document.add(new Paragraph("Mã khách hàng: " + hoaDon.getMaKH(), textFont));
             document.add(new Paragraph("Ngày lập: " + hoaDon.getNgayLap().toString(), textFont));
             if (hoaDon.getMaKM() != null)
-                document.add(new Paragraph("Mã Khuyến mãi: " + hoaDon.getMaKM(), textFont));
+                document.add(new Paragraph("Mã khuyến mãi: " + hoaDon.getMaKM(), textFont));
             document.add(new Paragraph("Hình thức thanh toán: " + hoaDon.getHinhThucTT(), textFont));
             document.add(new Paragraph(" "));
 

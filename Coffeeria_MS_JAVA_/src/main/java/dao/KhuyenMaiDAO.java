@@ -155,4 +155,29 @@ public class KhuyenMaiDAO {
         }
         return list;
     }
+    
+    public KhuyenMai findValidByMa(String ma) {
+        String sql = "SELECT * FROM KHUYENMAI WHERE MAKM = ? AND TRANGTHAI = 'Đang áp dụng' AND SYSDATE BETWEEN NGAYBD AND NGAYKT";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, ma);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    KhuyenMai km = new KhuyenMai();
+                    km.setMaKM(rs.getString("MAKM"));
+                    km.setTenKM(rs.getString("TENKM"));
+                    km.setLoaiKM(rs.getString("LOAIKM"));
+                    km.setGiaTriGiam(rs.getDouble("GIATRIGIAM"));
+                    km.setDieuKien(rs.getString("DIEUKIEN"));
+                    km.setNgayBD(rs.getDate("NGAYBD"));
+                    km.setNgayKT(rs.getDate("NGAYKT"));
+                    km.setTrangThai(rs.getString("TRANGTHAI"));
+                    return km;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

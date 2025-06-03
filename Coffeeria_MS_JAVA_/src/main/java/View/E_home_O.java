@@ -3,6 +3,7 @@ package View;
 
 import controller.HoaDonController;
 import dao.KhachHangDAO;
+import dao.KhuyenMaiDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -12,11 +13,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.CT_HoaDon;
 import model.HoaDon;
 import model.KhachHang;
+import model.KhuyenMai;
 import model.MonAn;
 import model.WrapLayout;
 
@@ -59,6 +63,28 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
         
         addQuantityChangeListener();
         
+        entercodeTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            private void resetDiscount() {
+                dis_textLabel.setText("0 VND");
+                updateTotalPrice();
+            }
+        });
+
     }
     
     public void loadMonAnToMenu() {
@@ -756,6 +782,52 @@ public abstract class E_home_O extends javax.swing.JFrame implements addItemList
 
     private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed
         // TODO add your handling code here:
+        String code = entercodeTextField.getText().trim();
+        if (code.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khuyến mãi!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
+        KhuyenMai km = kmDAO.findValidByMa(code);
+
+        if (km == null) {
+            JOptionPane.showMessageDialog(this, "Mã khuyến mãi không hợp lệ hoặc đã hết hạn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            dis_textLabel.setText("0 VND");
+            updateTotalPrice();
+            return;
+        }
+
+        double subTotal = 0;
+        try {
+            String subText = sub_textLabel.getText().replace(" VND", "").replace(".", "").trim();
+            subTotal = Double.parseDouble(subText);
+            System.out.println(">> subTotal: " + subTotal);
+        } catch (Exception e) {
+            subTotal = 0;
+        }
+
+        double discount = 0;
+        if (km.getLoaiKM().equalsIgnoreCase("Giảm theo cố định")) {
+            discount = km.getGiaTriGiam();
+        } else if (km.getLoaiKM().equalsIgnoreCase("Giảm theo %")) {
+            discount = subTotal * km.getGiaTriGiam() / 100.0;
+        }
+
+//        if (discount > subTotal) {
+//            discount = subTotal;
+//        }
+
+        System.out.println("subText raw: " + sub_textLabel.getText());
+        System.out.println("subTotal parsed: " + subTotal);
+
+
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        dis_textLabel.setText(formatter.format(discount) + " VND");
+
+        JOptionPane.showMessageDialog(this, "Áp dụng mã khuyến mãi: " + km.getTenKM(), "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+        updateTotalPrice();
     }//GEN-LAST:event_checkcodeButtonActionPerformed
 
 

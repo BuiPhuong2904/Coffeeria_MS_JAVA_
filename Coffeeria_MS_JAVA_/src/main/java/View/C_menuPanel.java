@@ -3,6 +3,7 @@ package View;
 
 import controller.HoaDonController;
 import dao.KhachHangDAO;
+import dao.KhuyenMaiDAO;
 import dao.MonAnDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -17,10 +18,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.CT_HoaDon;
 import model.HoaDon;
+import model.KhuyenMai;
 import model.MonAn;
 import model.TaiKhoan;
 import model.WrapLayout;
@@ -69,6 +73,28 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
         SwingUtilities.invokeLater(() -> {
             loadMonAnToMenu();
             addQuantityChangeListener();
+        });
+        
+        entercodeTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                resetDiscount();
+            }
+
+            private void resetDiscount() {
+                dis_textLabel1.setText("0 VND");
+                updateTotalPrice();
+            }
         });
     }
     
@@ -594,6 +620,47 @@ public abstract class C_menuPanel extends javax.swing.JPanel implements addItemL
 
     private void checkcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcodeButtonActionPerformed
         // TODO add your handling code here:
+        String code = entercodeTextField.getText().trim();
+        if (code.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khuyến mãi!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
+        KhuyenMai km = kmDAO.findValidByMa(code);
+
+        if (km == null) {
+            JOptionPane.showMessageDialog(this, "Mã khuyến mãi không hợp lệ hoặc đã hết hạn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            dis_textLabel1.setText("0 VND");
+            updateTotalPrice();
+            return;
+        }
+
+        double subTotal = 0;
+        try {
+            String subText = sub_textLabel1.getText().replace(" VND", "").replace(".", "").trim();
+            subTotal = Double.parseDouble(subText);
+        } catch (Exception e) {
+            subTotal = 0;
+        }
+
+        double discount = 0;
+        if (km.getLoaiKM().equalsIgnoreCase("Giảm theo cố định")) {
+            discount = km.getGiaTriGiam();
+        } else if (km.getLoaiKM().equalsIgnoreCase("Giảm theo %")) {
+            discount = subTotal * km.getGiaTriGiam() / 100.0;
+        }
+
+//        if (discount > subTotal) {
+//            discount = subTotal;
+//        }
+
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        dis_textLabel1.setText(formatter.format(discount) + " VND");
+
+        JOptionPane.showMessageDialog(this, "Áp dụng mã khuyến mãi: " + km.getTenKM(), "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+        updateTotalPrice();
         
     }//GEN-LAST:event_checkcodeButtonActionPerformed
 
