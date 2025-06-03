@@ -27,7 +27,7 @@ public class E_home_R extends javax.swing.JFrame {
         returnButton.setFocusPainted(false);
 
         veBieuDoDoanhThuTheoThang();
-        veBieuDoTiLeDanhMuc();
+//        veBieuDoTiLeDanhMuc();
     }
          
     public void veBieuDoDoanhThuTheoThang() {
@@ -93,13 +93,13 @@ public class E_home_R extends javax.swing.JFrame {
         ));
 
         ChartPanel chartPanel = new ChartPanel(pieChart);
-        chartPanel.setPreferredSize(chartPanelContainer1.getSize());
+        chartPanel.setPreferredSize(chartPanelContainer.getSize());
 
-        chartPanelContainer1.removeAll();
-        chartPanelContainer1.setLayout(new BorderLayout());
-        chartPanelContainer1.add(chartPanel, BorderLayout.CENTER);
-        chartPanelContainer1.revalidate();
-        chartPanelContainer1.repaint();
+        chartPanelContainer.removeAll();
+        chartPanelContainer.setLayout(new BorderLayout());
+        chartPanelContainer.add(chartPanel, BorderLayout.CENTER);
+        chartPanelContainer.revalidate();
+        chartPanelContainer.repaint();
     }
 
     /**
@@ -113,10 +113,9 @@ public class E_home_R extends javax.swing.JFrame {
 
         topPanel = new javax.swing.JPanel();
         returnButton = new javax.swing.JButton();
-        chartPanelContainer1 = new javax.swing.JPanel();
         tempPanel = new javax.swing.JPanel();
-        monthLabel = new javax.swing.JLabel();
         chartPanelContainer = new javax.swing.JPanel();
+        chooseComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(252, 252, 246));
@@ -153,27 +152,7 @@ public class E_home_R extends javax.swing.JFrame {
 
         getContentPane().add(topPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        chartPanelContainer1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout chartPanelContainer1Layout = new javax.swing.GroupLayout(chartPanelContainer1);
-        chartPanelContainer1.setLayout(chartPanelContainer1Layout);
-        chartPanelContainer1Layout.setHorizontalGroup(
-            chartPanelContainer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
-        );
-        chartPanelContainer1Layout.setVerticalGroup(
-            chartPanelContainer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(chartPanelContainer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 48, -1, 232));
-
         tempPanel.setBackground(new java.awt.Color(252, 252, 246));
-
-        monthLabel.setFont(new java.awt.Font("Microsoft Tai Le", 1, 70)); // NOI18N
-        monthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        monthLabel.setText("<html><div align='center'>THỐNG KÊ</div></html>");
-        monthLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         chartPanelContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -181,34 +160,43 @@ public class E_home_R extends javax.swing.JFrame {
         chartPanelContainer.setLayout(chartPanelContainerLayout);
         chartPanelContainerLayout.setHorizontalGroup(
             chartPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         chartPanelContainerLayout.setVerticalGroup(
             chartPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
+
+        chooseComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chooseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doanh thu theo tháng", "Tỉ lệ danh mục món ăn được mua" }));
+        chooseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tempPanelLayout = new javax.swing.GroupLayout(tempPanel);
         tempPanel.setLayout(tempPanelLayout);
         tempPanelLayout.setHorizontalGroup(
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempPanelLayout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
-                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(tempPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chartPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(tempPanelLayout.createSequentialGroup()
+                        .addGap(0, 559, Short.MAX_VALUE)
+                        .addComponent(chooseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         tempPanelLayout.setVerticalGroup(
             tempPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tempPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addComponent(chooseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(chartPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(tempPanelLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         getContentPane().add(tempPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, 560));
@@ -223,11 +211,22 @@ public class E_home_R extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
+    private void chooseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseComboBoxActionPerformed
+        // TODO add your handling code here:
+        String selected = (String) chooseComboBox.getSelectedItem();
+//        veBieuDoDoanhThuTheoThang();
+        if ("Doanh thu theo tháng".equals(selected)) {
+            veBieuDoDoanhThuTheoThang();
+        } 
+        else if ("Tỉ lệ danh mục món ăn được mua".equals(selected)) {
+            veBieuDoTiLeDanhMuc();
+        }
+    }//GEN-LAST:event_chooseComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartPanelContainer;
-    private javax.swing.JPanel chartPanelContainer1;
-    private javax.swing.JLabel monthLabel;
+    private javax.swing.JComboBox<String> chooseComboBox;
     private javax.swing.JButton returnButton;
     private javax.swing.JPanel tempPanel;
     private javax.swing.JPanel topPanel;
