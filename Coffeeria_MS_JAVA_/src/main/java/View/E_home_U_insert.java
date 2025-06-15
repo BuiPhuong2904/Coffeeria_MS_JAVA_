@@ -15,8 +15,6 @@ public class E_home_U_insert extends javax.swing.JFrame {
         initComponents();
         this.parent = parent;
         
-        idTextField.setEditable(false);
-        idTextField.setEnabled(false); 
     }
     
     public E_home_U_insert() {

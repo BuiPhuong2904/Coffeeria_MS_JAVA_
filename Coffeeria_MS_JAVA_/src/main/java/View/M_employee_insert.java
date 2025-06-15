@@ -21,12 +21,6 @@ public class M_employee_insert extends javax.swing.JFrame {
     public M_employee_insert(M_employeePanel employeePanel) {
         initComponents();
         this.employeePanel = employeePanel;
-        
-        idTextField.setEditable(false);
-        idTextField.setEnabled(false); 
-        
-        acc_idTextField.setEditable(false);
-        acc_idTextField.setEnabled(false); 
 
     }
 

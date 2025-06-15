@@ -123,7 +123,7 @@ public class C_profilePanel extends javax.swing.JPanel {
         acc_idTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         acc_idTextField.setForeground(new java.awt.Color(102, 102, 102));
 
-        saveButton.setBackground(new java.awt.Color(102, 255, 102));
+        saveButton.setBackground(new java.awt.Color(40, 167, 69));
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("SAVE");

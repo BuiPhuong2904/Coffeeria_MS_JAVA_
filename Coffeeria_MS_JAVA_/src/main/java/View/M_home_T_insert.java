@@ -19,8 +19,6 @@ public class M_home_T_insert extends javax.swing.JFrame {
         initComponents();
         this.parent = parent;
         
-        tk_idTextField.setEditable(false);
-        tk_idTextField.setEnabled(false); 
     }
     
     public M_home_T_insert() {

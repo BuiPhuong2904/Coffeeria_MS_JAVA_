@@ -18,14 +18,6 @@ public class E_customer_insert extends javax.swing.JFrame {
         
         this.customerPanel = customerPanel;
         
-        idTextField.setEditable(false);
-        idTextField.setEnabled(false); 
-        
-        levelTextField.setEditable(false);
-        levelTextField.setEnabled(false); 
-        
-        acc_idTextField.setEditable(false);
-        acc_idTextField.setEnabled(false); 
     }
 
     /**
